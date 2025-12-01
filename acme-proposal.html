@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACME Tools - Adobe Implementation Proposal</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .table-header {
+            background-color: #F9FAFB;
+        }
+        /* Timeline specific styles */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 2px solid #E5E7EB;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.5625rem;
+            top: 0.125rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            border-width: 2px;
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h1 class="text-4xl font-bold text-gray-900">Adobe Experience Cloud for ACME Tools</h1>
+            <h2 class="text-2xl font-semibold text-blue-600">Foundational Implementation Estimate Provided by Shift Paradigm</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">This is a high-level estimation based on a foundational implementation for Adobe Experience Platform centered on RTCDP, Target, and Customer Journey Analytics, as of September 24th, 2025.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Proposal Strategy Section -->
+        <section id="strategy" class="mb-16">
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Proposal Strategy</h3>
+                <p class="mb-8 text-lg text-gray-600">Based on your team's needs, we've developed a clear path to address your immediate and long-term goals while staying within your budget guardrails and respecting your Q4 code freeze.</p>
+                <div class="space-y-4 text-gray-600">
+                    <p><strong>Value:</strong> Establishes a real-time, unified data foundation for robust cross-channel analytics and future-proofs your personalization efforts, providing an immediate, decisive replacement for Google Analytics.</p>
+                    <p><strong>Budget:</strong> Aims to fit within the all-in ceiling of ≤ $400K (licensing + services).</p>
+                    <p><strong>Timeline:</strong> Contract signature targeted for November, enabling freeze-friendly prep work in Q4 (data modeling, identity design), followed by a full January start.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Breakdowns -->
+        <div class="space-y-12">
+
+            <!-- RTCDP / AEP Section -->
+            <section id="rtcdp-aep">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-700 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7l8 4 8-4m-8 4v10"></path></svg>
+                        1. Adobe RTCDP / AEP (The Foundation)
+                    </h3>
+                    <p class="mb-6 text-gray-600">This phase establishes the core data foundation and is designed for future B2P expansion. AEP is a prerequisite for Target and CJA.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="p-4 rounded-tl-lg font-semibold">Activity</th>
+                                    <th class="p-4 font-semibold text-center">Cost</th>
+                                    <th class="p-4 rounded-tr-lg font-semibold">Key Deliverables</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-4">Project Kick-off &amp; Scoping</td><td class="p-4 text-center">$7,600</td><td class="p-4">Detailed project plan, 1-2 primary use cases defined.</td></tr>
+                                <tr class="border-b"><td class="p-4">AEP Schema &amp; Data Modeling</td><td class="p-4 text-center">$14,250</td><td class="p-4">XDM schema configuration for key data sources.</td></tr>
+                                <tr class="border-b"><td class="p-4">Data Ingestion &amp; Source Setup</td><td class="p-4 text-center">$19,000</td><td class="p-4">Connect one CRM and online data source (Web SDK).</td></tr>
+                                <tr class="border-b"><td class="p-4">Identity &amp; Profile Configuration</td><td class="p-4 text-center">$9,500</td><td class="p-4">Basic identity stitching for unified customer profiles.</td></tr>
+                                <tr class="border-b"><td class="p-4">Segmentation &amp; Activation</td><td class="p-4 text-center">$15,200</td><td class="p-4">Creation of 3-5 core segments; setup of 1 activation destination.</td></tr>
+                                <tr><td class="p-4">Knowledge Transfer</td><td class="p-4 text-center">$5,700</td><td class="p-4 rounded-br-lg">Foundational training for the technical team.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg mt-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">RTCDP B2P Capabilities Included:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Hybrid Audience Segment Builds</li>
+                            <li>Tag Management</li>
+                            <li>Data Governance</li>
+                            <li>AI-powered Insights</li>
+                            <li>Experience Data Model (XDM) Mapping</li>
+                            <li>Profile Matching and Activation</li>
+                            <li>Up to 4 Sources Ingested</li>
+                            <li>Best Practice Training &amp; Enablement</li>
+                            <li>Architecture Design</li>
+                            <li>B2P Implementation of CDP</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Target Section -->
+            <section id="target">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-6 text-green-700 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.834 9.168-4.432"></path></svg>
+                        2. Adobe Target (Initial Personalization for Web)
+                    </h3>
+                    <p class="mb-6 text-gray-600">This phase focuses on activating AEP audiences for on-site personalization, enabling initial A/B tests and targeted experiences to drive immediate value.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="p-4 rounded-tl-lg font-semibold">Activity</th>
+                                    <th class="p-4 font-semibold text-center">Cost</th>
+                                    <th class="p-4 rounded-tr-lg font-semibold">Key Deliverables</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-4">Technical Setup &amp; Auditing</td><td class="p-4 text-center">$19,000</td><td class="p-4">Validated Target Web SDK on key site pages.</td></tr>
+                                <tr class="border-b"><td class="p-4">AEP Audience Integration</td><td class="p-4 text-center">$9,500</td><td class="p-4">Connection to AEP for using real-time segments.</td></tr>
+                                <tr class="border-b"><td class="p-4">Activity Setup &amp; Launch</td><td class="p-4 text-center">$14,250</td><td class="p-4">Launch 1-2 A/B tests and one XT activity.</td></tr>
+                                <tr><td class="p-4">Reporting &amp; Training</td><td class="p-4 text-center">$4,750</td><td class="p-4 rounded-br-lg">Training for marketing on activity setup and reporting.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg mt-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Innate Target Capabilities:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Personalization of on-site content</li>
+                            <li>A/B and Multivariate Testing (MVT)</li>
+                            <li>AI-powered automated personalization</li>
+                            <li>Targeting based on AEP real-time audiences</li>
+                            <li>Reporting and analysis of activity performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CJA Section -->
+            <section id="cja">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-700 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        3. Adobe Customer Journey Analytics (Initial Insights)
+                    </h3>
+                    <p class="mb-6 text-gray-600">This phase leverages the AEP data to provide a unified, cross-channel view of the customer journey, unlocking insights through powerful visualizations.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                           <thead class="table-header">
+                                <tr>
+                                    <th class="p-4 rounded-tl-lg font-semibold">Activity</th>
+                                    <th class="p-4 font-semibold text-center">Cost</th>
+                                    <th class="p-4 rounded-tr-lg font-semibold">Key Deliverables</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-4">Data Connection &amp; View Setup</td><td class="p-4 text-center">$19,000</td><td class="p-4">Connection to AEP data and creation of 1 primary Data View.</td></tr>
+                                <tr class="border-b"><td class="p-4">Workspace Dashboard Creation</td><td class="p-4 text-center">$19,000</td><td class="p-4">3 core dashboards built in Analysis Workspace.</td></tr>
+                                <tr><td class="p-4">User Training &amp; Enablement</td><td class="p-4 text-center">$9,500</td><td class="p-4 rounded-br-lg">Hands-on training for 1-2 analysts.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg mt-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Innate CJA Capabilities:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Centralized, flexible reporting and dashboards</li>
+                            <li>Connecting disparate online data sources</li>
+                            <li>Pathing and flow analysis to visualize customer journeys</li>
+                            <li>Ad hoc analysis and data exploration</li>
+                            <li>Building segments and audiences from unified data</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visual Timeline Section -->
+            <section id="timeline">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">Implementation Timeline (~19 Weeks)</h3>
+                    <p class="mb-6 text-center text-gray-600">Our approach respects your Q4 code freeze and begins with prep work in November, followed by a full implementation in January.</p>
+                    <div class="relative">
+                        <!-- Q4 Prep -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot bg-orange-500"></div>
+                            <h4 class="text-lg font-semibold text-orange-700">November-December: Freeze-Friendly Prep Work</h4>
+                            <p class="text-gray-600">Non-invasive data modeling, identity design, and instrumentation planning to prepare for a January start. </p>
+                        </div>
+                        <!-- Onboarding -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot bg-gray-500"></div>
+                            <h4 class="text-lg font-semibold text-gray-700">Weeks 1-2 (January): Onboarding and Project Planning</h4>
+                            <p class="text-gray-600">Establishing project goals, timelines, and technical requirements.</p>
+                        </div>
+                        <!-- AEP Timeline Item -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot bg-blue-500"></div>
+                            <h4 class="text-lg font-semibold text-blue-700">Weeks 2-12: AEP/RTCDP Foundation</h4>
+                            <p class="text-gray-600">Core data modeling, ingestion, and profile configuration.</p>
+                        </div>
+                        <!-- Target Timeline Item -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot bg-green-500"></div>
+                            <h4 class="text-lg font-semibold text-green-700">Weeks 10-14: Target Setup &amp; Integration</h4>
+                            <p class="text-gray-600">Begins in parallel once key AEP audiences are available for activation.</p>
+                        </div>
+                        <!-- CJA Timeline Item -->
+                        <div class="timeline-item">
+                           <div class="timeline-dot bg-purple-500"></div>
+                            <h4 class="text-lg font-semibold text-purple-700">Weeks 11-15: CJA Setup &amp; Dashboarding</h4>
+                            <p class="text-gray-600">Starts once data is flowing correctly into AEP and is ready for analysis.</p>
+                        </div>
+                        <!-- Go-Live Timeline Item -->
+                        <div class="timeline-item border-l-transparent">
+                            <div class="timeline-dot bg-red-500"></div>
+                            <h4 class="text-lg font-semibold text-red-700">Weeks 16-19: UAT, Go-Live &amp; Final Training</h4>
+                            <p class="text-gray-600">Extended User Acceptance Testing, production launch, and final handover sessions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Summary Section -->
+            <section id="summary" class="mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Project Cost Summary</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="p-4 rounded-tl-lg font-semibold">Adobe Tool</th>
+                                    <th class="p-4 rounded-tr-lg font-semibold text-center">Estimated Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-4 font-medium">Adobe RTCDP / AEP</td>
+                                    <td class="p-4 text-center font-semibold text-blue-600">$71,250</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-4 font-medium">Adobe Target</td>
+                                    <td class="p-4 text-center font-semibold text-green-600">$47,500</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium">Adobe Customer Journey Analytics (CJA)</td>
+                                    <td class="p-4 text-center font-semibold text-purple-600">$47,500</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="font-bold text-gray-900 bg-gray-100">
+                                <tr>
+                                    <td class="p-4 rounded-bl-lg">Total Estimated Implementation Cost</td>
+                                    <td class="p-4 rounded-br-lg text-center">$166,250</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Caveats Section -->
+            <section id="caveats">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-xl font-semibold text-yellow-800">Critical Caveats &amp; What's NOT Included</h3>
+                            <div class="mt-2 text-md text-yellow-700">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li><b>Adobe Licensing Fees:</b> This estimate is for implementation services only.</li>
+                                    <li><b>Hypercare:</b> This does not include post-launch hypercare or dedicated support due to expressed budget. Should you want additional post-launch support we are more than happy to support and modify.</li>
+                                    <li><b>Client Project Management:</b> Assumes client provides a project manager to coordinate on your side, who will partner with the project manager on our side.</li>
+                                    <li><b>Managed Services:</b> Ongoing support, campaign management, or platform administration is not included.</li>
+                                    <li><b>Migration:</b> This scope is for a net-new implementation and does not include any data migration activities.</li>
+                                    <li><b>Complex Data Transformation:</b> Assumes data is relatively clean. Significant ETL or data cleansing is out of scope.</li>
+                                    <li><b>Integrations:</b> This estimate only includes native Adobe integrations.</li>
+                                    <li><b>Multiple Brands/Websites:</b> Scope is for a single brand and single website implementation.</li>
+                                    <li><b>Creative Asset Development:</b> Design of banners or content for personalization is not included.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-16 border-t">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>© 2025 Shift Paradigm. This document is an estimate as of the known needs and requirements on September 24th 2025.</p>
+        </div>
+    </footer>
+
+
+
+</body></html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+        <html>
+          <head>
+            <title>MAP Comparison Tool</title>
+            
+          <script defer data-domain="shift-map-comparison-tool.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="shift-map-comparison-tool.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+          <body>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Marketing Platform Comparison</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: A user-driven, dashboard-style SPA. The core interaction is a multi-platform selector that dynamically updates all modules on the page. This non-linear structure was chosen to empower users to create their own comparisons, which is far more efficient than reading a static report. The flow is: 1) Get a quick recommendation via the "Archetype Selector", or 2) Manually select platforms for a deep comparison. All subsequent content (profiles, radar chart, detailed text) is filtered and rendered based on this selection, transforming the report into an interactive decision-support tool. -->
+    <!-- Visualization & Content Choices: 1) Recommendation Matrix -> Dropdown + Highlighted Cards -> Goal: Quickest path to a relevant answer. 2) Platform Profiles -> Side-by-side columns -> Goal: High-level summary. 3) Master Feature Ratings -> Interactive Radar Chart (Chart.js) -> Goal: Powerful visual summary of relative strengths/weaknesses. This is the "wow" factor. 4) Detailed Narratives -> Dropdown-controlled text blocks -> Goal: Progressive disclosure of deep-dive information without cluttering the UI. All choices prioritize interactivity and user-driven exploration. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4B4B4B;
+        }
+        .platform-card {
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .platform-card.selected {
+            border-color: #4A90E2;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+            transform: translateY(-4px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .prose-custom h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            color: #333;
+        }
+        .prose-custom p, .prose-custom li {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .prose-custom ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Marketing Platform Comparator</h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">An interactive tool to analyze and compare leading marketing automation and engagement platforms. Select platforms below to begin your custom comparison.</p>
+        </header>
+
+        <main>
+            <section id="recommender" class="mb-16 bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Who is it for?</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Don't know where to start? Select your business type to see our primary recommendation. This will pre-select the top platforms for a detailed comparison below.</p>
+                <div class="max-w-md mx-auto">
+                    <select id="archetype-selector" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="">Select your business archetype...</option>
+                        <option value="b2c_enterprise">Enterprise B2C Omnichannel</option>
+                        <option value="b2b_enterprise">Enterprise B2B / ABM</option>
+                        <option value="mid_market">Mid-Market "All-in-One"</option>
+                        <option value="smb">SMB / Startup</option>
+                        <option value="mobile">Mobile-First / App-Centric B2C</option>
+                        <option value="ecommerce">E-commerce Powerhouse (DTC)</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="platform-selector" class="mb-16">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">1. Select Platforms to Compare</h2>
+                <div id="platform-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
+                </div>
+            </section>
+            
+            <div id="comparison-wrapper" class="hidden">
+                <section id="platform-profiles" class="mb-16">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">2. High-Level Profiles</h2>
+                    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Here's a quick look at the core proposition, ideal customer, strengths, and limitations for the platforms you've selected.</p>
+                    <div id="profile-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+                </section>
+
+                <section id="visual-comparison" class="mb-16 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">3. Visual Feature Comparison</h2>
+                    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">This radar chart provides a visual summary of how the selected platforms rate across key strategic areas. A larger shape indicates stronger overall capabilities in those dimensions.</p>
+                    <div class="chart-container">
+                        <canvas id="featureRadarChart"></canvas>
+                    </div>
+                </section>
+
+                <section id="deep-dive" class="mb-16">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">4. Feature Deep Dive</h2>
+                     <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">For a more detailed analysis, select a feature category from the dropdown to compare the narrative summaries for your chosen platforms.</p>
+                    <div class="max-w-md mx-auto mb-8">
+                        <select id="feature-selector" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <option value="integration">Integration & Architecture</option>
+                            <option value="ui_ux">User Interface & Experience</option>
+                            <option value="ai">AI Capabilities</option>
+                            <option value="b2b">B2B Capabilities (Scoring)</option>
+                            <option value="channels">Channels Available</option>
+                            <option value="journey_builder">Journey Builders</option>
+                        </select>
+                    </div>
+                    <div id="deep-dive-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+                </section>
+            </div>
+             <div id="initial-prompt" class="text-center py-16 text-gray-500">
+                <p class="text-xl">Please select 2 to 4 platforms to begin the comparison.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const platformData = {
+            ajo: {
+                name: 'Adobe Journey Optimizer',
+                logoColor: 'bg-red-500',
+                borderColor: 'border-red-500',
+                chartColor: 'rgba(239, 68, 68, 0.4)',
+                ratings: { integration: 5, ui_ux: 4, ai: 5, b2b: 1, channels: 5, journey_builder: 5 },
+                profile: {
+                    proposition: 'A cloud-native, real-time omnichannel journey orchestration engine built on the Adobe Experience Platform (AEP).',
+                    customer: 'Large B2C enterprises invested in the Adobe ecosystem with high data maturity.',
+                    strengths: ['True real-time orchestration', 'Native to AEP unified profile', 'Modern API-first architecture', 'Intelligent offer decisioning'],
+                    limitations: ['High complexity & steep learning curve', 'Dependent on Adobe ecosystem', 'Not for B2B lead management']
+                },
+                deepDive: {
+                    integration: `Architected as the native engagement layer for Adobe Experience Platform (AEP). Its integration is primarily *inward* to activate data unified within AEP, making connections to other Adobe Cloud solutions seamless. External integration is API-first but requires significant technical expertise.`,
+                    ui_ux: `The journey canvas itself is modern and visually appealing. However, the platform's power is entirely dependent on the correct setup of the underlying AEP, resulting in a high overall learning curve. It's user-friendly for marketers *after* a complex technical setup is complete by data architects.`,
+                    ai: `Leverages Adobe's Sensei AI for "Intelligent Decisioning." This includes sophisticated models to automatically rank and optimize offers based on business goals and customer data, ensuring the next best action is delivered. Also features a generative AI Assistant.`,
+                    b2b: `Not designed for traditional B2B lead management. It lacks native features like lead and account scoring. High-intent users are identified through rich data and real-time segmentation within AEP, which must be custom-built.`,
+                    channels: `Offers broad native omnichannel support, including Email, SMS, Push, In-App, Direct Mail, Web, and newer channels like WhatsApp and RCS. A true leader in channel breadth.`,
+                    journey_builder: `Features a single, modern, and powerful canvas that accommodates both real-time, event-triggered journeys and scheduled, audience-based campaigns, providing a unified and best-in-class orchestration environment.`
+                }
+            },
+            marketo: {
+                name: 'Adobe Marketo Engage',
+                logoColor: 'bg-purple-600',
+                borderColor: 'border-purple-600',
+                chartColor: 'rgba(147, 51, 234, 0.4)',
+                ratings: { integration: 4, ui_ux: 2, ai: 3, b2b: 5, channels: 3, journey_builder: 3 },
+                profile: {
+                    proposition: 'The quintessential B2B marketing automation platform for lead management, nurturing, scoring, and sales alignment.',
+                    customer: 'Mid-market to large enterprise B2B organizations with long sales cycles and a need for deep CRM integration.',
+                    strengths: ['Best-in-class lead/account management', 'World-class Salesforce CRM sync', 'Mature and extensive feature set', 'Large, active user community'],
+                    limitations: ['Architecture is separate from AEP', 'UI can feel dated', 'Less focus on B2C channels like mobile push']
+                },
+                deepDive: {
+                    integration: `Its primary integration is *outward*, with a best-in-class, bidirectional sync to Salesforce CRM being its cornerstone. It functions as a self-contained marketing database that connects well to CRMs, but is not part of a unified data platform like AJO.`,
+                    ui_ux: `Has a moderate-to-high learning curve. It's an extremely powerful and deep platform, but the UI is often described as less intuitive and more dated than modern competitors. Best suited for dedicated marketing operations professionals.`,
+                    ai: `Is progressively integrating AI. Features include predictive content recommendations, AI-powered subject line optimization, and generative AI for creating summaries of webinar recordings. Capabilities are competent but less mature than AI leaders.`,
+                    b2b: `The definitive leader in traditional lead and account scoring. This is a core, native feature with highly customizable scoring based on demographic, firmographic, and behavioral signals, plus dedicated ABM functionality.`,
+                    channels: `Primarily focused on channels relevant to B2B engagement: Email and Web (personalization, forms, landing pages). Other channels like mobile or social are typically handled via integrations rather than being core native features.`,
+                    journey_builder: `Uses "Smart Campaigns" for triggers and "Engagement Programs" for nurturing. These are extremely powerful for B2B logic but are less visual and intuitive for orchestrating multi-path journeys compared to modern canvas-style builders.`
+                }
+            },
+            hubspot: {
+                name: 'HubSpot',
+                logoColor: 'bg-orange-500',
+                borderColor: 'border-orange-500',
+                chartColor: 'rgba(249, 115, 22, 0.4)',
+                ratings: { integration: 4, ui_ux: 5, ai: 4, b2b: 4, channels: 4, journey_builder: 4 },
+                profile: {
+                    proposition: 'An all-in-one customer platform designed for exceptional ease of use, combining CRM, Marketing, Sales, and Service.',
+                    customer: 'SMBs and mid-market companies that prioritize a single, user-friendly platform over specialized tools.',
+                    strengths: ['Exceptionally low learning curve', 'Intuitive, clean UI', 'True all-in-one with free CRM at its core', 'Extensive App Marketplace'],
+                    limitations: ['Less scalable for complex enterprise use cases', 'Pricing can escalate with team growth', 'Less specialized for deep e-commerce or mobile']
+                },
+                deepDive: {
+                    integration: `Strategy is defined by breadth. With its native CRM at the core, it relies on its extensive App Marketplace (1,800+ apps) and middleware like Zapier. It provides a strong, native, bidirectional sync with Salesforce.`,
+                    ui_ux: `The undisputed leader in ease of use with the lowest learning curve. Its UI is consistently praised as clean, intuitive, and easy to navigate. It's designed for the generalist marketer to achieve value quickly.`,
+                    ai: `Has made a significant investment in its "Breeze" AI suite. This includes generative AI for content, AI agents for automation, and predictive AI for lead scoring and database management, making AI accessible to a broad audience.`,
+                    b2b: `Provides a flexible and user-friendly scoring system for contacts, companies, and deals. Users can create separate "fit" (demographic) and "engagement" (behavioral) scores, making it a strong contender for many B2B use cases.`,
+                    channels: `Provides strong native support for core SMB/mid-market channels: Email, Social Media Management, Ad Management, and a full suite of web tools (Live Chat, Forms). Other channels like SMS are available via integrations.`,
+                    journey_builder: `Its "Workflows" tool is a key strength. It is a highly intuitive, visual journey builder that empowers marketers to create sophisticated automations without needing developer assistance, a critical feature for its target audience.`
+                }
+            },
+            sfmc_engage: {
+                name: 'SFMC Engagement',
+                logoColor: 'bg-blue-500',
+                borderColor: 'border-blue-500',
+                chartColor: 'rgba(59, 130, 246, 0.4)',
+                ratings: { integration: 5, ui_ux: 1, ai: 4, b2b: 2, channels: 5, journey_builder: 5 },
+                profile: {
+                    proposition: 'A comprehensive B2C digital marketing platform for creating personalized journeys across email, mobile, social, and ads.',
+                    customer: 'Large B2C enterprises invested in the Salesforce ecosystem, needing to manage campaigns at a massive scale.',
+                    strengths: ['Extreme scalability for high-volume sending', 'Broad native channel support', 'Deep integration with Salesforce Customer 360'],
+                    limitations: ['Notoriously high complexity', 'Fragmented and outdated UI', 'Requires specialized, expensive developers (AMPscript)']
+                },
+                deepDive: {
+                    integration: `Deeply embedded within the Salesforce ecosystem. Its primary integration is *inward* to the Salesforce Customer 360 Platform, connecting via Marketing Cloud Connect and acting as the engagement layer for Salesforce Data Cloud.`,
+                    ui_ux: `Has a notoriously high learning curve, the steepest of the group. The UI is consistently criticized as being outdated, fragmented, and difficult for non-technical users. Success requires highly specialized, certified developers.`,
+                    ai: `Leverages the "Einstein" AI engine for send time optimization, engagement scoring (predicting opens/clicks), and content personalization. A strong offering for optimizing large-scale B2C campaigns.`,
+                    b2b: `Uses Einstein Engagement Scoring, which predicts a B2C user's likelihood to open or click, not their sales-readiness. It is not designed for traditional B2B lead scoring.`,
+                    channels: `A leader in channel breadth, achieved through its dedicated "Studios" for Email, Mobile (SMS/Push), Social, and Advertising. Excellent for large-scale, multi-channel B2C communication.`,
+                    journey_builder: `Its "Journey Builder" is the heart of the platform. It is an exceptionally powerful and scalable engine for managing incredibly complex B2C journeys, but this power comes with significant configuration complexity.`
+                }
+            },
+            sfmc_account: {
+                name: 'SFMC Account Engagement',
+                logoColor: 'bg-teal-500',
+                borderColor: 'border-teal-500',
+                chartColor: 'rgba(20, 184, 166, 0.4)',
+                ratings: { integration: 5, ui_ux: 4, ai: 4, b2b: 5, channels: 2, journey_builder: 5 },
+                profile: {
+                    proposition: 'The dedicated B2B marketing automation solution for Salesforce, engineered for lead management and sales alignment.',
+                    customer: 'B2B businesses of any size for whom Salesforce CRM is the central system of record.',
+                    strengths: ['Unrivaled native integration with Salesforce Sales Cloud', 'Powerful and accessible ROI reporting', 'Easy-to-use visual journey builder'],
+                    limitations: ['Less powerful if not using Salesforce CRM', 'Limited marketing channels vs. SFMC Engagement', 'Less customizable than Marketo for advanced cases']
+                },
+                deepDive: {
+                    integration: `Has the tightest possible integration with Salesforce Sales Cloud, functioning almost as a native marketing module within the CRM. For these users, the Salesforce ecosystem is the data universe. Its value is diminished without Salesforce CRM.`,
+                    ui_ux: `Considered to have a low-to-moderate learning curve, particularly for existing Salesforce users. Its UI is modern, aligned with the Salesforce Lightning design system, and its core features are visually driven and easy to grasp.`,
+                    ai: `Leverages "Einstein" AI for predictive lead scoring, AI-assisted campaign creation, and advanced attribution modeling, providing significant intelligence for B2B marketers within the Salesforce ecosystem.`,
+                    b2b: `A leader in lead scoring and grading, designed to identify sales-ready prospects. This core feature is further enhanced by Einstein AI's predictive scoring capabilities, making it a top choice for B2B.`,
+                    channels: `Primarily focused on B2B channels: Email and Web. Its channel support is significantly more limited than its B2C counterpart, SFMC Engagement, as it is not designed for broad omnichannel communication.`,
+                    journey_builder: `Features "Engagement Studio," a visual, drag-and-drop journey builder that is consistently praised for its ease of use and power in the context of building effective B2B nurturing paths.`
+                }
+            },
+            braze: {
+                name: 'Braze',
+                logoColor: 'bg-gray-800',
+                borderColor: 'border-gray-800',
+                chartColor: 'rgba(31, 41, 55, 0.4)',
+                ratings: { integration: 5, ui_ux: 4, ai: 5, b2b: 2, channels: 5, journey_builder: 5 },
+                profile: {
+                    proposition: 'A leading customer engagement platform specializing in real-time, cross-channel messaging with a mobile-first focus.',
+                    customer: 'Mobile-first, digitally native B2C companies (media, fintech, retail) needing to react to user behavior in real-time.',
+                    strengths: ['Best-in-class mobile engagement (push, in-app)', 'Excels at real-time data activation', 'Highly scalable and performant architecture', 'Flexible data model'],
+                    limitations: ['Not for traditional B2B lead management', 'Steep learning curve for advanced features (Liquid, APIs)', 'Reporting can be inflexible']
+                },
+                deepDive: {
+                    integration: `Embodies the modern, composable architecture. It's designed to be the "engagement layer" that plugs into a flexible tech stack, integrating seamlessly with leading CDPs like Segment and mParticle via modern APIs and webhooks.`,
+                    ui_ux: `The UI is intuitive for day-to-day tasks like building campaigns. However, mastering its advanced capabilities (Liquid, APIs, data architecture) presents a steep learning curve. Best for technical marketers and growth teams.`,
+                    ai: `Features a comprehensive "BrazeAI" suite with predictive models for purchase/churn, intelligent optimization of channel/timing, and generative AI for copy, images, and even assisting with technical Liquid coding.`,
+                    b2b: `Not a native feature. The platform documents workarounds to build a lead scoring system using its journey builder and custom events, but it is not an out-of-the-box feature and is not designed for B2B sales cycles.`,
+                    channels: `The undisputed leader in mobile-centric channels. Its native support for Push Notifications, In-App Messages, and proprietary Content Cards is best-in-class, complemented by strong support for Email, SMS, and WhatsApp.`,
+                    journey_builder: `Its "Canvas" is a central feature. It is a sophisticated, visual tool for orchestrating complex, cross-channel journeys with advanced branching logic, A/B testing of different paths, and real-time event triggers.`
+                }
+            },
+            klaviyo: {
+                name: 'Klaviyo',
+                logoColor: 'bg-green-600',
+                borderColor: 'border-green-600',
+                chartColor: 'rgba(22, 163, 74, 0.4)',
+                ratings: { integration: 5, ui_ux: 4, ai: 4, b2b: 1, channels: 4, journey_builder: 5 },
+                profile: {
+                    proposition: 'A marketing automation platform "reinvented for e-commerce stores," leveraging commerce data for segmentation and automation.',
+                    customer: 'Direct-to-consumer (DTC) and e-commerce brands of all sizes who prioritize driving revenue through data-driven marketing.',
+                    strengths: ['Unparalleled, deep integration with Shopify', 'Powerful and intuitive segmentation on commerce data', 'Strong focus on revenue-based reporting', 'User-friendly visual flow builder'],
+                    limitations: ['Highly specialized for e-commerce; less suited for B2B', 'Integration ecosystem is e-comm focused', 'Support can be tiered']
+                },
+                deepDive: {
+                    integration: `Its superpower is its deep, native integration with e-commerce platforms like Shopify, BigCommerce, and Magento. This is its primary focus. It functions as a best-in-class specialist for the e-commerce stack.`,
+                    ui_ux: `Scores highly on ease of use with a low-to-moderate learning curve. Its UI is clean and user-friendly, and its visual flow builder is particularly intuitive for its target audience of e-commerce marketers.`,
+                    ai: `Uses AI and data science extensively for its e-commerce focus. This includes predictive analytics (CLV, churn risk), AI-powered send time optimization, personalized product recommendations, and generative AI for on-brand copy.`,
+                    b2b: `Not designed for B2B. Its "scoring" is e-commerce-centric, using predictive analytics to generate scores like "Predicted Customer Lifetime Value" and "Churn Risk" rather than identifying sales-ready leads.`,
+                    channels: `Channel support is tailored to DTC brands. It has very strong native capabilities in Email and SMS, and also supports Push Notifications. It is expanding into conversational channels like WhatsApp, which are critical for e-commerce.`,
+                    journey_builder: `Its "Flows" is a powerful and user-friendly visual automation builder. It excels at creating journeys based on e-commerce triggers (e.g., abandoned cart, browse abandonment) and offers a large library of pre-built templates.`
+                }
+            }
+        };
+
+        const recommendationData = {
+            b2c_enterprise: { primary: 'ajo', secondary: 'sfmc_engage' },
+            b2b_enterprise: { primary: 'marketo', secondary: 'sfmc_account' },
+            mid_market: { primary: 'hubspot', secondary: null },
+            smb: { primary: 'hubspot', secondary: 'klaviyo' },
+            mobile: { primary: 'braze', secondary: 'ajo' },
+            ecommerce: { primary: 'klaviyo', secondary: 'braze' },
+        };
+
+        const featureLabels = {
+            integration: 'Integration & Architecture',
+            ui_ux: 'Ease of Use / UI',
+            ai: 'AI Capabilities',
+            b2b: 'B2B Lead/Account Scoring',
+            channels: 'Channel Breadth',
+            journey_builder: 'Journey Builder Power'
+        };
+
+        let selectedPlatforms = [];
+        let featureRadarChart;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const platformGrid = document.getElementById('platform-grid');
+            Object.keys(platformData).forEach(key => {
+                const platform = platformData[key];
+                const card = document.createElement('div');
+                card.className = 'platform-card cursor-pointer p-4 bg-white rounded-xl shadow-sm border-2 border-gray-200 hover:shadow-md hover:border-gray-300 transition';
+                card.dataset.id = key;
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 rounded-full ${platform.logoColor}"></div>
+                        <h3 class="font-semibold text-sm text-gray-700">${platform.name}</h3>
+                    </div>
+                `;
+                card.addEventListener('click', () => togglePlatform(key));
+                platformGrid.appendChild(card);
+            });
+
+            document.getElementById('archetype-selector').addEventListener('change', handleArchetypeSelection);
+            document.getElementById('feature-selector').addEventListener('change', updateDeepDive);
+        });
+
+        function handleArchetypeSelection(event) {
+            const selectedArchetype = event.target.value;
+            if (!selectedArchetype) return;
+
+            const recommendations = recommendationData[selectedArchetype];
+            const platformsToSelect = [recommendations.primary, recommendations.secondary].filter(Boolean);
+            
+            selectedPlatforms = [];
+            document.querySelectorAll('.platform-card').forEach(card => card.classList.remove('selected'));
+            
+            platformsToSelect.forEach(platformId => {
+                togglePlatform(platformId);
+            });
+        }
+
+        function togglePlatform(platformId) {
+            const card = document.querySelector(`.platform-card[data-id='${platformId}']`);
+            const index = selectedPlatforms.indexOf(platformId);
+
+            if (index > -1) {
+                selectedPlatforms.splice(index, 1);
+                card.classList.remove('selected');
+            } else {
+                if (selectedPlatforms.length < 4) {
+                    selectedPlatforms.push(platformId);
+                    card.classList.add('selected');
+                } else {
+                    alert('You can compare a maximum of 4 platforms at a time.');
+                }
+            }
+            updateView();
+        }
+
+        function updateView() {
+            const wrapper = document.getElementById('comparison-wrapper');
+            const prompt = document.getElementById('initial-prompt');
+
+            if (selectedPlatforms.length >= 2) {
+                wrapper.classList.remove('hidden');
+                wrapper.classList.add('fade-in');
+                prompt.classList.add('hidden');
+                updateProfiles();
+                updateRadarChart();
+                updateDeepDive();
+            } else {
+                wrapper.classList.add('hidden');
+                prompt.classList.remove('hidden');
+            }
+        }
+
+        function updateProfiles() {
+            const container = document.getElementById('profile-container');
+            container.innerHTML = '';
+            container.className = `grid grid-cols-1 md:grid-cols-${Math.min(selectedPlatforms.length, 2)} lg:grid-cols-${Math.min(selectedPlatforms.length, 3)} gap-8`;
+            
+            selectedPlatforms.forEach(id => {
+                const platform = platformData[id];
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-sm border border-gray-200 prose-custom fade-in';
+                card.innerHTML = `
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-4 h-4 rounded-full ${platform.logoColor}"></div>
+                        <h2 class="text-xl font-bold text-gray-800 m-0">${platform.name}</h2>
+                    </div>
+                    <h3>Core Proposition</h3>
+                    <p>${platform.profile.proposition}</p>
+                    <h3>Ideal Customer</h3>
+                    <p>${platform.profile.customer}</p>
+                    <h3>Strengths</h3>
+                    <ul>${platform.profile.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+                    <h3>Limitations</h3>
+                    <ul>${platform.profile.limitations.map(l => `<li>${l}</li>`).join('')}</ul>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateRadarChart() {
+            const ctx = document.getElementById('featureRadarChart').getContext('2d');
+            const labels = Object.values(featureLabels);
+            const datasets = selectedPlatforms.map(id => {
+                const platform = platformData[id];
+                return {
+                    label: platform.name,
+                    data: Object.values(platform.ratings),
+                    backgroundColor: platform.chartColor,
+                    borderColor: platform.chartColor.replace('0.4', '1'),
+                    pointBackgroundColor: platform.chartColor.replace('0.4', '1'),
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: platform.chartColor.replace('0.4', '1'),
+                    borderWidth: 2
+                };
+            });
+
+            if (featureRadarChart) {
+                featureRadarChart.destroy();
+            }
+
+            featureRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: {
+                                font: { size: 12, weight: '500' },
+                                color: '#555'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                stepSize: 1,
+                                font: { size: 10 }
+                            },
+                            min: 0,
+                            max: 5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        const ratingMap = ['N/A', 'Lacking', 'Basic', 'Competent', 'Strong', 'Leader'];
+                                        label += ratingMap[context.parsed.r];
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateDeepDive() {
+            const container = document.getElementById('deep-dive-container');
+            const selectedFeature = document.getElementById('feature-selector').value;
+            container.innerHTML = '';
+             container.className = `grid grid-cols-1 md:grid-cols-${Math.min(selectedPlatforms.length, 2)} lg:grid-cols-${Math.min(selectedPlatforms.length, 3)} gap-8`;
+
+            selectedPlatforms.forEach(id => {
+                const platform = platformData[id];
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-xl shadow-sm border border-gray-200 prose-custom fade-in';
+                card.innerHTML = `
+                     <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-4 h-4 rounded-full ${platform.logoColor}"></div>
+                        <h2 class="text-xl font-bold text-gray-800 m-0">${platform.name}</h2>
+                    </div>
+                    <p>${platform.deepDive[selectedFeature]}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+    </script>
+</body>
+</html>
+
+          </body>
+        </html>

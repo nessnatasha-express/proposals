@@ -1,0 +1,918 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH/FT Proposal for Calix</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F5F3E9;
+            color: #193542;
+        }
+        /* Custom scrollbar for a more polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0e0e0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a0a0a0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #808080;
+        }
+        /* Style for the active navigation link */
+        .nav-link.active {
+            background-color: #e8f7ff;
+            color: #1CADFF;
+            font-weight: 600;
+        }
+        /* Accordion styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .prose p {
+            margin-bottom: 1.25em;
+        }
+        h2, h3, h4 {
+            color: #1CADFF;
+            font-weight: 300;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        section {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        h2, .h2-style {
+            margin-bottom: 1rem;
+        }
+    </style>
+<script defer data-domain="shift-calix-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="shift-calix-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+<body class="text-[#193542]">
+
+    <!-- Main Container -->
+    <div class="flex min-h-screen">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white border-r border-slate-200 p-6 sticky top-0 h-screen overflow-y-auto hidden lg:block">
+            <div class="flex items-center gap-2 mb-8">
+                <img src="https://www.shiftparadigm.com/wp-content/uploads/2024/09/Logo_Blue_Black.png" alt="SH/FT Logo" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/120x40/ffffff/193542?text=SH/FT';">
+            </div>
+            <nav>
+                <ul class="space-y-2" id="desktop-nav">
+                    <li><a href="#summary" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Executive summary</a></li>
+                    <li><a href="#about" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">About SH/FT</a></li>
+                    <li><a href="#needs" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Aligning on your needs</a></li>
+                    <li><a href="#options" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Implementation options</a></li>
+                    <li><a href="#change-management" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Change management</a></li>
+                    <li><a href="#project-management" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Project management</a></li>
+                    <li><a href="#team-structure" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Team structure</a></li>
+                    <li><a href="#success" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Success stories</a></li>
+                    <li><a href="#timeline" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Timeline &amp; costs</a></li>
+                    <li><a href="#closing" class="nav-link block px-4 py-2 rounded-md hover:bg-[#F5F3E9] transition-colors duration-200">Closing &amp; contact</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-10">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Header for mobile -->
+                <header class="lg:hidden mb-6">
+                     <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                           <img src="https://www.shiftparadigm.com/wp-content/uploads/2024/09/Logo_Blue_Black.png" alt="SH/FT Logo" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/120x40/ffffff/193542?text=SH/FT';">
+                        </div>
+                        <select id="mobile-nav" class="block w-full max-w-xs p-2 border border-slate-300 rounded-md bg-white">
+                            <option value="summary">Executive Summary</option>
+                            <option value="about">About SH/FT</option>
+                            <option value="needs">Aligning on Your Needs</option>
+                            <option value="options">Implementation Options</option>
+                            <option value="change-management">Change Management</option>
+                            <option value="project-management">Project Management</option>
+                            <option value="team-structure">Team Structure</option>
+                            <option value="success">Success Stories</option>
+                            <option value="timeline">Timeline &amp; Costs</option>
+                            <option value="closing">Closing &amp; Contact</option>
+                        </select>
+                    </div>
+                </header>
+
+                <!-- Intro Block -->
+                <div class="bg-[#1CADFF] text-white p-8 rounded-xl shadow-lg mb-12">
+                    <h1 class="text-4xl font-light mb-2 text-white">Marketing Automation Implementation Proposal and Approach for Calix</h1>
+                    <p class="text-indigo-100 text-lg">How SH/FT can partner with Calix to deliver seamless lifecycle communications across Marketing and Customer Success — with every touchpoint driving a stronger customer experience.</p>
+                </div>
+
+                <!-- Section 1: Executive Summary -->
+                <section id="summary" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="file-text" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Executive summary</h2>
+                        </div>
+                        <p class="text-lg text-slate-500 mt-2 mb-10">Scaling customer experience through Calix's future-ready platform.</p>
+                        
+                        <div class="prose max-w-none prose-slate mb-8">
+                            <p>We sincerely appreciate the opportunity to respond to your RFP. Your focus on unifying Marketing and Customer Success, future-proofing your marketing automation platform, and ensuring every customer touchpoint reflects excellence resonates deeply with SH/FT’s core expertise. Your vision for a connected, scalable, and experience-driven lifecycle aligns perfectly with our strengths. We’re confident that we are the right partner to help you achieve this goal, as demonstrated in this proposal and our commitment to building a successful, lasting partnership.</p>
+                            <p><b>As you evaluate your next-generation platform, we understand the importance of being platform-agnostic, and that is exactly where we sit in the marketplace. Unlike many of our competitors, we are customer-first, technology-second, ensuring that we support a strong, purpose-built tech stack strategy that allows your tech—whether it's blue or red—to fit with you and not work against you.</b></p>
+                            <p>Our team brings proven success helping fast-growing technology organizations design and deliver unified lifecycle communications, balancing technical build with operational enablement. We ensure migrations happen with minimal disruption, while enabling segmentation, advanced journeys, unified reporting, and adoption across teams.</p>
+                            <p>We’re excited about the potential to partner with you to create a future-proof, customer-first lifecycle framework that keeps pace with your growth. With SH/FT, you’ll enhance operational efficiency, strengthen customer engagement, and continue delivering the exceptional experience that fuels your rapid success.</p>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-6 text-center pt-10">Four reasons why SH/FT is your ideal partner</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg text-center border border-slate-200">
+                                <div class="flex justify-center mb-3"><i data-lucide="zap" class="w-8 h-8 text-[#1CADFF]"></i></div>
+                                <h4 class="font-semibold text-[#193542] mb-1">Proven Expertise</h4>
+                                <p class="text-sm text-slate-600">in technology implementation</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg text-center border border-slate-200">
+                                <div class="flex justify-center mb-3"><i data-lucide="users" class="w-8 h-8 text-[#1CADFF]"></i></div>
+                                <h4 class="font-semibold text-[#193542] mb-1">Data-Driven Personalization</h4>
+                                <p class="text-sm text-slate-600">for customer experience</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg text-center border border-slate-200">
+                                <div class="flex justify-center mb-3"><i data-lucide="sliders-horizontal" class="w-8 h-8 text-[#1CADFF]"></i></div>
+                                <h4 class="font-semibold text-[#193542] mb-1">Streamlined Processes</h4>
+                                <p class="text-sm text-slate-600">for operational efficiency</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg text-center border border-slate-200">
+                                <div class="flex justify-center mb-3"><i data-lucide="lightbulb" class="w-8 h-8 text-[#1CADFF]"></i></div>
+                                <h4 class="font-semibold text-[#193542] mb-1">Innovation-Driven Approach</h4>
+                                <p class="text-sm text-slate-600">for competitive advantage</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-2 text-center pt-10">If this wasn't enough to convince you we're invested in you, let's share a bit more on why we think we're the right extension of your team. Here is what makes SH/FT stand out.</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="recycle" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Lifecycle-first, not platform-first</h4>
+                                    <p class="text-sm text-slate-600">We start from the customer journey and business objectives, then architect the right solution, whether on SFMC, Marketo, or a hybrid of both.</p>
+                                </div>
+                            </div>
+                             <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="network" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Deep experience integrating complex tech ecosystems</h4>
+                                    <p class="text-sm text-slate-600">Proven track record stitching together Salesforce, Marketo, 6sense, Snowflake, Adobe Target, and Workfront.</p>
+                                </div>
+                            </div>
+                             <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="rocket" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Balanced “startup pace” with enterprise scale</h4>
+                                    <p class="text-sm text-slate-600">Built to thrive in high-growth environments, delivering nimble migrations without disrupting momentum.</p>
+                                </div>
+                            </div>
+                             <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="users-round" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Operational change &amp; adoption expertise</h4>
+                                    <p class="text-sm text-slate-600">Implementation doesn’t stop at launch. We drive process change, enablement, and ongoing optimization all to support your business growth and goals.</p>
+                                </div>
+                            </div>
+                             <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="gauge-circle" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Proven execution velocity &amp; quality</h4>
+                                    <p class="text-sm text-slate-600">Successfully delivered large-scale Marketing Automation Platform migrations under tight timelines, maintaining customer experience and reporting integrity.</p>
+                                </div>
+                            </div>
+                             <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200 flex items-start gap-4">
+                                <i data-lucide="heart-handshake" class="w-8 h-8 text-[#1CADFF] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-[#193542]">Customer-obsessed mindset with flexibility</h4>
+                                    <p class="text-sm text-slate-600">Designed around your priority of experience &gt; cost, we tailor our approach to your operating cadence and urgency.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: About SH/FT -->
+                <section id="about" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                           <i data-lucide="info" class="w-8 h-8 text-[#1CADFF]"></i>
+                           <h2 class="text-4xl font-light">About SH/FT</h2>
+                        </div>
+                        <p class="text-lg text-slate-500 mt-2 mb-10">Your digital co-pilot and growth partner.</p>
+                        
+                        <p class="mb-8">SH/FT is an agency that accelerates growth for marketing and product teams. We align technology, data, automation, and AI to meet your specific business needs. Unlock the full potential of your marketing technology, and accelerate growth.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <i data-lucide="globe" class="w-8 h-8 text-[#1CADFF] mb-3"></i>
+                                <h4 class="font-semibold text-[#193542] mb-2">Global reach, local impact</h4>
+                                <p class="text-sm text-slate-600">Our 150+ global team members operate remotely across the United States, Canada, and India, bringing diverse perspectives and localized insights to every engagement.</p>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <i data-lucide="award" class="w-8 h-8 text-[#1CADFF] mb-3"></i>
+                                <h4 class="font-semibold text-[#193542] mb-2">Proven digital marketing expertise</h4>
+                                <p class="text-sm text-slate-600">With 1000s of technology setups under our belt, we have decades of combined experience in MarTech, compliance, UX, data, and marketing strategy.</p>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <i data-lucide="shield-check" class="w-8 h-8 text-[#1CADFF] mb-3"></i>
+                                <h4 class="font-semibold text-[#193542] mb-2">Extensive certifications</h4>
+                                <p class="text-sm text-slate-600">Our team is proudly certified in well over 250 certifications across leading technology ecosystems like Adobe, Salesforce, and Braze, ensuring we stay at the cutting edge.</p>
+                            </div>
+                             <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <i data-lucide="star" class="w-8 h-8 text-[#1CADFF] mb-3"></i>
+                                <h4 class="font-semibold text-[#193542] mb-2">Client satisfaction</h4>
+                                <p class="text-sm text-slate-600">As of 2025, our NPS score is 9.3 out of 10, reflecting our commitment to delivering tangible results and exceeding client expectations.</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-3xl font-light mb-4 text-center pt-10">We deliver transformative growth solutions</h3>
+                        <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">Teaming up with us empowers you to boost your business operations, refine your technology and data for optimal efficiency, and navigate the essential changes your business needs to propel growth.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                            <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <i data-lucide="bar-chart-3" class="w-10 h-10 text-[#1CADFF]"></i>
+                                    <h4 class="text-2xl font-light">Growth consulting</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 mb-4">Strategic insights, research, and analysis to help businesses make informed, data-driven decisions.</p>
+                                <ul class="space-y-2 text-sm text-slate-600">
+                                    <li>AI Strategy &amp; Planning</li><li>Analytics Strategy</li><li>Attribution Modeling</li><li>Audience Intelligence</li><li>Business Process Design</li><li>Change Management</li><li>Competitive Intelligence</li><li>Data Architecture</li><li>Go-to-Market Planning</li><li>Audience Segmentation</li><li>Market Intelligence</li><li>Revenue Process Design</li><li>User Experience (UX)</li><li>Lead Management</li><li>Tech Architecture</li>
+                                </ul>
+                            </div>
+                             <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <i data-lucide="cpu" class="w-10 h-10 text-[#1CADFF]"></i>
+                                    <h4 class="text-2xl font-light">Technology transformation</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 mb-4">We design and implement technology ecosystems to enhance efficiency and accelerate transformation.</p>
+                                <ul class="space-y-2 text-sm text-slate-600">
+                                    <li>Data Enrichment</li><li>Data Diagnostics</li><li>Data Administration</li><li>Data Optimization</li><li>Integrations &amp; Syncs</li><li>MarTech 360</li><li>System Administration</li><li>System Diagnostics</li><li>System Implementation</li><li>System Migration</li><li>Custom Development</li><li>Product Development</li><li>eCommerce Engineering</li><li>App Development</li><li>Enterprise Web/CMS Dev</li>
+                                </ul>
+                            </div>
+                             <div class="p-6 bg-white rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <i data-lucide="heart-handshake" class="w-10 h-10 text-[#1CADFF]"></i>
+                                    <h4 class="text-2xl font-light">Personalized experiences</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 mb-4">Customer-centered experiences from web design to digital marketing, crafted to foster lasting loyalty.</p>
+                                <ul class="space-y-2 text-sm text-slate-600">
+                                    <li>Campaign Analytics</li><li>Campaign Diagnostics</li><li>Campaign Automation</li><li>Campaign Planning</li><li>Channel Management</li><li>Content Diagnostics</li><li>Content Production</li><li>Content Strategy</li><li>Channel Diagnostics</li><li>Channel Deliverability</li><li>Template Development</li><li>Experience Blueprint</li><li>Lifecycle Automation</li><li>Lifecycle Analytics</li><li>Product Design</li><li>Creative Design</li><li>Journey Mapping</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Your Needs -->
+                <section id="needs" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="check-circle" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Aligning on your needs</h2>
+                        </div>
+                        <p class="text-lg text-slate-500 mt-2 mb-8">Enabling a connected marketing ecosystem for Calix success</p>
+                        <p class="mb-8">Through the RFQ documents you have provided, along with our ad-hoc discussions both via email and live, here are the core areas we believe you're after in this important initiative:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <h3 class="text-xl font-light mb-4">Unified customer experience across marketing &amp; customer success</h3>
+                                <ul class="space-y-3 text-slate-600 text-sm">
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Marketing and Customer Success operate on separate platforms (Pardot vs. SFMC), creating fragmented customer experiences.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>A single Marketing Automation Platform is required to align both teams and ensure cohesive lifecycle communications.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Salesforce CRM must remain the system of record for all engagement activity.</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <h3 class="text-xl font-light mb-4">Scalable, modern marketing automation</h3>
+                                <ul class="space-y-3 text-slate-600 text-sm">
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>The current Pardot environment lacks advanced segmentation, reporting, and ABM capabilities.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Calix requires a solution that supports personalized, multi-channel campaigns (email, SMS, WhatsApp, mobile) and advanced targeting.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>The platform must be future-proof and capable of scaling with rapid growth, avoiding another migration in the near term.</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <h3 class="text-xl font-light mb-4">Data and integration alignment</h3>
+                                <ul class="space-y-3 text-slate-600 text-sm">
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Your Marketing Automation Platform must integrate seamlessly with Snowflake and Salesforce Data Cloud to activate customer insights.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Alignment with existing tools (6sense, Workfront, Adobe Target, Cvent) is essential for efficiency and governance.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>Clean, governed data flow across platforms is critical for accurate reporting and decision-making.</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <h3 class="text-xl font-light mb-4">Clear implementation &amp; change management path</h3>
+                                <ul class="space-y-3 text-slate-600 text-sm">
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>The engagement timeline is driven by expiring contracts — overlap and a realistic migration plan are essential.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>You expect partner support not just in standing up the tech, but also in process &amp; change management.</span></li>
+                                    <li class="flex items-start"><span class="mr-3 text-[#1CADFF] mt-1">•</span><span>You desire an implementation partner engaged immediately after platform decision to avoid delays.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Implementation Options -->
+                <section id="options" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="server" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Implementation options</h2>
+                        </div>
+                        <div class="prose max-w-none prose-slate my-8">
+                            <p>Calix is at a key moment for its marketing and customer engagement technology. The decision to move from Pardot isn't just about choosing a new platform for the marketing team—it's a chance to build a forward-thinking MarTech stack that truly supports your B2B goals and empowers both the Marketing and Customer Success teams.</p>
+                            <p>This section lays out two distinct strategic options, giving you a full view of the possibilities this investment opens up for your teams. Each option strikes a different balance between platform consolidation, best-in-class tools, efficiency, and long-term flexibility.</p>
+                            <br>
+                            <p><b>Click or tap on the 2 options below to learn more about each one of them.</b></p>
+                        </div>
+                        
+                        <div class="space-y-4" id="options-accordion">
+                            <!-- Option 1 -->
+                            <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full text-left p-6 bg-[#1CADFF] text-white rounded-lg hover:scale-105 transition-transform duration-200">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-start gap-6">
+                                            <div class="text-4xl font-bold opacity-75">01</div>
+                                            <div>
+                                                <h3 class="text-3xl font-light text-white">Option 1: Consolidation Under Salesforce Ecosystem</h3>
+                                                <p class="font-medium">Migrate Marketing (Pardot) to a New SFMC Business Unit</p>
+                                            </div>
+                                        </div>
+                                        <i data-lucide="plus-circle" class="w-8 h-8 flex-shrink-0 ml-4"></i>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="p-6">
+                                        <div class="prose max-w-none prose-slate mb-6">
+                                            <p>This approach involves migrating the Marketing team from Pardot to a new, dedicated Business Unit (BU) within the existing Salesforce Marketing Cloud (SFMC) instance currently used by the Customer Success team. This path prioritizes unifying all marketing and customer communication on a single, powerful Salesforce platform, maximizing your existing investment and leveraging the native, seamless data connection to your CRM.</p>
+                                        </div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                            <div class="border border-green-300 bg-green-50 rounded-lg p-4">
+                                                <h4 class="font-bold text-green-800 mb-2">Pros</h4>
+                                                <ul class="list-disc list-inside space-y-2 text-sm text-green-700">
+                                                    <li><b>Platform Consolidation:</b> Unifies both Marketing and Customer Success teams onto a single platform (SFMC), simplifying vendor management.</li>
+                                                    <li><b>Leverages Existing Investment:</b> Maximizes the value of your current SFMC license and leverages existing internal knowledge.</li>
+                                                    <li><b>Native CRM Integration:</b> Offers the tightest possible data sync with your Salesforce CRM via Marketing Cloud Connect.</li>
+                                                    <li><b>Shared Capabilities:</b> Allows for shared assets, templates, and data models between BUs, fostering brand consistency and operational efficiency.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="border border-red-300 bg-red-50 rounded-lg p-4">
+                                                <h4 class="font-bold text-red-800 mb-2">Cons</h4>
+                                                <ul class="list-disc list-inside space-y-2 text-sm text-red-700">
+                                                    <li><b>More B2C-Centric Model:</b> SFMC's contact-based data model is not optimized for ABM and requires significant custom data architecture for B2B.</li>
+                                                    <li><b>Complex Integrations:</b> Integrating account-based tools like 6sense is not native and requires a custom solution.</li>
+                                                    <li><b>Potential for Conflict:</b> Shared resources and platform limits require strong governance to prevent teams from impacting each other's performance.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Option 2 -->
+                            <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full text-left p-6 bg-[#1CADFF] text-white rounded-lg hover:scale-105 transition-transform duration-200">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-start gap-6">
+                                            <div class="text-4xl font-bold opacity-75">02</div>
+                                            <div>
+                                                <h3 class="text-3xl font-light text-white">Option 2: Migrate to Marketo</h3>
+                                                <p class="font-medium">Migrate Everything (Marketing &amp; CS) to Marketo</p>
+                                            </div>
+                                        </div>
+                                        <i data-lucide="plus-circle" class="w-8 h-8 flex-shrink-0 ml-4"></i>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="p-6">
+                                        <div class="prose max-w-none prose-slate mb-6">
+                                            <p>This option represents the "Total Unification &amp; B2B Alignment" strategy. It involves a full consolidation of all marketing and customer engagement efforts by migrating both the Marketing team (from Pardot) and the Customer Success team (from SFMC) to a single, new Adobe Marketo instance. This is the most transformative approach, designed to align the entire customer lifecycle—from the first touch to renewal and advocacy—on a single, B2B-centric platform.</p>
+                                        </div>
+                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                            <div class="border border-green-300 bg-green-50 rounded-lg p-4">
+                                                <h4 class="font-bold text-green-800 mb-2">Pros</h4>
+                                                <ul class="list-disc list-inside space-y-2 text-sm text-green-700">
+                                                    <li><b>Fully Unified Platform:</b> Creates a single source of truth for all customer engagement.</li>
+                                                    <li><b>360-Degree Customer View:</b> Enables a seamless view of the entire customer lifecycle for coordinated journeys.</li>
+                                                    <li><b>Strong B2B Focus:</b> Aligns the entire organization's outreach around Marketo's powerful account-based framework.</li>
+                                                    <li><b>Reduced Vendor Complexity &amp; Costs:</b> Consolidates operations onto a single platform, reducing overhead long-term.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="border border-red-300 bg-red-50 rounded-lg p-4">
+                                                <h4 class="font-bold text-red-800 mb-2">Cons</h4>
+                                                <ul class="list-disc list-inside space-y-2 text-sm text-red-700">
+                                                    <li><b>Highest Disruption:</b> Requires migrating two teams from two different platforms simultaneously.</li>
+                                                    <li><b>Sub-Optimal for CS:</b> Marketo is not designed for customer service communications and lacks purpose-built SFMC features.</li>
+                                                    <li><b>Likely More Change Management Needs:</b> Requires comprehensive retraining for the Customer Success team.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-10">Other potential options to consider</h3>
+                        <p class="mb-6">While these two are likely the ultimate options here are two additional consideration we could scope out and support:</p>
+                         <div class="p-6 bg-[#F5F3E9] rounded-lg border border-slate-200 space-y-4">
+                            <p><b>Best-of-Breed Approach:</b> Splitting CS and Marketing into two separate instances—one in SFMC and one in Marketo—to leverage the strengths of each platform for its intended purpose.</p>
+                            <p><b>Orchestration Layer:</b> Use Adobe Journey Optimizer (AJO) B2B as the orchestration layer above SFMC or Marketo. This allows for a 6sense-like, ABM-driven buying committee structure over all marketing efforts, regardless of the underlying platform.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Change Management -->
+                <section id="change-management" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="users-round" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Change management</h2>
+                        </div>
+                        <div class="prose max-w-none prose-slate my-8">
+                            <p>At SH/FT, we view change management not as a bolt-on to transformation, but as the force multiplier that ensures new strategies, systems, and ways of working stick. Our approach reframes change from something daunting into an essential, achievable path forward that builds momentum and keeps organizations moving.</p>
+                            <p>We tailor change management to your culture and stakeholder needs—right-sizing the rigor so it’s practical, sustainable, and owned by your teams.</p>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-10">Our framework is designed to make change:</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="flex items-center gap-3 p-4 bg-[#F5F3E9] rounded-lg"><i data-lucide="zap" class="w-5 h-5 text-[#1CADFF]"></i><span class="font-semibold">Necessary and urgent</span></div>
+                            <div class="flex items-center gap-3 p-4 bg-[#F5F3E9] rounded-lg"><i data-lucide="mouse-pointer-click" class="w-5 h-5 text-[#1CADFF]"></i><span class="font-semibold">Approachable</span></div>
+                            <div class="flex items-center gap-3 p-4 bg-[#F5F3E9] rounded-lg"><i data-lucide="users" class="w-5 h-5 text-[#1CADFF]"></i><span class="font-semibold">Shared</span></div>
+                            <div class="flex items-center gap-3 p-4 bg-[#F5F3E9] rounded-lg"><i data-lucide="rocket" class="w-5 h-5 text-[#1CADFF]"></i><span class="font-semibold">Doable and empowering</span></div>
+                        </div>
+
+                        <p class="mb-6">Our offering includes a proprietary change management survey to assess readiness and shape the right approach. From there, we focus on four proven levers of adoption:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="handshake" class="w-6 h-6 text-[#1CADFF]"></i>
+                                    <h4 class="font-semibold text-[#193542]">Stakeholder Engagement</h4>
+                                </div>
+                                <p class="text-sm text-slate-600">Building buy-in early, minimizing resistance.</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="sitemap" class="w-6 h-6 text-[#1CADFF]"></i>
+                                    <h4 class="font-semibold text-[#193542]">Impact Planning</h4>
+                                </div>
+                                <p class="text-sm text-slate-600">Anticipating disruption, mapping dependencies, and mitigating risk.</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="megaphone" class="w-6 h-6 text-[#1CADFF]"></i>
+                                    <h4 class="font-semibold text-[#193542]">Clear Communication</h4>
+                                </div>
+                                <p class="text-sm text-slate-600">Making the purpose and benefits of change visible and compelling.</p>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-6 rounded-lg border border-slate-200">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="target" class="w-6 h-6 text-[#1CADFF]"></i>
+                                    <h4 class="font-semibold text-[#193542]">Targeted Training</h4>
+                                </div>
+                                <p class="text-sm text-slate-600">Equipping teams with the knowledge and skills to succeed.</p>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-3xl font-light mb-4 pt-10">Training &amp; enablement</h3>
+                        <p class="mb-6">SH/FT is committed to empowering your team to effectively use your consolidated Marketing Automation Platform. We provide a variety of ongoing training and support options, including:</p>
+                        <div class="space-y-2" id="training-accordion">
+                            <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-sky-50 hover:bg-sky-100">
+                                    <span class="font-semibold text-[#193542]">Implementation Training</span>
+                                    <i data-lucide="plus" class="accordion-icon w-5 h-5 transition-transform"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="p-4 text-sm text-slate-600">
+                                        <ul class="list-disc list-inside space-y-2">
+                                            <li><b>Post-Launch Hypercare:</b> We provide dedicated support for 2-4 weeks post-go-live, ensuring rapid resolution of any issues.</li>
+                                            <li><b>Office Hours:</b> Bi-weekly sessions are available to all active customers to answer questions and provide best practices.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-sky-50 hover:bg-sky-100">
+                                    <span class="font-semibold text-[#193542]">Post-Implementation Support</span>
+                                    <i data-lucide="plus" class="accordion-icon w-5 h-5 transition-transform"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="p-4 text-sm text-slate-600">
+                                        <ul class="list-disc list-inside space-y-2">
+                                            <li><b>Ongoing Performance Reviews:</b> Regular reviews to monitor platform activities and identify areas for improvement.</li>
+                                            <li><b>Platform Utilization Assessment:</b> We review how teams are utilizing the platform, ensuring best practices are followed.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-sky-50 hover:bg-sky-100">
+                                    <span class="font-semibold text-[#193542]">Role-Specific Virtual Enablement</span>
+                                    <i data-lucide="plus" class="accordion-icon w-5 h-5 transition-transform"></i>
+                                </button>
+                                <div class="accordion-content"><p class="p-4 text-sm text-slate-600">Tailored workshops and sessions to address the specific needs of different roles within your team.</p></div>
+                            </div>
+                             <div class="border border-slate-200 rounded-lg">
+                                <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-sky-50 hover:bg-sky-100">
+                                    <span class="font-semibold text-[#193542]">Centralized Training Repository</span>
+                                    <i data-lucide="plus" class="accordion-icon w-5 h-5 transition-transform"></i>
+                                </button>
+                                <div class="accordion-content"><p class="p-4 text-sm text-slate-600">A continuously updated library of resources, guides, and best practices to support ongoing learning.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Project Management -->
+                <section id="project-management" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="clipboard-list" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Project management</h2>
+                        </div>
+                        <p class="text-lg text-slate-500 mt-2 mb-8">Proactive communication &amp; transparent progress tracking</p>
+                        <div class="prose max-w-none prose-slate mb-8">
+                            <p>At SH/FT, we believe in a structured, transparent, and collaborative project management approach. We combine the best of Agile and Waterfall methodologies, ensuring flexibility while maintaining clear accountability and quality results.</p>
+                            <p>Our process is grounded in a well-defined project lifecycle with a phased, deliverables-oriented approach. Our philosophy goes beyond simply delivering the solution - we are dedicated to understanding your strategic goals, perspectives and needs to ensure successful execution and delivery. Our promise to you as a client is to communicate clearly and consistently. We create team cohesion with regular updates and open progress tracking.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-2xl font-light mb-4">Key pillars of our philosophy</h3>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start"><i data-lucide="user-check" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span>A committed Project Manager (PM) serves as the primary point of contact.</span></li>
+                                    <li class="flex items-start"><i data-lucide="message-circle" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span>Real-time, transparent communication for clear stakeholder visibility.</span></li>
+                                    <li class="flex items-start"><i data-lucide="clipboard-list" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span>Emphasis on detailed planning, clear accountability, and seamless collaboration.</span></li>
+                                    <li class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span>Onsite facilitation for kickoff, discovery, and key milestones as needed.</span></li>
+                                    <li class="flex items-start"><i data-lucide="shield-alert" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span>Robust risk management through identification, assessment, and mitigation.</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-light mb-4">Communication &amp; tracking</h3>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start"><i data-lucide="file-text" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span><b>Communication Plan:</b> Established at project onset.</span></li>
+                                    <li class="flex items-start"><i data-lucide="slack" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span><b>Shared Channels:</b> Utilizing Slack or Teams for real-time interaction.</span></li>
+                                    <li class="flex items-start"><i data-lucide="calendar-days" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span><b>Shared Project Plan:</b> A detailed, maintained plan accessible to all stakeholders.</span></li>
+                                    <li class="flex items-start"><i data-lucide="users" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span><b>Weekly Status Meetings:</b> PM-led 30-minute check-ins.</span></li>
+                                    <li class="flex items-start"><i data-lucide="bar-chart-2" class="w-5 h-5 text-[#1CADFF] mr-3 mt-1 flex-shrink-0"></i><span><b>Bi-Weekly Status Reports:</b> Covering project health, progress, and risks.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 7: Team Structure -->
+                <section id="team-structure" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="sitemap" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Team structure</h2>
+                        </div>
+                        <p class="my-8">To ensure the success of your project, we've assembled a dedicated leadership team, each member bringing specialized expertise to guide and support you throughout the engagement. This team will provide strategic direction, ensure client satisfaction, and manage the project's execution, fostering a collaborative and productive partnership.</p>
+                        
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-10">Understanding our project leadership layer</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-[#193542]">VP, Client Success</h4><p class="text-sm text-slate-600">Your trusted advisor and advocate. Owns the overall health of our partnership.</p></div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-[#193542]">Program Manager</h4><p class="text-sm text-slate-600">Your project lead. Expertly manages the project lifecycle from planning to delivery.</p></div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-[#193542]">Technical Delivery Lead</h4><p class="text-sm text-slate-600">Your platform and integration architect, ensuring work gets done right.</p></div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg border border-slate-200"><h4 class="font-semibold text-[#193542]">Business Operations Strategy Lead</h4><p class="text-sm text-slate-600">Your strategic lead, focused on operational processes, enablement, and training.</p></div>
+                        </div>
+
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-10">How your team will be structured</h3>
+                        <p class="mb-6">Regardless of the platform solution you choose, we'll support the work with a team structure that looks like this:</p>
+                        <div class="bg-[#F5F3E9] border border-slate-200 rounded-lg p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                <!-- Account Management -->
+                                <div>
+                                    <h4 class="font-bold text-white bg-[#1CADFF] py-2 rounded-t-lg">Account Management</h4>
+                                    <div class="border border-t-0 bg-white border-slate-200 p-4 rounded-b-lg space-y-2 text-sm">
+                                        <p>VP, Client Success</p>
+                                        <p>Program Manager</p>
+                                    </div>
+                                </div>
+                                <!-- Technical Workstream -->
+                                <div>
+                                    <h4 class="font-bold text-white bg-[#1CADFF] py-2 rounded-t-lg">Technical Workstream</h4>
+                                    <div class="border border-t-0 bg-white border-slate-200 p-4 rounded-b-lg space-y-2 text-sm">
+                                        <p class="font-semibold">Technical Delivery Lead</p>
+                                        <div class="border-t border-slate-200 my-2"></div>
+                                        <p>Platform(s) Architect</p>
+                                        <p>Platform(s) Specialists</p>
+                                        <p>Integration Engineer</p>
+                                        <p>CRM Specialist</p>
+                                        <p>Template Developer</p>
+                                        <p>Technical QA</p>
+                                    </div>
+                                </div>
+                                <!-- Strategy Workstream -->
+                                <div>
+                                    <h4 class="font-bold text-white bg-[#1CADFF] py-2 rounded-t-lg">Strategy Workstream</h4>
+                                    <div class="border border-t-0 bg-white border-slate-200 p-4 rounded-b-lg space-y-2 text-sm">
+                                        <p class="font-semibold">Business Ops Strategy Lead</p>
+                                        <div class="border-t border-slate-200 my-2"></div>
+                                        <p>Marketing Operations Specialist</p>
+                                        <p>Change Management &amp; Enablement Lead</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mt-10 mb-4">Our "bench strength" for as-needed support</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">Design / UX</div>
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">Product / CMS Engineer</div>
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">BI Analyst</div>
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">Email Marketing Specialist</div>
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">Data Engineer</div>
+                             <div class="bg-[#F5F3E9] p-3 rounded-md">Deliverability Specialist</div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Section 8: Success Stories -->
+                <section id="success" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                           <i data-lucide="award" class="w-8 h-8 text-[#1CADFF]"></i>
+                           <h2 class="text-4xl font-light">Success stories</h2>
+                        </div>
+                        <p class="text-lg text-slate-500 mt-2 mb-10">Proven results with industry leaders</p>
+                        
+                        <div class="space-y-8">
+                            <!-- Story 1 -->
+                            <div class="p-6 rounded-lg" style="background-color: #0F232D;">
+                                <p class="text-sm font-semibold text-[#1CADFF] mb-1">Approach: SFMC Consolidation</p>
+                                <h4 class="text-3xl font-light mb-3 text-white">Resmed: Unifying multiple platforms</h4>
+                                <p class="text-sm text-white">Resmed operated two instances of Pardot (one of Gainsight, as well as a complex Marketo instance). We collaborated with them to merge these into a single SFMC instance linked to a third-party patient database. This consolidation enabled all marketing technology teams to operate under one central system. While they did not implement ABM, they effectively utilized a B2B2C approach in one of the business units, showcasing SFMC's flexibility.</p>
+                            </div>
+                            <!-- Story 2 -->
+                             <div class="p-6 rounded-lg" style="background-color: #0F232D;">
+                                <p class="text-sm font-semibold text-[#1CADFF] mb-1">Approach: Total Unification in Marketo</p>
+                                <h4 class="text-3xl font-light mb-3 text-white">Contentsquare: Integrating acquisitions</h4>
+                                <p class="text-sm text-white">After acquiring Heap and Hotjar, Contentsquare faced the challenge of integrating three separate marketing stacks (SFMC, HubSpot, Marketo). We assisted in unifying them into a new centralized Marketo instance with direct 6sense integration for ABM, and an ETL solution to Snowflake. This complex project resulted in significant cost savings and efficiency improvements across their global teams.</p>
+                            </div>
+                            <!-- Story 3 -->
+                             <div class="p-6 rounded-lg" style="background-color: #0F232D;">
+                                <p class="text-sm font-semibold text-[#1CADFF] mb-1">Approach: Best-of-Breed Strategy -- SFMC for CS &amp; Marketo for Marketing</p>
+                                <h4 class="text-3xl font-light mb-3 text-white">Atlassian: Platform consolidation at scale</h4>
+                                <p class="text-sm text-white">Atlassian, through acquisition, had nearly 16 different Marketing Automation Platforms. We helped consolidate these into two distinct instances: Marketo for enterprise-level B2B ABM, and SFMC for engaging active users with nurturing and education. This decision was driven by the need for SFMC's strong in-app and push channel capabilities, which Marketo lacks. This strategic split allowed each platform to be used for its core strengths while ensuring deep integration with their CRM and data lake to support PLG strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 9: Timeline & Costs -->
+                <section id="timeline" class="mb-12 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="calendar-clock" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Timeline &amp; costs</h2>
+                        </div>
+                        <p class="my-8">Reflected below are two pricing and project plans. In these plans we've broken down typical work by phases, pricing and timing, along with the typical tasks you will see. Click on each timeline to see what tasks and activities make up each phase of the work.</p>
+                        
+                        <div class="space-y-8">
+                            <!-- Option 1: SFMC Timeline & Scope -->
+                            <div class="border border-slate-200 rounded-lg">
+                                <div class="w-full text-left p-6 bg-[#F5F3E9]">
+                                    <h4 class="text-xl font-light mb-1 text-[#193542]">Option 1: Consolidation Under Salesforce Ecosystem</h4>
+                                    <div class="flex justify-between items-baseline mb-4">
+                                        <p class="text-sm text-slate-500">Migrate Marketing to a new SFMC Business Unit</p>
+                                        <div class="text-right flex-shrink-0 ml-4">
+                                             <p class="font-bold">16-18 Weeks</p>
+                                             <p class="text-2xl font-bold text-[#1CADFF]">$279,400</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-200 rounded-full h-8 flex text-white text-xs font-bold overflow-hidden border border-slate-300">
+                                        <div class="bg-[#1CADFF] h-full flex items-center justify-center" style="width: 11.7%;" title="Phase 1: Discovery (2 Weeks)">P1</div>
+                                        <div class="bg-[#246F99] h-full flex items-center justify-center" style="width: 29.4%;" title="Phase 2: Design (5 Weeks)">P2</div>
+                                        <div class="bg-[#E4D3A0] h-full flex items-center justify-center" style="width: 35.3%;" title="Phase 3: Build (6 Weeks)">P3</div>
+                                        <div class="bg-[#615D50] h-full flex items-center justify-center" style="width: 23.6%;" title="Phase 4: Deploy &amp; Drive (4 Weeks)">P4</div>
+                                    </div>
+                                     <div class="flex justify-between text-xs mt-2 text-slate-500">
+                                        <span>Start</span>
+                                        <span>End Wk 2</span>
+                                        <span>End Wk 7</span>
+                                        <span>End Wk 13</span>
+                                        <span>End Wk 17</span>
+                                    </div>
+                                </div>
+                                <div class="p-6 prose prose-slate max-w-none text-sm">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#1CADFF] mr-2"></span>Phase 01: Discovery</h5>
+                                            <ul><li>Create discovery plan</li><li>Setup systems</li><li>Kick-off &amp; Discovery Sessions (2-Day Onsite)</li><li>IP Warming Discovery</li><li>Technical Access &amp; Provisioning</li><li>CRM Data &amp; Mapping Deep Dive</li><li>SFMC Analytics Discovery</li><li>Migration Deep Dive</li><li>Integration Discovery (6sense, Snowflake)</li><li>Form &amp; Web Tracking Discovery</li><li>Define Business Requirements</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#246F99] mr-2"></span>Phase 02: Design</h5>
+                                            <ul><li>Strategize ABM &amp; Lead Management</li><li>Design User/Roles Configuration</li><li>Map Pardot Journeys to SFMC</li><li>Audience Segmentation Strategy</li><li>Marketing Cloud Connect Design</li><li>Integration Architecture Design</li><li>Compliance &amp; Preference Center Design</li><li>Data Model Design</li><li>Form Strategy</li><li>System Architecture Diagram</li><li>Template Design (Email &amp; LP)</li><li>IP Warming Plan</li><li>Create Migration &amp; Test Plans</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#E4D3A0] mr-2"></span>Phase 03: Build</h5>
+                                            <ul><li>Configure SFMC (BU, Users, etc.)</li><li>Configure MC Connect</li><li>Build Data Extensions &amp; Automations</li><li>Build Integrations</li><li>Build Preference Center</li><li>Build Compliance Logic</li><li>Build Forms</li><li>Build &amp; Migrate Journeys</li><li>Develop Templates</li><li>Build IP Warming Assets</li><li>Build Reporting Dashboards</li><li>Internal QA</li><li>Discover and Build for Data Cloud Integration</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#615D50] mr-2"></span>Phase 04: Deploy &amp; Drive</h5>
+                                            <ul><li>Team Training / Office Hours</li><li>Execute QA &amp; Testing</li><li>Manage UAT &amp; Triage</li><li>Implement Revisions</li><li>Execute IP Warming</li><li>Final Deployment &amp; Go-Live</li><li>Hypercare (4 weeks)</li><li>Develop Training Materials</li><li>Execute User Training</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Option 2: Marketo Timeline & Scope -->
+                            <div class="border border-slate-200 rounded-lg">
+                                <div class="w-full text-left p-6 bg-[#F5F3E9]">
+                                    <h4 class="text-xl font-light mb-1 text-[#193542]">Option 2: Migrate to Marketo</h4>
+                                     <div class="flex justify-between items-baseline mb-4">
+                                        <p class="text-sm text-slate-500">Migrate Marketing &amp; CS to Marketo</p>
+                                        <div class="text-right flex-shrink-0 ml-4">
+                                             <p class="font-bold">19-21 Weeks</p>
+                                             <p class="text-2xl font-bold text-[#1CADFF]">$299,600</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-200 rounded-full h-8 flex text-white text-xs font-bold overflow-hidden border border-slate-300">
+                                        <div class="bg-[#1CADFF] h-full flex items-center justify-center" style="width: 15%;" title="Phase 1: Discovery (3 Weeks)">P1</div>
+                                        <div class="bg-[#246F99] h-full flex items-center justify-center" style="width: 30%;" title="Phase 2: Design (6 Weeks)">P2</div>
+                                        <div class="bg-[#E4D3A0] h-full flex items-center justify-center" style="width: 35%;" title="Phase 3: Build (7 Weeks)">P3</div>
+                                        <div class="bg-[#615D50] h-full flex items-center justify-center" style="width: 20%;" title="Phase 4: Deploy &amp; Drive (4 Weeks)">P4</div>
+                                    </div>
+                                     <div class="flex justify-between text-xs mt-2 text-slate-500">
+                                        <span>Start</span>
+                                        <span>End Wk 3</span>
+                                        <span>End Wk 9</span>
+                                        <span>End Wk 16</span>
+                                        <span>End Wk 20</span>
+                                    </div>
+                                </div>
+                                <div class="p-6 prose prose-slate max-w-none text-sm">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#1CADFF] mr-2"></span>Phase 01: Discovery</h5>
+                                            <ul><li>Create discovery plan</li><li>Setup systems</li><li>Kick-off &amp; Discovery Sessions (2-Day Onsite)</li><li>IP Warming Discovery</li><li>Technical Access &amp; Provisioning</li><li>CRM Data &amp; Mapping Deep Dive</li><li>Marketo Analytics Discovery</li><li>Migration Deep Dive</li><li>Integration Discovery (6sense, Snowflake)</li><li>Form &amp; Web Tracking Discovery</li><li>Define Business Requirements</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#246F99] mr-2"></span>Phase 02: Design</h5>
+                                            <ul><li>Design User/Roles Configuration</li><li>Map Pardot Journeys to Marketo</li><li>Design Marketo &lt;&gt; CRM Sync</li><li>Strategize ABM &amp; Lead Management</li><li>Audience Segmentation Strategy</li><li>Integration Architecture Design</li><li>Compliance &amp; Preference Center Design</li><li>Form Strategy</li><li>System Architecture Diagram</li><li>Template Design (Email &amp; LP)</li><li>Program COE Design</li><li>Create Migration &amp; Test Plans</li><li>IP Warming Plan</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#E4D3A0] mr-2"></span>Phase 03: Build</h5>
+                                            <ul><li>Configure Marketo (Workspaces, etc.)</li><li>Create COE Programs</li><li>Develop Templates</li><li>Configure Marketo &lt;&gt; CRM Sync</li><li>Build Custom Objects &amp; Fields</li><li>Build Integrations</li><li>Build Preference Center</li><li>Build Compliance Logic</li><li>Build Forms</li><li>Build &amp; Migrate Programs</li><li>Build Reporting Dashboards</li><li>Internal QA</li><li>Discover and Build for Data Cloud Integration</li></ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold flex items-center"><span class="w-3 h-3 rounded-full bg-[#615D50] mr-2"></span>Phase 04: Deploy &amp; Drive</h5>
+                                            <ul><li>Enable: 12 Marketo Courses</li><li>Team Training / Office Hours</li><li>Execute QA &amp; Testing</li><li>Manage UAT &amp; Triage</li><li>Implement Revisions</li><li>Execute IP Warming</li><li>Final Deployment &amp; Go-Live</li><li>Hypercare (4 weeks)</li><li>Develop Training Materials</li><li>Execute User Training</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 10: Closing & Next Steps -->
+                <section id="closing" class="mb-16 scroll-mt-20">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <div class="section-header">
+                            <i data-lucide="mail" class="w-8 h-8 text-[#1CADFF]"></i>
+                            <h2 class="text-4xl font-light">Closing &amp; contact</h2>
+                        </div>
+                        
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-8">Where we go from here</h3>
+                        <div class="prose max-w-none prose-slate mb-8">
+                            <p>Taking into account the milestones integral to your process and the key stages we've outlined for our project, below is a high-level timeline that maps our journey through the upcoming phases of our collaboration for your marketing automation implementation and migration.</p>
+                            <p>Furthermore, we acknowledge that there's also the matter of selecting and contracting with the Marketing Automation Platform vendor. We are well aware of the time this process might consume and its potential implications for the overall timeline.</p>
+                        </div>
+                        
+                        <hr class="my-8 border-slate-200">
+                        <h3 class="text-2xl font-light mb-4 pt-8">Thank you</h3>
+                        <p class="mb-8">Calix team, from all of us at SH/FT, THANK YOU for inviting us to participate in this transformative initiative for your business. We're excited to establish a strategic partnership with you, and we're grateful to be considered for this opportunity. Please reach out to the team below at any time.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg">
+                                <p class="font-semibold text-[#193542]">Lauren Garcia</p>
+                                <p class="text-sm text-slate-600">Strategic Growth Advisor</p>
+                                <a href="/cdn-cgi/l/email-protection#670b061215020949000615040e0627140f0e011317061506030e000a4904080a" class="text-sm text-[#1CADFF] hover:underline"><span class="__cf_email__" data-cfemail="6a060b1f180f04440d0b1809030b2a1902030c1e1a0b180b0e030d0744090507">[email&#160;protected]</span></a>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg">
+                                <p class="font-semibold text-[#193542]">Rebecca Domanico</p>
+                                <p class="text-sm text-slate-600">VP, Client Success</p>
+                                <a href="/cdn-cgi/l/email-protection#70021512151313115e141f1d111e19131f300318191604001102111419171d5e131f1d" class="text-sm text-[#1CADFF] hover:underline"><span class="__cf_email__" data-cfemail="66140304030505074802090b07080f050926150e0f001216071407020f010b4805090b">[email&#160;protected]</span></a>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg">
+                                <p class="font-semibold text-[#193542]">Erica Sante</p>
+                                <p class="text-sm text-slate-600">VP, Business Operations Strategy</p>
+                                <a href="/cdn-cgi/l/email-protection#1772657e747639647679637257647f7e7163677665767e73707a3974787a" class="text-sm text-[#1CADFF] hover:underline"><span class="__cf_email__" data-cfemail="385d4a515b59164b59564c5d784b50515e4c48594a59515c5f55165b5755">[email&#160;protected]</span></a>
+                            </div>
+                            <div class="bg-[#F5F3E9] p-4 rounded-lg">
+                                <p class="font-semibold text-[#193542]">Natasha Ness</p>
+                                <p class="text-sm text-slate-600">SVP, Tech &amp; Data Services</p>
+                                <a href="/cdn-cgi/l/email-protection#84eae5f0e5f7ece5aaeae1f7f7c4f7ecede2f0f4e5f6e5e0ede3e9aae7ebe9" class="text-sm text-[#1CADFF] hover:underline"><span class="__cf_email__" data-cfemail="7c121d081d0f141d5212190f0f3c0f14151a080c1d0e1d18151b11521f1311">[email&#160;protected]</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Navigation scroll-spy
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+
+                        if (document.activeElement !== mobileNav) {
+                            mobileNav.value = id;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            mobileNav.addEventListener('change', (e) => {
+                const targetId = e.target.value;
+                document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Accordion functionality
+            function setupAccordion(containerId, expandAll = false) {
+                const accordionContainer = document.getElementById(containerId);
+                if (accordionContainer) {
+                    const accordionButtons = accordionContainer.querySelectorAll('.accordion-button');
+                    accordionButtons.forEach(button => {
+                        const content = button.nextElementSibling;
+                        if (expandAll && content) {
+                             content.style.maxHeight = content.scrollHeight + "px";
+                        }
+
+                        button.addEventListener('click', () => {
+                            const icon = button.querySelector('.accordion-icon');
+                            const isOpen = content.style.maxHeight;
+                            
+                            if (isOpen) {
+                                content.style.maxHeight = null;
+                                if(icon) icon.classList.remove('rotate-45');
+                            } else {
+                                content.style.maxHeight = content.scrollHeight + "px";
+                                if(icon) icon.classList.add('rotate-45');
+                            }
+                        });
+                    });
+                }
+            }
+            
+            setupAccordion('summary-accordion');
+            setupAccordion('training-accordion');
+            setupAccordion('options-accordion');
+            setupAccordion('timeline-accordion', true); // Expand timeline accordions by default
+        });
+    </script>
+
+
+</body></html>

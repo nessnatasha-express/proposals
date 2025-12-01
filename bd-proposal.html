@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal: BD Marketo Instance Migration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <style>
+        body {
+            font-family: 'Roboto Light', sans-serif;
+            font-weight: 300; /* Roboto Light */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif; /* Keep headings a bit bolder */
+            font-weight: 500;
+        }
+        .header-bg {
+            background-color: #272B31; /* Dark background from reference site */
+        }
+        .text-shift-blue {
+            color: #3CB9FF; /* UPDATED BLUE */
+        }
+        .bg-shift-light-grey {
+            background-color: #F8F9FA; /* Light grey for sections */
+        }
+        .border-shift-grey {
+            border-color: #DEE2E6; /* Subtle border color */
+        }
+        .bg-shift-dark-blue {
+            background-color: #272B31; /* Dark blue for total investment */
+        }
+        .accordion-content {
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-shift-light-grey text-gray-800">
+
+    <div class="header-bg py-4 px-6 lg:px-8 shadow-md">
+        <div class="container mx-auto flex items-center">
+            <span class="text-white text-xl font-semibold">Shift Paradigm Proposal</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header Section --><header class="text-center mb-10 mt-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">BD Marketo Instance Migration Proposal</h1>
+            <p class="mt-3 text-lg text-gray-600">A Strategic Transition to Regional Workspaces presented by Shift Paradigm | Revised Oct 23rd 2025</p>
+        </header>
+
+        <!-- Summary & High-Level Info --><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md border border-shift-grey">
+                <h2 class="text-2xl font-bold text-shift-blue mb-3">Project Objective</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    This proposal outlines the comprehensive plan to migrate BD's marketing operations from a single Edwards Marketo instance to a series of new, regionally-focused BD Workspaces. This strategic initiative includes the seamless movement of all relevant programs, forms, operational flows, and associated assets. We will align the new workspaces with BD's current operational processes and enable the APM team to ensure a smooth and efficient transition.
+                </p>
+            </div>
+            <div class="bg-shift-dark-blue text-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center text-center">
+                <div>
+                    <h3 class="text-xl font-semibold">Total Investment</h3>
+                    <p class="text-4xl font-bold my-2">$84,040</p>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-xl font-semibold">Estimated Timeline</h3>
+                    <p class="text-2xl font-bold">14-16 Weeks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phases Section --><div class="space-y-4">
+
+            <!-- Accordion Item: Phase 1 (Updated Scope) --><div class="phase-card bg-white rounded-lg shadow-md border border-shift-grey overflow-hidden">
+                <button class="accordion-toggle w-full text-left p-6 hover:bg-shift-light-grey focus:outline-none">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Phase 1: Planning &amp; Requirements Gathering</h3>
+                            <p class="text-shift-blue font-semibold mt-1">Foundation for Success</p>
+                        </div>
+                        <div class="text-right flex items-center space-x-4">
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden">
+                    <div class="px-6 pb-6 pt-4 border-t border-shift-grey">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Create comprehensive discovery plan.</li>
+                            <li>Setup project systems (Jira, Confluence, Slack, Smartsheets, etc.).</li>
+                            <li>Gain client technical access and provisioning.</li>
+                            <li>System to Sandbox to System(s) Working Sessions to confirm connectivity.</li>
+                            <li>Conduct ALL-Region Discovery sessions.</li>
+                            <li>CRM Schema Mapping Discovery &amp; Working Session.</li>
+                            <li>Migration Deep Dive &amp; Inventory Intake Process.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item: Phase 2 --><div class="phase-card bg-white rounded-lg shadow-md border border-shift-grey overflow-hidden">
+                 <button class="accordion-toggle w-full text-left p-6 hover:bg-shift-light-grey focus:outline-none">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Phase 2: Design &amp; Define Requirements</h3>
+                            <p class="text-shift-blue font-semibold mt-1">Blueprint for Migration</p>
+                        </div>
+                        <div class="text-right flex items-center space-x-4">
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden">
+                    <div class="px-6 pb-6 pt-4 border-t border-shift-grey">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Design account, admin, user permissions, roles, and configuration.</li>
+                            <li>Define criteria for lead destinations and routing.</li>
+                            <li>Define required Programs, Campaigns, Templates, and Forms (up to 10 programs per region, total 30 programs).</li>
+                            <li>Up to 50 forms total.</li>
+                            <li>Define custom fields, mapping, and data transformation needs.</li>
+                            <li>Define lead activity data migration strategy.</li>
+                            <li>Finalize all mapping schema designs.</li>
+                            <li>Support and Guidance on the CRM integration (no build work included).</li>
+                            <li>Finalize detailed blueprints in Confluence.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item: Phase 3 (Updated Scope) --><div class="phase-card bg-white rounded-lg shadow-md border border-shift-grey overflow-hidden">
+                 <button class="accordion-toggle w-full text-left p-6 hover:bg-shift-light-grey focus:outline-none">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Phase 3: Build &amp; Configuration</h3>
+                            <p class="text-shift-blue font-semibold mt-1">Bringing the Plan to Life</p>
+                        </div>
+                        <div class="text-right flex items-center space-x-4">
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden">
+                    <div class="px-6 pb-6 pt-4 border-t border-shift-grey grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">BD US/LATAM APM Workspace</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Configure contacts tagged by country.</li>
+                                <li>Configuration of workspace, users, roles, tags.</li>
+                                <li>Creation of custom fields.</li>
+                                <li>Migrate up to 50 forms.</li>
+                                <li>Integrate Knack.</li>
+                                <li>Execute activity migration (Program Membership).</li>
+                                <li>Operationalize all migrated programs.</li>
+                                <li>Migrate BD Canada partition members.</li>
+                                <li>We will align the new workspaces with BD's current operational processes and enable the APM team to ensure a smooth and efficient transition.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">BD (Other) Workspaces (2x)</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Create necessary custom fields.</li>
+                                <li>Operationalize up to 30 migrated programs across all workspaces (10 per region).</li>
+                                <li>Execute activity migration (Program Membership).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Accordion Item: Phase 4 --><div class="phase-card bg-white rounded-lg shadow-md border border-shift-grey overflow-hidden">
+                 <button class="accordion-toggle w-full text-left p-6 hover:bg-shift-light-grey focus:outline-none">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Phase 4: Deploy &amp; Drive</h3>
+                            <p class="text-shift-blue font-semibold mt-1">Go-Live and Support</p>
+                        </div>
+                        <div class="text-right flex items-center space-x-4">
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden">
+                    <div class="px-6 pb-6 pt-4 border-t border-shift-grey">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Execution of internal QA &amp; Testing Plan.</li>
+                            <li>Implement up to three rounds of revisions based on BD UAT.</li>
+                            <li>Final deployment and Go-Live execution.</li>
+                            <li>Team Training Sessions and office hours for enablement.</li>
+                            <li>Education and training on Taxonomy.</li>
+                            <li>Development and documentation of training materials.</li>
+                            <li>Execution of User Training Sessions.</li>
+                            <li>Hypercare: 2 weeks of post-launch monitoring and support.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item: Management & Governance --><div class="phase-card bg-white rounded-lg shadow-md border border-shift-grey overflow-hidden">
+                 <button class="accordion-toggle w-full text-left p-6 hover:bg-shift-light-grey focus:outline-none">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Project Management &amp; Governance</h3>
+                            <p class="text-shift-blue font-semibold mt-1">Ensuring On-Track Delivery</p>
+                        </div>
+                        <div class="text-right flex items-center space-x-4">
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-content max-h-0 overflow-hidden">
+                    <div class="px-6 pb-6 pt-4 border-t border-shift-grey">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Project Kickoff and Onboarding.</li>
+                            <li>Bi-weekly touchbases/status meetings.</li>
+                            <li>Detailed progress reporting, including Burn Reports.</li>
+                            <li>Continuous risk assessment and mitigation planning.</li>
+                            <li>Stakeholder management and coordination.</li>
+                            <li>Documentation maintenance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Notes Section (Updated Headline) --><div class="mt-12 bg-shift-light-grey p-6 rounded-lg border border-shift-grey">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Considerations and Assumptions</h2>
+            <div class="space-y-3 text-gray-700">
+                <p><i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>Migration Path: The proposed approach assumes a direct instance-to-instance connection is possible, potentially via a sandbox environment. This is the most efficient method.</p>
+                <p><i class="fas fa-tools text-red-500 mr-2"></i>Contingency: If a direct connection is not permitted and a manual migration is required, the project scope, timeline, and cost will need to be re-evaluated. We will seek to confirm the migration path during Phase 1 before proceeding.</p>
+                <!-- ASSUMPTIONS -->
+                <p><i class="fas fa-bookmark text-gray-500 mr-2"></i>Assumes adoption of future global inquiry model; current model will not be implemented.</p>
+                <p><i class="fas fa-bookmark text-gray-500 mr-2"></i>Assumes adoption of the future preference center and consent management redesign.</p>
+                <p><i class="fas fa-info-circle text-blue-500 mr-2"></i>CRM Scope (Guidance Only): Within this revised proposal, we have included guidance only in SF CRM related to the lead and inquiry model and lead management. No build or integration work in the CRM is included in this scope.</p>
+                <p><i class="fas fa-database text-blue-500 mr-2"></i>Activity Data: Marketo activity migration may be limited to Program Membership based - dependant on available data (Source instance ID's).</p>
+                <p><i class="fas fa-palette text-blue-500 mr-2"></i>Asset Migration: BD to manage and deliver all design asset migration - no requirement for design and development of email and landing page templates in destination instances.</p>
+            </div>
+        </div>
+
+        <!-- Footer --><footer class="text-center mt-12 py-6 border-t border-shift-grey">
+            <p class="text-gray-500">Proposal Prepared for BD | © 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // JavaScript to handle accordion functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordions = document.querySelectorAll('.accordion-toggle');
+
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function () {
+                    // Find the icon and rotate it
+                    const icon = this.querySelector('i.fa-chevron-down');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180');
+                    }
+
+                    // Get the content panel
+                    const content = this.nextElementSibling;
+
+                    // Toggle max-height for smooth transition
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        // Set max-height to scrollHeight plus a small buffer to ensure content is visible
+                        content.style.maxHeight = content.scrollHeight + 20 + "px";
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

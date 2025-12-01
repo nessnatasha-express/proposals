@@ -1,0 +1,586 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FanDuel - Delorean Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0d1b3e;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Navigation */
+        .left-nav {
+            width: 320px;
+            background: linear-gradient(180deg, #1557d4 0%, #0d47a1 50%, #0a2f6f 100%);
+            padding: 40px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-section {
+            padding: 0 30px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 180px;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .supported-by {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-section {
+            padding: 0 20px;
+            margin-bottom: 80px;
+        }
+
+        .nav-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 30px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 0 10px 10px;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 14px 20px;
+            margin-bottom: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .nav-item.active {
+            background: #ffb81c;
+            color: #000000;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 184, 28, 0.3);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            margin-left: 320px;
+            padding: 60px 80px;
+            background: #0d1b3e;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 40px 0 20px;
+            color: #ffb81c;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin: 30px 0 15px;
+            color: #1e90ff;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        strong {
+            color: #ffb81c;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: rgba(21, 87, 212, 0.2);
+            border-left: 4px solid #1557d4;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #1557d4 0%, #0d47a1 100%);
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .contact-info a {
+            color: #ffb81c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* Artifact thumbnails */
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .artifact-card {
+            background: rgba(21, 87, 212, 0.15);
+            border: 2px solid rgba(21, 87, 212, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .artifact-card:hover {
+            border-color: #1557d4;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(21, 87, 212, 0.4);
+        }
+
+        .artifact-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: rgba(13, 27, 62, 0.5);
+        }
+
+        .artifact-card-label {
+            padding: 15px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .left-nav {
+                width: 280px;
+            }
+            
+            .content-area {
+                margin-left: 280px;
+                padding: 40px 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-nav {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .content-area {
+                margin-left: 0;
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation -->
+        <nav class="left-nav">
+            <div class="logo-section">
+                <svg class="logo" viewBox="0 0 751 132" xmlns="http://www.w3.org/2000/svg" style="width: 176px; height: auto;">
+                    <g transform="translate(47.927804,-44.806208)">
+                        <g transform="matrix(0.76158217,0,0,0.75008308,-47.923982,44.806208)">
+                            <g>
+                                <path d="m 234.2,144.9 h 19.2 c 0.8,0 1.5,-0.7 1.5,-1.5 V 98.7 h 34.4 c 0.6,0 1.2,-0.4 1.4,-1 l 6.1,-16.8 c 0.3,-0.8 -0.1,-1.6 -0.9,-1.9 -0.2,-0.1 -0.3,-0.1 -0.5,-0.1 h -40.5 v -28 h 51.7 c 0.6,0 1.2,-0.4 1.4,-1 l 6.2,-16.8 c 0.3,-0.8 -0.1,-1.6 -0.9,-1.9 -0.2,-0.1 -0.3,-0.1 -0.5,-0.1 h -78.6 c -0.8,0 -1.5,0.7 -1.5,1.5 v 110.8 c 0,0.9 0.7,1.5 1.5,1.5 z" fill="#ffffff"></path>
+                                <path d="m 357.2,32.1 -40.3,110.8 c -0.3,0.8 0.1,1.6 0.9,1.9 0.2,0.1 0.3,0.1 0.5,0.1 h 20 c 0.6,0 1.2,-0.4 1.4,-1 l 6.5,-19.1 h 40.5 l 6.4,19.1 c 0.2,0.6 0.8,1 1.4,1 h 19.9 c 0.8,0 1.5,-0.7 1.5,-1.5 0,-0.2 0,-0.3 -0.1,-0.5 L 375.4,32.1 c -0.2,-0.6 -0.8,-1 -1.4,-1 h -15.3 c -0.7,0 -1.2,0.4 -1.5,1 z m -4.7,74 14.4,-41.4 13.9,41.4 z" fill="#ffffff"></path>
+                                <path d="m 506.8,100.8 -44.7,-69 c -0.3,-0.4 -0.8,-0.7 -1.3,-0.7 h -17.5 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 110.8 c 0,0.8 0.7,1.5 1.5,1.5 v 0 h 19.2 c 0.8,0 1.5,-0.7 1.5,-1.5 v 0 V 75 l 44.7,69.2 c 0.3,0.4 0.8,0.7 1.3,0.7 h 17.5 c 0.8,0 1.5,-0.7 1.5,-1.5 v 0 -110.8 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 v 0 h -19.2 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 z" fill="#ffffff"></path>
+                                <path d="m 743.3,105.1 c 0,13.1 -7.8,21 -19.8,21 -12,0 -19.7,-7.8 -19.7,-21 V 32.6 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 v 0 h -19.2 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 73.3 c 0,24.2 18.6,40 41.9,40 23.3,0 41.9,-15.8 41.9,-40 V 32.6 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 v 0 h -19 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 z" fill="#ffffff"></path>
+                                <path d="m 876.7,49.9 6.1,-16.8 c 0.3,-0.8 -0.1,-1.6 -0.9,-1.9 -0.2,-0.1 -0.3,-0.1 -0.5,-0.1 h -78.5 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 110.8 c 0,0.8 0.7,1.5 1.5,1.5 v 0 h 78.5 c 0.8,0 1.5,-0.7 1.5,-1.5 0,-0.2 0,-0.3 -0.1,-0.5 l -6.1,-16.8 c -0.2,-0.6 -0.8,-1 -1.4,-1 H 823.6 V 97.4 h 41.6 c 0.8,0 1.5,-0.7 1.5,-1.5 v 0 -16.8 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 v 0 H 823.6 V 50.9 h 51.7 c 0.6,0 1.2,-0.4 1.4,-1 z" fill="#ffffff"></path>
+                                <path d="m 978.6,125.1 h -47 V 32.6 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 0,0 0,0 -0.1,0 h -19.2 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 110.8 c 0,0.8 0.7,1.5 1.5,1.5 v 0 h 73.8 c 0.8,0 1.5,-0.7 1.5,-1.5 0,-0.2 0,-0.3 -0.1,-0.5 l -6.1,-16.8 c -0.1,-0.6 -0.7,-1 -1.3,-1 z" fill="#ffffff"></path>
+                                <path d="M 637.9,42 C 630.4,34.5 619.7,31.1 607.8,31.1 h -45.2 c -0.8,0 -1.5,0.7 -1.5,1.5 0,0.1 0,0.2 0,0.3 l 3.3,16.8 c 0.2,0.7 0.7,1.2 1.4,1.2 h 39.7 c 7.7,0 12.8,2.4 16.6,7 4.2,5.1 4.8,12.3 4.8,29.6 0,17.3 -0.6,25.4 -4.8,30.5 -3.8,4.6 -9,7 -16.6,7 H 589 V 65.9 c 0,-0.8 -0.7,-1.5 -1.5,-1.5 v 0 h -19.2 c -0.8,0 -1.5,0.7 -1.5,1.5 v 0 77.6 c 0,0.8 0.7,1.5 1.5,1.5 v 0 h 39.6 c 11.8,0 22.6,-3.4 30.1,-10.9 12.8,-12.8 11.5,-29.4 11.5,-46.5 -0.1,-17.2 1.2,-32.9 -11.6,-45.6 z" fill="#ffffff"></path>
+                            </g>
+                            <g>
+                                <path d="M 72.8,29.1 C 76.2,21.8 80.1,14.9 84.6,8.5 86.4,5.9 88.3,3.5 90.2,1.2 90.5,0.7 90.2,0 89.6,0 89.1,0 88.6,0 88.1,0 68,0 48.6,3.4 30.6,9.6 21.3,12.8 12.3,16.8 3.7,21.5 1.3,22.8 -0.1,25.3 0,28 c 0.2,10 1.3,19.7 3.2,29.2 1.7,8.9 4.1,17.6 7.1,26 3.6,10.1 8.1,19.8 13.5,28.9 9.8,16.9 22.3,32 37,44.7 2.5,2.2 5.1,4.3 7.7,6.3 0.6,0.4 1.4,-0.2 1.1,-0.8 -1.1,-2.7 -2.1,-5.5 -3,-8.3 -4.5,-13.5 -7.3,-28 -8.2,-43 0,-0.7 -0.3,-1.3 -0.6,-1.8 -3.7,-5.1 -7,-10.3 -10,-15.9 2.7,-1.5 5.6,-2.8 8.5,-3.9 1.3,-0.5 2.1,-1.7 2.2,-3.1 0.7,-10 2.2,-19.9 4.6,-29.3 0.1,-0.5 -0.3,-1 -0.8,-0.9 -9.1,2.1 -17.9,5.2 -26,9.3 -2.3,-7.8 -4,-15.8 -5,-24 12.2,-5.2 25.3,-8.7 38.9,-10.4 1,0 2,-0.8 2.6,-1.9 z" fill="#ffffff"></path>
+                                <path d="M 172.5,21.5 C 163.9,16.8 155,12.9 145.6,9.6 133.1,5.3 120.1,2.4 106.5,1 c -1.1,-0.1 -2.1,0.3 -2.9,1 -7.3,7.5 -13.8,16.6 -19.1,27 -0.2,0.5 0.1,1 0.6,1 1,0 1.9,0 2.9,0 20.2,0 39.5,4.1 57.1,11.5 -1,8.2 -2.7,16.3 -5,24 -2.9,9.7 -6.8,19 -11.6,27.8 -10,18.4 -23.9,34.5 -40.5,47 -5.8,-4.4 -11.2,-9.1 -16.2,-14.3 -0.5,-0.5 -1.3,-0.1 -1.2,0.6 1.3,7.6 3,15 5.2,22 3.1,9.8 7.1,18.8 11.9,27 0.2,0.3 0.6,0.5 1,0.3 9.5,-5.6 18.5,-12 26.8,-19.2 14.6,-12.7 27.2,-27.8 37,-44.7 5.3,-9.2 9.8,-18.8 13.5,-28.9 3,-8.4 5.4,-17.1 7.1,-26 1.8,-9.5 2.9,-19.3 3.2,-29.2 0,-2.7 -1.4,-5.2 -3.8,-6.4 z" fill="#ffffff"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <div class="project-title">Delorean Project</div>
+                <div class="supported-by">Supported by Shift Paradigm</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">Navigation</div>
+                <a class="nav-item active" onclick="showSection('introduction')">Introduction</a>
+                <a class="nav-item" onclick="showSection('shift')">Who's Shift</a>
+                <a class="nav-item" onclick="showSection('delorean')">Delorean</a>
+                <a class="nav-item" onclick="showSection('inflight')">In Flight</a>
+                <a class="nav-item" onclick="showSection('contact')">Contact</a>
+            </div>
+
+            <div class="nav-footer">
+                © 2025 Shift Paradigm. Partnering with FanDuel Delorean.<br>
+                Updated October 27th and Presented October 28th by Natasha Ness
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Introduction Section -->
+            <section id="introduction" class="content-section active">
+                <h1>Introduction</h1>
+                <p>This page gives you a high-level view of how Shift Paradigm has been supporting Fanduel on the critical delorean efforts in 2025 and where we're focused over the next several sprints.</p>
+            </section>
+
+            <!-- Who's Shift Section -->
+            <section id="shift" class="content-section">
+                <h1>Who's Shift</h1>
+                <div class="highlight-box">
+                    <p><strong>Shift Paradigm</strong> is a specialized consultancy focused on helping organizations connect the complex by transforming how they <strong>engage customers, activate data, and operationalize growth.</strong></p>
+                </div>
+                
+                <p>We work at the intersection of three core practice areas:</p>
+                <ul>
+                    <li><strong>Digital Experiences:</strong> Strategy, product, UI/UX, and engineering to elevate brand experiences.</li>
+                    <li><strong>Technology &amp; Data:</strong> Implementation, integrations, operationalizing business process, data activation, migrations, AI/ML, and architecture that power scale.</li>
+                    <li><strong>Human-Centered Marketing:</strong> Journey design, CX, lifecycle orchestration, and relationship marketing.</li>
+                </ul>
+
+                <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 40px 0;">
+
+                <p>On our team you will likely come across several names and faces. We have a number of "shifters" who partner with the FanDuel team this includes these names:</p>
+
+                <h3>Technologist &amp; Platform Experts</h3>
+                <p>Karen Leibowitz, Michael Knight, Aarzoo Kothari, Max Suckle, Nakul Kothari, Priya Prajapati, and many more.</p>
+
+                <h3>Leadership</h3>
+                <p>Natasha Ness (presenter and lead with FD), Liz Ross, Isaac Ferreira, Erica Sante</p>
+
+                <h3>Management</h3>
+                <p>Bridget Miller, Tim Cashman, Kyle King</p>
+            </section>
+
+            <!-- Delorean Section -->
+            <section id="delorean" class="content-section">
+                <h1>Supporting the Delorean Efforts</h1>
+                <p>We are a dual-track partner, providing both strategic and delivery support to ensure a smooth transition and successful platform launch:</p>
+                
+                <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 30px;">
+                    <div style="flex: 1;">
+                        <h3>1. Strategic Thought Partner</h3>
+                        <p>Guiding technical and channel decisions across <strong>XP / Hightouch</strong> and how existing systems (Segment, Braze, Knime) can effectively transition to new solutions accurately and compliantly.</p>
+                    </div>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 10px;">
+                        <path d="M9 2L7.17 4H4C2.9 4 2 4.9 2 6V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V6C22 4.9 21.1 4 20 4H16.83L15 2H9ZM12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7Z" fill="#1e90ff"></path>
+                        <circle cx="12" cy="12" r="3" fill="#ffb81c"></circle>
+                    </svg>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 30px;">
+                    <div style="flex: 1;">
+                        <h3>2. Implementation Co-Delivery</h3>
+                        <p>We are <strong>co-delivering the implementation of XP</strong> with the XP team, while also enabling the current Braze CRM Ops team to remain focused and dedicated to day-to-day campaign execution.</p>
+                    </div>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 10px;">
+                        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#1e90ff"></path>
+                        <path d="M14 2V8H20" fill="#ffb81c"></path>
+                        <path d="M16 13H8V15H16V13Z" fill="#ffb81c"></path>
+                        <path d="M16 17H8V19H16V17Z" fill="#ffb81c"></path>
+                    </svg>
+                </div>
+                
+                <div class="highlight-box" style="display: flex; gap: 15px; align-items: flex-start;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M12 2L2 7V12C2 17.55 6.84 22.74 12 24C17.16 22.74 22 17.55 22 12V7L12 2Z" fill="#ffb81c"></path>
+                        <path d="M12 8V13M12 16H12.01" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                    <p style="margin: 0;"><strong>This is absolutely critical.</strong> It's important that we support and augment the current CRM Ops team to avoid any miss in active deployments while we are actively working through this technology transformation. This also includes ensuring that the migration to these new systems are "feature parity" and beyond. So there is no slip or downgrade in capability or future once cut overs do happen, and they happen gradually and intentionally, with the user/player/customer never knowing a thing about the move.</p>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 40px 0;">
+
+                <h2>Workshop Facilitation</h2>
+                <p>Our team has been key resources, helping Patty, Kunal and team facilitate key discussion points across this digital transformation.</p>
+                
+                <p>This includes co-facilitating the <strong>Edinburgh Workshop</strong> in <strong>September</strong> in addition to the <strong>Ways of Working workshop</strong> in <strong>New Jersey</strong> in <strong>October</strong>.</p>
+                
+                <p>This will likely result in several additional hands on sessions in the future, inclusive of the <strong>AI Workshop</strong> we will be attending in the coming weeks.</p>
+            </section>
+
+            <!-- In Flight Section -->
+            <section id="inflight" class="content-section">
+                <h1>Key Items In Flight</h1>
+                <p>Our focus is on foundational planning and execution to ensure successful platform integration and future growth. We have aligned on topics like:</p>
+                
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" fill="#1e90ff"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Roadmap Alignment</h3>
+                        <p style="margin-bottom: 0;">Defining the phased approach for platform roll-out.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C17.98 2.9 17.35 2.9 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04Z" fill="#1e90ff"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Blueprints</h3>
+                        <p style="margin-bottom: 0;">Think through <span style="color: #ffb81c;">people, process, and platforms</span> and define <span style="color: #ffb81c;">optimizations in the future stack</span>.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#ffb81c"></path>
+                        <circle cx="12" cy="12" r="10" stroke="#1e90ff" stroke-width="2" fill="none"></circle>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Audit</h3>
+                        <p style="margin-bottom: 0;">There are <span style="color: #ffb81c;">1000s of active campaigns and assets</span> within Braze today, we are auditing and defining what should and what shouldn't migrate over into XP. This includes <span style="color: #ffb81c;">template optimizations, content blocks</span> for regulatory reasons, data, campaigns and more.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z" fill="#1e90ff"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Use Case Documentation</h3>
+                        <p style="margin-bottom: 0;">Highlight how key capabilities must be used in the new system for example, highlighting how <span style="color: #ffb81c;">Push Notifications</span> should be evolved and used in the future.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#1e90ff"></path>
+                        <path d="M12 6L8 10H11V14H13V10H16L12 6Z" fill="#ffb81c"></path>
+                        <path d="M8 16H16V18H8V16Z" fill="#ffb81c"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Integration Strategy</h3>
+                        <p style="margin-bottom: 0;">Support key seamless data flow for crucial use cases, including <span style="color: #ffb81c;">generosity and non-generosity campaigns</span> and non-campaign related efforts. This includes guiding and recommending flows of data from <span style="color: #ffb81c;">Databricks &lt;&gt; High Touch &lt;&gt; XP</span> and other scenarios. This also includes integration of 3rd party systems for personalization and dynamic content like <span style="color: #ffb81c;">Moveable Ink and the future DAM</span>.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6ZM20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H8V4H20V16Z" fill="#1e90ff"></path>
+                        <rect x="10" y="6" width="8" height="2" fill="#ffb81c"></rect>
+                        <rect x="10" y="10" width="8" height="2" fill="#ffb81c"></rect>
+                        <rect x="10" y="14" width="5" height="2" fill="#ffb81c"></rect>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Iterative Channel Standup, Starting with Email Channel</h3>
+                        <p style="margin-bottom: 0;">Starting with <span style="color: #ffb81c;">email channel</span> we're working with the XP team to clearly align and setup a strong email foundation consolidating the current <span style="color: #ffb81c;">10 workspaces in braze into 1 centralized one in XP</span> with a warmed IP and configured setup for strong email performance, then moving onto future channels like <span style="color: #ffb81c;">Push, In-App, Live Activity</span> from there.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" fill="#1e90ff"></path>
+                        <path d="M10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="#ffb81c"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Compliance Design</h3>
+                        <p style="margin-bottom: 0;">Ensuring that the <span style="color: #ffb81c;">preference management</span> is aligned with regulatory needs and able to be used in XP while data should be stored back into <span style="color: #ffb81c;">core databases</span>.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-top: 5px;">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z" fill="#1e90ff"></path>
+                        <path d="M7 10H9V17H7V10ZM11 7H13V17H11V7ZM15 13H17V17H15V13Z" fill="#ffb81c"></path>
+                    </svg>
+                    <div>
+                        <h3 style="margin-top: 0; color: #1e90ff;">Delivery Framework</h3>
+                        <p style="margin-bottom: 0;">Implementing a structure for how the right type of work gets delivered efficiently.</p>
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 50px 0 40px;">
+
+                <h2>Artifacts &amp; Documentation</h2>
+                <p>Here are a few samples of documents we've put together for the Delorean project to help guide all teams with Patty and Kunal's leadership and partnership.</p>
+
+                <div class="artifact-grid">
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-stack-comparison.png?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-stack-comparison.png?version=0" alt="Stack Comparison" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">Technology Stack Comparison</div>
+                    </a>
+
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/MarTech%20Future%20Workshop%20-%20FD-journey-map.jpg?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/MarTech%20Future%20Workshop%20-%20FD-journey-map.jpg?version=0" alt="Journey Map" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">MarTech Future Workshop - Journey Map</div>
+                    </a>
+
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-high-touch.png?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-high-touch.png?version=0" alt="Hightouch Integration" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">Hightouch Integration &amp; Logic</div>
+                    </a>
+
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-xp%20prep%20support.png?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-xp%20prep%20support.png?version=0" alt="XP Prep Support" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">XP Preparation &amp; Support</div>
+                    </a>
+
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-architecture-details.png?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-architecture-details.png?version=0" alt="Architecture Details" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">Architecture Details &amp; Integration</div>
+                    </a>
+
+                    <a href="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-ways-of-working-diagram.png?version=0" target="_blank" class="artifact-card">
+                        <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/fd-ways-of-working-diagram.png?version=0" alt="Ways of Working" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.padding='80px 15px';">
+                        <div class="artifact-card-label">Ways of Working Diagram</div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-section">
+                <h1>Questions &amp; Next Steps</h1>
+                <p>We're here to partner and ensure full clarity and alignment throughout the project. Please don't hesitate to reach out with any questions, feedback, or requests for deep-dive sessions.</p>
+                
+                <div class="contact-info">
+                    <h3 style="color: #ffffff; margin-top: 0;">Direct Contact (Natasha Ness):</h3>
+                    <p style="margin-bottom: 25px;"><a href="/cdn-cgi/l/email-protection#d19fb0a5b0a2b9b0ffbfb4a2a291a2b9b8b7a5a1b0a3b0b5b8b6bcffb2bebc"><span class="__cf_email__" data-cfemail="5e103f2a3f2d363f70303b2d2d1e2d3637382a2e3f2c3f3a373933703d3133">[email&#160;protected]</span></a></p>
+                    
+                    <h3 style="color: #ffffff;">Project Team Alias:</h3>
+                    <p style="margin-bottom: 0;"><a href="/cdn-cgi/l/email-protection#2a5e4f4b474c4b444e5f4f466a5942434c5e5a4b584b4e434d4704494547"><span class="__cf_email__" data-cfemail="a7d3c2c6cac1c6c9c3d2c2cbe7d4cfcec1d3d7c6d5c6c3cec0ca89c4c8ca">[email&#160;protected]</span></a></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+
+            // Scroll to top of content area
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body></html>

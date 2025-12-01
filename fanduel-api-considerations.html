@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FanDuel Technical Integration Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Monaco', 'Consolas', monospace;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: rgba(26, 32, 44, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid #4a5568;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #4a5568;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #63b3ed;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(99, 179, 237, 0.3);
+        }
+        
+        .header p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .system-node {
+            background: linear-gradient(145deg, #2d3748, #4a5568);
+            border: 2px solid #63b3ed;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            min-height: 280px;
+        }
+        
+        .system-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(99, 179, 237, 0.2);
+            border-color: #90cdf4;
+        }
+        
+        .system-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #4a5568;
+            padding-bottom: 10px;
+        }
+        
+        .system-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .databricks .system-icon { background: linear-gradient(135deg, #ff6b35, #f7931e); }
+        .knime .system-icon { background: linear-gradient(135deg, #ffdf00, #ff8c00); }
+        .hightouch .system-icon { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .promo-engine .system-icon { background: linear-gradient(135deg, #ec4899, #ef4444); }
+        .sanity .system-icon { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+        .bynder .system-icon { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .braze .system-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .movable-ink .system-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        
+        .system-title {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .system-type {
+            color: #63b3ed;
+            font-size: 0.8rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .api-section {
+            margin: 15px 0;
+        }
+        
+        .api-title {
+            color: #90cdf4;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .api-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .api-item {
+            background: rgba(99, 179, 237, 0.1);
+            color: #cbd5e0;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            border: 1px solid rgba(99, 179, 237, 0.2);
+        }
+        
+        .endpoint {
+            color: #68d391;
+            font-weight: 600;
+        }
+        
+        .method {
+            color: #fbb6ce;
+            font-weight: 600;
+        }
+        
+        .data-flow-section {
+            margin-top: 30px;
+            background: rgba(45, 55, 72, 0.5);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #4a5568;
+        }
+        
+        .data-flow-title {
+            color: #63b3ed;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .flow-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .flow-card {
+            background: linear-gradient(145deg, #2d3748, #4a5568);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #63b3ed;
+        }
+        
+        .flow-card h3 {
+            color: #90cdf4;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .flow-step-number {
+            background: #63b3ed;
+            color: #1a202c;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.7rem;
+        }
+        
+        .integration-patterns {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .pattern-card {
+            background: rgba(45, 55, 72, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #4a5568;
+        }
+        
+        .pattern-title {
+            color: #fbb6ce;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .pattern-details {
+            color: #cbd5e0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .code-block {
+            background: #1a202c;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.75rem;
+            overflow-x: auto;
+        }
+        
+        .code-comment {
+            color: #68d391;
+        }
+        
+        .code-string {
+            color: #fbb6ce;
+        }
+        
+        .code-method {
+            color: #63b3ed;
+        }
+        
+        @media (max-width: 1200px) {
+            .architecture-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+<script defer data-domain="fanduel-api-considerations.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ FanDuel Technical Integration Architecture</h1>
+            <p>API Flows, Endpoints & Data Integration Patterns</p>
+        </div>
+        
+        <div class="architecture-grid">
+            <!-- Databricks Node -->
+            <div class="system-node databricks">
+                <div class="system-header">
+                    <div class="system-icon">DB</div>
+                    <div>
+                        <div class="system-title">Databricks</div>
+                        <div class="system-type">Data Lakehouse</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">REST APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/2.0/clusters/list</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/2.0/jobs/runs/submit</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/2.0/workspace/export</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">SQL Endpoints</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="endpoint">JDBC</span> Driver Connection</div>
+                        <div class="api-item"><span class="endpoint">ODBC</span> Driver Connection</div>
+                        <div class="api-item"><span class="endpoint">Delta Sharing</span> Protocol</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Data Outputs</div>
+                    <div class="api-list">
+                        <div class="api-item">Customer Profiles</div>
+                        <div class="api-item">ML Model Scores</div>
+                        <div class="api-item">Risk Assessments</div>
+                        <div class="api-item">Behavioral Events</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- KNIME Node -->
+            <div class="system-node knime">
+                <div class="system-header">
+                    <div class="system-icon">KN</div>
+                    <div>
+                        <div class="system-title">KNIME Analytics</div>
+                        <div class="system-type">ML/Analytics Platform</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Server APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/knime/rest/v4/workflows</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/knime/rest/v4/jobs/{id}</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/knime/rest/v4/data-services</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Connectors</div>
+                    <div class="api-list">
+                        <div class="api-item">Databricks Connector</div>
+                        <div class="api-item">REST API Consumer</div>
+                        <div class="api-item">Database Connector</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">ML Outputs</div>
+                    <div class="api-list">
+                        <div class="api-item">Churn Probability</div>
+                        <div class="api-item">LTV Predictions</div>
+                        <div class="api-item">Fraud Scores</div>
+                        <div class="api-item">Propensity Models</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hightouch Node -->
+            <div class="system-node hightouch">
+                <div class="system-header">
+                    <div class="system-icon">HT</div>
+                    <div>
+                        <div class="system-title">Hightouch</div>
+                        <div class="system-type">Reverse ETL</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Management API</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v1/syncs</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/v1/syncs/trigger</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v1/models</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Source Connections</div>
+                    <div class="api-list">
+                        <div class="api-item">Databricks SQL Warehouse</div>
+                        <div class="api-item">JDBC Connection</div>
+                        <div class="api-item">Delta Lake Tables</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Destination APIs</div>
+                    <div class="api-list">
+                        <div class="api-item">Braze REST API</div>
+                        <div class="api-item">Salesforce Bulk API</div>
+                        <div class="api-item">Facebook Conversions API</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ML Promo Engine Node -->
+            <div class="system-node promo-engine">
+                <div class="system-header">
+                    <div class="system-icon">AI</div>
+                    <div>
+                        <div class="system-title">ML Promo Engine</div>
+                        <div class="system-type">AI Decision Engine</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Decision APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/v1/decisions/promo</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v1/eligibility/{userId}</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/v1/optimization</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Real-time Inputs</div>
+                    <div class="api-list">
+                        <div class="api-item">User Profile Data</div>
+                        <div class="api-item">Behavioral Signals</div>
+                        <div class="api-item">Risk Assessments</div>
+                        <div class="api-item">Market Conditions</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Decision Outputs</div>
+                    <div class="api-list">
+                        <div class="api-item">Bonus Amount</div>
+                        <div class="api-item">Offer Type</div>
+                        <div class="api-item">Expiry Time</div>
+                        <div class="api-item">Risk Limits</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sanity CMS Node -->
+            <div class="system-node sanity">
+                <div class="system-header">
+                    <div class="system-icon">SA</div>
+                    <div>
+                        <div class="system-title">Sanity CMS</div>
+                        <div class="system-type">Headless CMS</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Content APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/v1/data/query/{dataset}</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/v1/data/mutate/{dataset}</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/v1/assets/images</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">GROQ Queries</div>
+                    <div class="api-list">
+                        <div class="api-item">Content Filtering</div>
+                        <div class="api-item">Real-time Updates</div>
+                        <div class="api-item">Reference Resolution</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Content Types</div>
+                    <div class="api-list">
+                        <div class="api-item">Promo Templates</div>
+                        <div class="api-item">Legal Disclaimers</div>
+                        <div class="api-item">Sports Content</div>
+                        <div class="api-item">Campaign Copy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bynder DAM Node -->
+            <div class="system-node bynder">
+                <div class="system-header">
+                    <div class="system-icon">BY</div>
+                    <div>
+                        <div class="system-title">Bynder DAM</div>
+                        <div class="system-type">Digital Asset Mgmt</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Asset APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v4/media</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/v4/upload</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v4/collections</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Webhooks</div>
+                    <div class="api-list">
+                        <div class="api-item">Asset Updated</div>
+                        <div class="api-item">Asset Approved</div>
+                        <div class="api-item">Collection Modified</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Asset Types</div>
+                    <div class="api-list">
+                        <div class="api-item">Brand Images</div>
+                        <div class="api-item">Video Assets</div>
+                        <div class="api-item">Sports Graphics</div>
+                        <div class="api-item">Promo Banners</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Braze Node -->
+            <div class="system-node braze">
+                <div class="system-header">
+                    <div class="system-icon">BZ</div>
+                    <div>
+                        <div class="system-title">Braze</div>
+                        <div class="system-type">Customer Engagement</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">REST APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/users/track</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/messages/send</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/campaigns/trigger/send</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Data Export</div>
+                    <div class="api-list">
+                        <div class="api-item">Currents to Databricks</div>
+                        <div class="api-item">Engagement Events</div>
+                        <div class="api-item">Campaign Analytics</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Integrations</div>
+                    <div class="api-list">
+                        <div class="api-item">Movable Ink Connect</div>
+                        <div class="api-item">Cloud Data Ingestion</div>
+                        <div class="api-item">Connected Content</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Movable Ink Node -->
+            <div class="system-node movable-ink">
+                <div class="system-header">
+                    <div class="system-icon">MI</div>
+                    <div>
+                        <div class="system-title">Movable Ink</div>
+                        <div class="system-type">Visual Personalization</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Image APIs</div>
+                    <div class="api-list">
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v1/images/{campaignId}</span></div>
+                        <div class="api-item"><span class="method">POST</span> <span class="endpoint">/api/v1/data-sources</span></div>
+                        <div class="api-item"><span class="method">GET</span> <span class="endpoint">/api/v1/personalize</span></div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Data Connectors</div>
+                    <div class="api-list">
+                        <div class="api-item">Customer Data API</div>
+                        <div class="api-item">Real-time Sports Data</div>
+                        <div class="api-item">Inventory Feeds</div>
+                    </div>
+                </div>
+                
+                <div class="api-section">
+                    <div class="api-title">Personalizations</div>
+                    <div class="api-list">
+                        <div class="api-item">Live Odds Display</div>
+                        <div class="api-item">User Stats</div>
+                        <div class="api-item">Dynamic Promos</div>
+                        <div class="api-item">Game Recommendations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-flow-section">
+            <div class="data-flow-title">🔄 Critical Data Flow Patterns</div>
+            
+            <div class="flow-diagram">
+                <div class="flow-card">
+                    <h3>Real-time Personalization Flow</h3>
+                    <div class="flow-step">
+                        <div class="flow-step-number">1</div>
+                        User action triggers event in Databricks
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">2</div>
+                        KNIME model scores user for promo eligibility
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">3</div>
+                        ML Promo Engine calculates optimal offer
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">4</div>
+                        Hightouch syncs decision to Braze
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">5</div>
+                        Braze triggers campaign with Movable Ink
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">6</div>
+                        Movable Ink renders personalized visual
+                    </div>
+                </div>
+                
+                <div class="flow-card">
+                    <h3>Content Delivery Pipeline</h3>
+                    <div class="flow-step">
+                        <div class="flow-step-number">1</div>
+                        Marketing creates content in Sanity CMS
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">2</div>
+                        Assets stored and approved in Bynder
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">3</div>
+                        Braze Connected Content calls Sanity API
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">4</div>
+                        Movable Ink pulls assets from Bynder API
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">5</div>
+                        Dynamic content rendered at open time
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">6</div>
+                        Engagement data flows back to Databricks
+                    </div>
+                </div>
+                
+                <div class="flow-card">
+                    <h3>Risk Management Flow</h3>
+                    <div class="flow-step">
+                        <div class="flow-step-number">1</div>
+                        Betting events stream to Databricks
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">2</div>
+                        KNIME fraud models analyze patterns
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">3</div>
+                        Risk scores updated in real-time
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">4</div>
+                        Hightouch syncs alerts to operational systems
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">5</div>
+                        ML Promo Engine adjusts limits automatically
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">6</div>
+                        Compliance notifications sent via Braze
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="integration-patterns">
+            <div class="pattern-card">
+                <div class="pattern-title">🔌 Databricks → Hightouch Integration</div>
+                <div class="pattern-details">
+                    Hightouch connects to Databricks SQL Warehouse using JDBC/ODBC drivers for real-time data sync.
+                </div>
+                <div class="code-block">
+<span class="code-comment">-- SQL Model in Hightouch</span>
+<span class="code-method">SELECT</span> 
+  user_id,
+  churn_probability,
+  ltv_prediction,
+  last_bet_timestamp,
+  risk_score
+<span class="code-method">FROM</span> ml_scores.user_predictions
+<span class="code-method">WHERE</span> updated_at >= <span class="code-string">'{{last_sync_time}}'</span>
+                </div>
+            </div>
+            
+            <div class="pattern-card">
+                <div class="pattern-title">🎯 Braze → Movable Ink Integration</div>
+                <div class="pattern-details">
+                    Connected Content API calls and webhook integrations for real-time personalization.
+                </div>
+                <div class="code-block">
+<span class="code-comment">// Braze Connected Content</span>
+{% connected_content
+  <span class="code-string">"https://api.movableink.com/v1/personalize"</span

@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teladoc CCM Early Engagement Proof of Concept (POC)</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Dark Tech / Shift Paradigm Branding -->
+    <!-- Application Structure Plan: The application structure is simplified to focus purely on the six sequential project Phases (0 through 5). The navigation only displays these phases, prioritizing the step-by-step execution path of the POC. The financial and partnership context is removed from the primary UI view. -->
+    <!-- Visualization & Content Choices: The core content for each phase (tasks, deliverables, goals) remains the primary view. The phased views continue to use Chart.js visualizations where appropriate to illustrate focus allocation or projected outcomes. All visuals adhere to the NO SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Changed Font */
+            background-color: #121212; /* Very Dark Background */
+            color: #E0E0E0; /* Light Gray Text */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Custom Dark Mode/Accent Styling */
+        .nav-item {
+             color: #A0A0A0;
+        }
+        .nav-item.active {
+            background-color: #004d4d; /* Dark Teal background */
+            border-color: #00FFFF; /* Bright Cyan border */
+            color: #00FFFF; /* Bright Cyan text */
+            font-weight: 700;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .phasing-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .phasing-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #00BFFF; 
+            color: #121212; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 16px;
+        }
+        .phasing-text {
+            border-left: 2px solid #00BFFF; 
+            padding-left: 16px;
+        }
+        .phasing-text:not(:last-child) {
+            padding-bottom: 12px;
+        }
+        .timeline-table th, .timeline-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #333333;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-[#1A1A1A] shadow-lg sticky top-0 z-10">
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center space-x-4">
+                 <svg class="w-10 h-10 text-[#00FFFF]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                </svg>
+                <div>
+                    <h1 class="text-xl font-bold text-white">Teladoc CCM Early Engagement Proof of Concept (POC)</h1>
+                    <p class="text-sm text-gray-400">Interactive Work Approach provided by Shift Paradigm</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                
+                <aside class="md:w-1/4 lg:w-1/5">
+                    <nav id="phase-navigation" class="space-y-2 sticky top-24">
+                        <!-- Navigation items will be injected here -->
+                    </nav>
+                </aside>
+                
+                <section id="phase-content" class="flex-1 md:w-3/4 lg:w-4/5">
+                    <!-- Content will be dynamically rendered here -->
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const projectData = {
+            objective: "To rapidly design, build, and measure a high-impact, integrated multi-channel marketing journey focused on the first 30 days post-enrollment for CCM members. The goal is to drive a measurable increase in device activation, app adoption, and initial program utilization by replacing the current disjointed experience with a cohesive, personalized member workflow. (Note: The executed member journey is 30 days, but the POC build effort spans 12+ weeks.)",
+            pricing: {
+                total_low_hours: 320,
+                total_high_hours: 480,
+                hourly_rate: 215,
+                annualInvestment: {
+                    year1: 700000,
+                    year2: 450000,
+                    phasing: [ 
+                        { phase: "Foundation", year: "Year 1", focus: "Immediate Support & Remediation", description: "Support and fix critical gaps in existing systems (data integrity, current journeys, system configuration). This stabilizes the environment for the POC." },
+                        { phase: "POC Execution", year: "Year 1", focus: "High-Impact Use Case Build (0-12+ Weeks)", description: "Focus on the core use case (Early Engagement: First 30 Days) to demonstrate measurable ROI and build the first high-value journey the 'right way'." },
+                        { phase: "Automation", year: "Year 1", focus: "Enablement & Scalability", description: "Establish scalable, automated template systems (Journey Templates, Dynamic Content Blocks) allowing Teladoc to run campaigns independently." },
+                        { phase: "Optimization & Advisory", year: "Year 2+", focus: "Capability Transfer & Refinement", description: "Transition to an advisory role, providing training, advanced analytics, and strategic guidance to empower the Teladoc team for self-optimization." },
+                        { phase: "Innovation", year: "Year 2+", focus: "Future Strategy & Next-Gen CX", description: "Collaborate on next-generation customer experiences (e.g., cross-sell, predictive modeling) and lead the exploration of new channels/capabilities." }
+                    ],
+                    year1_details: [
+                        "Setting up new campaigns & journeys (includes POC build)",
+                        "Optimizing existing campaigns (e.g., list hygiene, deliverability)",
+                        "Testing and experimentation (A/B testing, segmentation tests)",
+                        "API and Event-based trigger implementation",
+                        "Channel asset development (Landing pages, emails, SMS, push, in-app)",
+                        "Support on mobile and web SDK implementation",
+                        "Quality Assurance (QA) and UAT support",
+                        "Analytics, tracking, and dashboard configuration",
+                        "Extensive creative and copy development",
+                        "AI-based recommendations and automation setup",
+                        "Est. Focus: 75% Build/Automation, 25% Optimization"
+                    ],
+                    year2_details: [
+                        "Monitoring campaign health, deliverability, and usage patterns",
+                        "Advanced campaign and audience intelligence analysis",
+                        "Guidance on team structure, hiring, and internal experimentation strategy",
+                        "Recommended new campaigns and personalization roadmaps",
+                        "Internal team training and enablement",
+                        "Ongoing QA and platform support",
+                        "Est. Focus: 25% Build/Automation, 75% Optimization/Advisory"
+                    ],
+                }
+            },
+            partnership: {
+                title: "POC Support Investment Breakdown (Hourly Rate: $215/hr)", 
+                introduction: "Our partnership begins with a structured Proof of Concept. The breakdown below details the estimated hours and investment for the dedicated team required to execute this POC.", 
+                supportBreakdown: [ 
+                    { role: "Marketing Strategy & Planning", low: 60, high: 90 },
+                    { role: "Creative Design & UX/UI", low: 40, high: 60 },
+                    { role: "Content with AI Assist", low: 50, high: 75 },
+                    { role: "SFMC / Data Automation & Architects (2-3 FTE)", low: 100, high: 150 },
+                    { role: "Quality Assurance (QA)", low: 30, high: 55 },
+                    { role: "Advisory & Workshop Facilitation", low: 40, high: 50 }
+                ]
+            },
+            phases: [
+                {
+                    title: "Phase 0: Onboarding & Project Planning",
+                    duration: "Weeks 1-2",
+                    icon: "⚙️", 
+                    goal: "Align on core objectives, finalize the project schedule, establish communication protocols, and grant technical access.",
+                    introduction: "The kickoff phase ensures the project is set up for success by aligning all stakeholders, defining the governance model, and establishing the necessary technical environment. This prevents delays in later build stages.",
+                    tasks: [
+                        { area: "0.1 Project Mobilization", activity: "Kickoff meeting, introduction of core team members, and final review of POC charter.", deliverables: ["Signed Project Charter and Scope", "Defined Communication Plan and Cadence", "Risk and Mitigation Log Initialized"] },
+                        { area: "0.2 Access and Environment Setup", activity: "Establish required access to Teladoc CCM systems, Marketing Automation Platform, and necessary reporting tools.", deliverables: ["Secure System Access Granted", "Development/Sandbox Environment Provisioned"] }
+                    ]
+                },
+                {
+                    title: "Phase 1: Assess, Define & Design",
+                    duration: "Weeks 2-4",
+                    icon: "📐", 
+                    goal: "Establish the strategic foundation, define the member’s ideal experience, and finalize all requirements, recommendations, and the complete scope build for the next phases.",
+                    introduction: "This expanded phase is the bedrock of the entire project. We immerse ourselves in the member experience via an **Onsite Workshop** to design the informed strategy. Crucially, the phase ends with all high-level strategy, detailed blueprinting, and technical requirements fully defined and signed off.",
+                    tasks: [
+                        { area: "1.1 CX Empathy Mapping & Onsite Workshop", activity: "Conduct a detailed moment-of-truth walk-through of the member's current journey (Day 0 to Day 7) via an intensive **Onsite Workshop Session**. Identify points of anxiety, confusion, and motivation.", deliverables: ["CX Pain Point Map", "Revised Value Proposition (e.g., 'Peace of mind while you wait,' '5-minute setup')", "Workshop Synthesis Document"] },
+                        { area: "1.2 Creative & Competitive Assessment", activity: "Review existing assets (email, SMS). Analyze how competitors (e.g., Omada, Amwell) simplify onboarding. Use insights to inform messaging.", deliverables: ["Creative Gap Analysis", "Competitive Insights Summary: 3 Key Takeaways"] },
+                        { area: "1.3 Data & Feasibility", activity: "Identify precise enrollment attributes and behavioral signals (e.g., device delivery) required to trigger personalized actions.", deliverables: ["Data Requirements Document", "Platform Readiness Check"] },
+                        { area: "1.4 POC Scope and Strategy Finalization", activity: "Establish baseline metrics/KPIs. Formalize Audience/Persona recommendations. Define high-level view of journey. Finalize overall charter and approach for program itself.", deliverables: ["Formal POC Charter with success metrics and pilot group definition", "Audience/Persona Recommendation Document", "High-Level Journey Map"] },
+                        { area: "1.5 Final Blueprint & Technical Requirements", activity: "Final in-depth Journey Diagram documenting all interactions (milestones, moments, time, events). Formalize the Testing Hypothesis. Draft all technical requirements for setup across all channels and systems.", deliverables: ["Final In-Depth Journey Diagram (L2/L3 Detail)", "Formalized Testing Hypothesis and Segmentation Plan", "Draft Technical Requirements for SFMC/SDK Implementation"] }
+                    ]
+                },
+                {
+                    title: "Phase 2: Content and Asset Development",
+                    duration: "Weeks 5-8",
+                    icon: "🎨", 
+                    goal: "Translate the defined experience into integrated, executable marketing assets and channel workflows, utilizing persona-specific messaging and finalized KPI reporting designs.",
+                    introduction: "With a fully approved blueprint from Phase 1, this phase focuses entirely on creative and content production. We develop compelling assets that specifically target different member personas to maximize relevance and conversion in the activation journey, while preparing the final reporting structures.",
+                    tasks: [
+                        { area: "2.1 Content by Channel", activity: "Draft all primary and variant copy for all channels (SMS, Email subject lines/body, Push notifications). Focus on clear CTAs and **Persona/Variant specific content blocks** to drive high relevance.", deliverables: ["Full Content Library (10-12 touchpoints)", "**Persona-Specific Content Matrix**", "Final Copy Deck (Approved Messaging)"] },
+                        { area: "2.2 Creative by Audience / Channel", activity: "Design and code the visual templates for Email and Hub/Landing Pages. Ensure templates are responsive, modular, and include necessary **Audience/Channel variants** (e.g., device type visuals).", deliverables: ["Coded Templates (Email, Hub) tested for responsiveness", "Visual Design Mock-ups (Email/Landing Page)"] },
+                        { area: "2.3 Testing Variants", activity: "Prepare the final segment splits and logic rules for the live A/B test (e.g., Control vs. New Journey; Variant A vs. Variant B for message timing).", deliverables: ["Finalized A/B Test Segmentation Logic", "Variant Split Documentation"] },
+                        { area: "2.4 KPI Dashboard Design", activity: "Design the visual layout, metric groupings, and data sources for the pilot reporting dashboard.", deliverables: ["Reporting Dashboard Wireframe/Design (Including M1, M2, M3 views)"] },
+                        { area: "2.5 Asset Configurations in SFMC", activity: "Deploy all finalized assets (Email, SMS, Cloud Pages) to the SFMC environment and map dynamic content modules to the target data extensions.", deliverables: ["Dynamic Content Rules Mapped and Configured", "SFMC Asset Deployment Log (Ready for Journey Builder)"] }
+                    ],
+                    // Removed visualization block
+                },
+                {
+                    title: "Phase 3: Technical Implementation & QA",
+                    duration: "Weeks 8-10",
+                    icon: "💻", 
+                    goal: "Configure the automation platform, integrate data streams, build reporting, and perform rigorous end-to-end testing prior to launch.",
+                    introduction: "This phase focuses on technical build-out within the **Salesforce Marketing Cloud (SFMC)** environment, integrating all data and automation logic, and preparing the monitoring infrastructure. The use of SFMC's Einstein capabilities is key to enabling future intelligent personalization.",
+                    tasks: [
+                        { area: "3.1 Salesforce Marketing Cloud Platform Automation Build", activity: "Configure the journey workflow using **Journey Builder**. Implement necessary **Einstein Capabilities** (e.g., Engagement Scoring, Send Time Optimization) for future scale.", deliverables: ["SFMC Journey Workflow Configured", "Einstein Capabilities Setup and Verified", "Exclusion/Suppression Rules Implemented"] },
+                        { area: "3.2 Signal Integration", activity: "Deploy API connections to ensure the marketing platform is actively listening for critical behavioral signals (e.g., Device_Activated = TRUE).", deliverables: ["Verified Signal Feeds confirming real-time data processing", "Data Extension Structure Finalized"] },
+                        { area: "3.3 Reporting Dashboard Setup", activity: "Build comprehensive real-time dashboards for monitoring M1, M2, M3 and campaign performance.", deliverables: ["Live Performance Dashboard Configured (e.g., in Marketing Cloud Intelligence or Tableau)", "Automated Reporting Schedule Defined"] },
+                        { area: "3.4 End-to-End Testing", activity: "Conduct full Quality Assurance (QA) by simulating the entire member journey to verify timing, content, and personalization.", deliverables: ["QA Sign-Off Report confirming zero defects in journey logic"] }
+                    ]
+                },
+                {
+                    title: "Phase 4: Pilot Launch & Optimization",
+                    duration: "Weeks 10-11",
+                    icon: "🚀", 
+                    goal: "Execute the POC, gather initial performance data, and implement real-time refinements.",
+                    introduction: "The pilot launch tests our hypothesis with a controlled group. We monitor performance closely against the control group, using the new dashboards to track key metrics and make rapid, data-informed optimizations to maximize the pilot's success over the $30$-day member journey.",
+                    tasks: [
+                        { area: "4.1 Pilot Launch", activity: "Deploy the new multi-channel journey to the defined POC Pilot Group. A Control Group continues with the existing experience.", deliverables: ["Active POC Journey running live with continuous monitoring", "Pilot Group Segmentation Verified"] },
+                        { area: "4.2 Data Visualization & Monitoring", activity: "Utilize the real-time dashboard to track the primary success metrics (M1, M2, M3) for both the Pilot and Control groups.", deliverables: ["Daily Performance Review Log"] },
+                        { area: "4.3 Rapid Optimization", activity: "Based on the first week of data, implement rapid, low-effort optimizations (e.g., adjusting subject lines or timing).", deliverables: ["Optimization Log documenting changes and their impact"] }
+                    ],
+                    // Removed visualization block
+                },
+                {
+                    title: "Phase 5: Measurement, Synthesis & Scale",
+                    duration: "Weeks 12+",
+                    icon: "🏆", 
+                    goal: "Quantify the POC success and create a roadmap for scaling the approach across all CCM and future programs.",
+                    introduction: "In the final phase, we analyze the comprehensive results from the pilot to prove the value and ROI of the new approach. The insights gathered will form the basis of a strategic recommendation and a clear roadmap for a full-scale rollout, transforming the member onboarding experience across the organization.",
+                    tasks: [
+                        { area: "5.1 Final Results Analysis", activity: "Conduct a full comparison of Pilot vs. Control group performance across the 30-day window. Calculate ROI lift from the new approach.", deliverables: ["Final POC Results Deck quantifying the lift in M1, M2, and M3", "Estimated Financial Benefit Calculation"] },
+                        { area: "5.2 Strategic Learnings", activity: "Document key findings on channel efficacy, creative effectiveness, and the impact of signal-based personalization.", deliverables: ["Best Practice Guide for future engagement strategies (e.g., 'SMS is the definitive channel...')"] },
+                        { area: "5.3 Scaling Roadmap", activity: "Develop a phased plan for implementing the Multi-Channel Orchestration Strategy across the entire CCM base and into other Teladoc programs.", deliverables: ["Recommendation Roadmap with phased plan and resource requirements"] }
+                    ],
+                    // Removed visualization block
+                }
+            ]
+        };
+
+        const introductionContent = {
+            title: "Introduction: The Early Engagement Lifecycle",
+            icon: "👋",
+            body: `
+                <p class="mb-4 text-gray-300">This proof of concept is based on the end-to-end build and activation of **2 out of the 4 core stages** of the Early Engagement Lifecycle Program. The 4 core stages are reflected below. As you go through each phase you will learn more of what each of our steps intail to get a flavor of how we partner together. As a reminder, each asset will have the ability to be experimented with (A/B testing and multivariant) allowing for vartiations of each email and sms.</p>
+                <div class="mt-6 p-4 bg-[#2C2C2C] border border-[#333333] rounded-lg">
+                    <h3 class="text-lg font-semibold text-white mb-3">Core Early Engagement Stages</h3>
+                    <ul class="space-y-3 ml-5 text-gray-300 list-disc list-outside">
+                        <li><strong>Welcome Journey:</strong> Currently 2 emails and 2 sms.</li>
+                        <li><strong>Activation Journey:</strong> Currently 4 emails, 4 sms, an activation hub landing page, and outbound call. (This is one of the target stages for the POC).</li>
+                        <li><strong>Onboarding Journey:</strong> Currently 6 emails, 2 sms, leveraging a DS model that is building data to help inform Next Best Action. (This is the other target stage for the POC).</li>
+                        <li><strong>Engagement Journey:</strong> Currently 9 emails, specifically a 7-day challenge to help build habits and conduct 7 device readings.</li>
+                    </ul>
+                </div>
+            `
+        };
+
+        const timelineData = {
+            priceRangeLow: 215000,
+            priceRangeHigh: 300000,
+            phases: [
+                { name: "Phase 0: Planning", duration: "1-2 Weeks" },
+                { name: "Phase 1: Design", duration: "2-4 Weeks" },
+                { name: "Phase 2: Content/Assets", duration: "5-8 Weeks" },
+                { name: "Phase 3: Technical Build/QA", duration: "8-10 Weeks" },
+                { name: "Phase 4: Pilot Launch", duration: "10-11 Weeks" },
+                { name: "Phase 5: Measure/Scale", duration: "12+ Weeks" }
+            ],
+            totalWeeks: "12+ Weeks"
+        };
+
+
+        const navigationContainer = document.getElementById('phase-navigation');
+        const contentContainer = document.getElementById('phase-content');
+        let currentChart = null; 
+
+        const formatCurrency = (amount) => `$${amount.toLocaleString()}`;
+
+        const createNavLink = (title, type, icon, index) => {
+            const navLink = document.createElement('a');
+            navLink.href = '#';
+            navLink.className = 'nav-item flex items-center space-x-3 p-3 rounded-lg border-l-4 border-transparent transition-colors duration-200 hover:bg-[#2C2C2C]'; 
+            navLink.dataset.type = type;
+            navLink.dataset.index = index;
+            navLink.innerHTML = `
+                <span class="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] text-[#00FFFF] font-semibold text-sm">${icon}</span>
+                <span class="text-sm">${title}</span>
+            `;
+            navLink.onclick = (e) => {
+                e.preventDefault();
+                renderContent(type, index);
+            };
+            navigationContainer.appendChild(navLink);
+        };
+
+        const renderIntroduction = () => {
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'bg-[#1A1A1A] p-6 sm:p-8 rounded-lg shadow-xl border border-[#333333] space-y-6 fade-in';
+
+            contentWrapper.innerHTML = `
+                <h2 class="text-2xl font-bold text-white">${introductionContent.title}</h2>
+                <p class="text-base text-gray-300 pb-4 border-b border-[#333333]">Overview of the Early Engagement Lifecycle and POC Scope.</p>
+                <div class="text-gray-200">${introductionContent.body}</div>
+            `;
+            contentContainer.appendChild(contentWrapper);
+        };
+
+        const renderTimelineAndPricing = () => {
+            // Pricing elements removed as requested.
+            
+            const tableRows = timelineData.phases.map((p) => `
+                <tr class="hover:bg-[#2C2C2C]">
+                    <td class="font-medium text-white">${p.name}</td>
+                    <td class="text-[#00FFFF]">${p.duration}</td>
+                </tr>
+            `).join('');
+
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'bg-[#1A1A1A] p-6 sm:p-8 rounded-lg shadow-xl border border-[#333333] space-y-6 fade-in';
+            
+            contentWrapper.innerHTML = `
+                <h2 class="text-2xl font-bold text-white mb-6">Execution Timeline Summary</h2>
+                
+                <table class="w-full timeline-table">
+                    <thead>
+                        <tr class="text-sm font-semibold text-gray-400">
+                            <th class="py-2">Project Phase</th>
+                            <th class="py-2">Duration (Weeks)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        ${tableRows}
+                    </tbody>
+                    <tfoot>
+                        <tr class="text-base font-bold bg-[#2C2C2C] border-t-2 border-[#00FFFF]">
+                            <td class="py-3 text-white">Total Project Duration</td>
+                            <td class="py-3 text-[#00FFFF]">${timelineData.totalWeeks}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            `;
+            contentContainer.appendChild(contentWrapper);
+        };
+
+
+        const renderContent = (type, index) => {
+            if (currentChart) {
+                currentChart.destroy();
+                currentChart = null;
+            }
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            contentContainer.innerHTML = ''; 
+
+            if (type === 'intro') {
+                renderIntroduction();
+            } else if (type === 'timeline') {
+                renderTimelineAndPricing();
+            } else if (type === 'phase') {
+                const phase = projectData.phases[index];
+                
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = 'bg-[#1A1A1A] p-6 sm:p-8 rounded-lg shadow-xl border border-[#333333] space-y-6 fade-in'; 
+                
+                let tasksHtml = phase.tasks.map(task => {
+                    const deliverablesList = task.deliverables.map(d => `<li class="ml-4 list-disc">${d}</li>`).join('');
+
+                    return `
+                        <div class="bg-[#2C2C2C] border border-[#333333] rounded-lg p-4 transition hover:shadow-lg">
+                            <h4 class="font-semibold text-white">${task.area}</h4>
+                            <p class="mt-1 text-sm"><strong class="text-gray-300">Activity:</strong> ${task.activity}</p>
+                            <div class="mt-2 text-sm">
+                                <strong class="text-gray-300">Key Deliverables:</strong>
+                                <ul class="mt-1 space-y-1">${deliverablesList}</ul>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                contentWrapper.innerHTML = `
+                    <div class="flex justify-between items-baseline">
+                        <h2 class="text-2xl font-bold text-white">${phase.title}</h2>
+                        <span class="text-sm font-medium text-[#00FFFF] bg-[#004d4d] px-3 py-1 rounded-full">${phase.duration}</span>
+                    </div>
+                    <p class="text-base text-gray-300 pb-4 border-b border-[#333333]">${phase.goal}</p>
+                    <p class="text-sm italic text-gray-400">${phase.introduction}</p>
+                    <div class="space-y-4">${tasksHtml}</div>
+                `;
+
+                contentContainer.appendChild(contentWrapper);
+            }
+
+            // Set the current navigation item as active
+            document.querySelector(`.nav-item[data-type="${type}"][data-index="${index}"]`).classList.add('active');
+        };
+
+        // --- Navigation Builder ---
+
+        // 1. Introduction Link
+        createNavLink('Introduction', 'intro', '👋', 0);
+        
+        // 2. Phase Links
+        projectData.phases.forEach((phase, index) => {
+            createNavLink(phase.title, 'phase', phase.icon, index);
+        });
+
+        // 3. Timeline Link
+        createNavLink('Timeline', 'timeline', '💵', projectData.phases.length);
+
+        renderContent('intro', 0); // Start on Introduction view
+    </script>
+
+
+</body></html>

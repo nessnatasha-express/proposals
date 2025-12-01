@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FanDuel Braze Workspace Consolidation - Project Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .phase-content {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+        }
+        .phase-content.active {
+            display: block;
+            max-height: 1000px; /* Adjust as needed for content height */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .chevron::before {
+            content: '▼'; /* Down arrow */
+            display: inline-block;
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease-in-out;
+        }
+        .phase-button.active .chevron::before {
+            transform: rotate(-180deg); /* Up arrow */
+        }
+        /* Custom scrollbar for better aesthetics (optional) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+<script defer data-domain="fanduel-workspace-consolidation-plan.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="fanduel-workspace-consolidation-plan.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="fanduel-workspace-consolidation-plan.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="fanduel-workspace-consolidation-plan.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-700 text-slate-100 min-h-screen p-4 sm:p-8 selection:bg-sky-400 selection:text-white">
+
+    <div class="max-w-5xl mx-auto bg-slate-800 shadow-2xl rounded-xl p-6 sm:p-10 ring-1 ring-slate-700">
+
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-sky-400">FanDuel Braze Workspace Consolidation</h1>
+            <p class="text-lg text-slate-300 mt-2">Interactive Project Plan</p>
+        </header>
+
+        <section class="mb-10 p-6 bg-slate-700/50 rounded-lg shadow-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-sky-300 mb-6 border-b-2 border-sky-500 pb-3">Project Overview</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-xl font-semibold text-slate-100 mb-2">Core Objective:</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        To consolidate FanDuel's 7 active Braze workspaces into a single, new instance. This will streamline marketing operations, reduce costs, enable better cross-product promotion, and centralize customer engagement efforts.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-slate-100 mb-2">Desired Business Outcomes:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-300 pl-4">
+                        <li><span class="font-medium text-sky-400">Cost Savings:</span> Reduce MarTech data usage costs (targeting up to 15% / $414K annually) and ongoing operational/maintenance expenses.</li>
+                        <li><span class="font-medium text-sky-400">Increased Efficiency:</span> Simplify campaign orchestration, development, testing, workspace maintenance, and user permission management.</li>
+                        <li><span class="font-medium text-sky-400">Improved Performance:</span> Faster product innovation cycles and increased revenue per user through enhanced cross-promotion capabilities.</li>
+                        <li><span class="font-medium text-sky-400">Centralization:</span> A unified platform for all marketing communications.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 p-6 bg-slate-700/50 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-6 border-b-2 border-sky-500 pb-3">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-sky-300">Project Phases & Timeline</h2>
+                <span class="text-xl font-semibold text-sky-400">Total: 30 Weeks</span>
+            </div>
+            <div id="phasesAccordion" class="space-y-3">
+                <div class="bg-slate-800 rounded-lg shadow-md overflow-hidden border border-slate-600">
+                    <button class="phase-button w-full text-left p-4 sm:p-5 text-lg font-medium text-slate-100 hover:bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 flex justify-between items-center" data-target="phase1Content">
+                        <span><span class="chevron"></span>1. Project Initiation & Onboarding</span>
+                        <span class="text-sm text-sky-400">1 Week</span>
+                    </button>
+                    <div id="phase1Content" class="phase-content px-4 sm:px-5 text-slate-300 bg-slate-700/30">
+                        <h4 class="text-md font-semibold text-slate-200 mt-2 mb-1">Key Objectives:</h4>
+                        <p>Align teams, define roles, establish project governance & communication plan.</p>
+                        <h4 class="text-md font-semibold text-slate-200 mt-3 mb-1">Key Deliverables:</h4>
+                        <p>Kick-off meeting, Project Charter (implied).</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg shadow-md overflow-hidden border border-slate-600">
+                    <button class="phase-button w-full text-left p-4 sm:p-5 text-lg font-medium text-slate-100 hover:bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 flex justify-between items-center" data-target="phase2Content">
+                        <span><span class="chevron"></span>2. Discovery & Pre-Migration Planning</span>
+                        <span class="text-sm text-sky-400">2 Weeks</span>
+                    </button>
+                    <div id="phase2Content" class="phase-content px-4 sm:px-5 text-slate-300 bg-slate-700/30">
+                        <h4 class="text-md font-semibold text-slate-200 mt-2 mb-1">Key Objectives:</h4>
+                        <p>Finalize migration strategy, scope, technical requirements, and detailed timeline.</p>
+                        <h4 class="text-md font-semibold text-slate-200 mt-3 mb-1">Key Deliverables:</h4>
+                        <ul class="list-disc list-inside space-y-1 pl-4">
+                            <li>Audit Findings Review & Summary</li>
+                            <li>Comprehensive Project Plan</li>
+                            <li>Detailed Migration Plan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg shadow-md overflow-hidden border border-slate-600">
+                    <button class="phase-button w-full text-left p-4 sm:p-5 text-lg font-medium text-slate-100 hover:bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 flex justify-between items-center" data-target="phase3Content">
+                        <span><span class="chevron"></span>3. Migration & Consolidation</span>
+                        <span class="text-sm text-sky-400">16 Weeks</span>
+                    </button>
+                    <div id="phase3Content" class="phase-content px-4 sm:px-5 text-slate-300 bg-slate-700/30">
+                        <h4 class="text-md font-semibold text-slate-200 mt-2 mb-1">Key Objectives:</h4>
+                        <p>Transfer all designated assets (campaigns, canvases, segments, templates, etc.) to the new workspace.</p>
+                        <h4 class="text-md font-semibold text-slate-200 mt-3 mb-1">Key Deliverables:</h4>
+                         <ul class="list-disc list-inside space-y-1 pl-4">
+                            <li>Migrated assets (campaigns, canvases, segments, templates, content blocks, media library)</li>
+                            <li>Clean & migrated data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg shadow-md overflow-hidden border border-slate-600">
+                    <button class="phase-button w-full text-left p-4 sm:p-5 text-lg font-medium text-slate-100 hover:bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 flex justify-between items-center" data-target="phase4Content">
+                        <span><span class="chevron"></span>4. QA & Testing</span>
+                        <span class="text-sm text-sky-400">11 Weeks</span>
+                    </button>
+                    <div id="phase4Content" class="phase-content px-4 sm:px-5 text-slate-300 bg-slate-700/30">
+                        <h4 class="text-md font-semibold text-slate-200 mt-2 mb-1">Key Objectives:</h4>
+                        <p>Validate functionality, data integrity, performance, and compliance of the new workspace.</p>
+                        <h4 class="text-md font-semibold text-slate-200 mt-3 mb-1">Key Deliverables:</h4>
+                        <ul class="list-disc list-inside space-y-1 pl-4">
+                            <li>Test Plan</li>
+                            <li>Testing Documentation</li>
+                            <li>Validation Summary (issue logs & resolutions)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg shadow-md overflow-hidden border border-slate-600">
+                    <button class="phase-button w-full text-left p-4 sm:p-5 text-lg font-medium text-slate-100 hover:bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 flex justify-between items-center" data-target="phase5Content">
+                        <span><span class="chevron"></span>5. Project Closeout</span>
+                        <span class="text-sm text-sky-400">1 Week</span>
+                    </button>
+                    <div id="phase5Content" class="phase-content px-4 sm:px-5 text-slate-300 bg-slate-700/30">
+                        <h4 class="text-md font-semibold text-slate-200 mt-2 mb-1">Key Objectives:</h4>
+                        <p>Finalize documentation, conduct post-mortem, and formally close the project.</p>
+                        <h4 class="text-md font-semibold text-slate-200 mt-3 mb-1">Key Deliverables:</h4>
+                        <ul class="list-disc list-inside space-y-1 pl-4">
+                            <li>Final Project Report</li>
+                            <li>Lessons Learned</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10 p-6 bg-slate-700/50 rounded-lg shadow-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-sky-300 mb-6 border-b-2 border-sky-500 pb-3">Overall Approach & Strategy</h2>
+            <ul class="list-disc list-inside space-y-3 text-slate-300 pl-4">
+                <li><span class="font-medium text-slate-100">Collaborative Planning:</span> Work closely with FanDuel stakeholders during discovery to align on priorities and requirements.</li>
+                <li><span class="font-medium text-slate-100">Phased Migration:</span> Execute the migration in manageable stages, potentially prioritized by:
+                    <ul class="list-circle list-inside space-y-1 text-slate-400 pl-6 mt-1">
+                        <li>Alignment with FanDuel's seasonal promotional calendar and existing marketing/tech priorities.</li>
+                        <li>Size and volume of assets.</li>
+                        <li>Product line focus.</li>
+                    </ul>
+                </li>
+                <li><span class="font-medium text-slate-100">Clear Asset Definition:</span> Utilize the FanDuel-provided audit and subsequent discovery sessions to clearly define all assets for migration.</li>
+                <li><span class="font-medium text-slate-100">Leverage Existing Infrastructure:</span> The new Braze instance will be configured by FanDuel; this project focuses on the migration of assets into that pre-configured environment.</li>
+                <li><span class="font-medium text-slate-100">Rigorous Testing:</span> Implement a comprehensive QA plan to ensure a seamless transition and mitigate risks.</li>
+                <li><span class="font-medium text-slate-100">Regular Communication:</span> Maintain transparent and consistent communication on progress, risks, and issues.</li>
+            </ul>
+        </section>
+
+        <section class="mb-10 p-6 bg-slate-700/50 rounded-lg shadow-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-sky-300 mb-6 border-b-2 border-sky-500 pb-3">Key Deliverables Summary</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 p-4 rounded-lg shadow border border-slate-600">
+                    <h3 class="text-lg font-semibold text-sky-400 mb-2">Audit Findings Review & Summary</h3>
+                    <p class="text-slate-300 text-sm">Ensures shared understanding of assets for migration.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg shadow border border-slate-600">
+                    <h3 class="text-lg font-semibold text-sky-400 mb-2">Comprehensive Migration Plan</h3>
+                    <p class="text-slate-300 text-sm">The roadmap detailing strategy, timeline, and ownership.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg shadow border border-slate-600">
+                    <h3 class="text-lg font-semibold text-sky-400 mb-2">Migrated Assets</h3>
+                    <p class="text-slate-300 text-sm">All campaigns, canvases, segments, templates, content blocks, and media library successfully transferred.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg shadow border border-slate-600">
+                    <h3 class="text-lg font-semibold text-sky-400 mb-2">Testing Plan & Documentation</h3>
+                    <p class="text-slate-300 text-sm">Outlines test cases and validation processes, with a summary of results and resolutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-6 bg-slate-700/50 rounded-lg shadow-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-sky-300 mb-6 border-b-2 border-sky-500 pb-3">Core Assumptions</h2>
+            <ul class="list-disc list-inside space-y-3 text-slate-300 pl-4">
+                <li>FanDuel will provide an initial audit of existing workspaces and assets.</li>
+                <li>FanDuel will configure the core new Braze workspace/instance prior to the migration phase. This project team is responsible for migrating assets into it.</li>
+                <li>FanDuel stakeholders will be available for necessary discovery sessions (up to 3, max 60 mins each) and ongoing collaboration.</li>
+                <li>The scope of migration includes approximately:
+                    <ul class="list-circle list-inside space-y-1 text-slate-400 pl-6 mt-1">
+                        <li>Up to 300 Campaigns</li>
+                        <li>Up to 700 Canvases</li>
+                        <li>Up to 830 Content Blocks</li>
+                        <li>Up to 20 Templates (general) & 20 Email Templates</li>
+                        <li>Up to 10 Teams and 50 Tags to be created/mapped</li>
+                        <li>Media library</li>
+                    </ul>
+                </li>
+                <li>A CDP Segment/Hightouch review and audit for consolidation is included.</li>
+                <li>Necessary access to existing Braze workspaces and the new target workspace will be provided.</li>
+            </ul>
+        </section>
+
+        <footer class="mt-12 text-center text-sm text-slate-400">
+            <p>&copy; <span id="currentYear"></span> FanDuel Project Plan. All information is indicative.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // JavaScript for Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordion = document.getElementById('phasesAccordion');
+            if (accordion) {
+                const phaseButtons = accordion.querySelectorAll('.phase-button');
+
+                phaseButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetId = button.dataset.target;
+                        const targetContent = document.getElementById(targetId);
+                        const isActive = button.classList.contains('active');
+
+                        // Optional: Close other open accordions
+                        // phaseButtons.forEach(btn => {
+                        //     if (btn !== button) {
+                        //         document.getElementById(btn.dataset.target).classList.remove('active');
+                        //         btn.classList.remove('active');
+                        //     }
+                        // });
+
+                        if (targetContent) {
+                            if (isActive) {
+                                targetContent.classList.remove('active');
+                                button.classList.remove('active');
+                            } else {
+                                targetContent.classList.add('active');
+                                button.classList.add('active');
+                            }
+                        }
+                    });
+                     // Add keydown event for accessibility (Enter and Space to toggle)
+                    button.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault(); // Prevent default space scroll
+                            button.click();
+                        }
+                    });
+                });
+            }
+
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>

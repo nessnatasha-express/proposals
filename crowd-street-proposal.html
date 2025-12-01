@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Street Proposal Infographic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFFFFF; /* White background */
+            color: #000; /* Default text color */
+        }
+        .text-primary { color: #000; }
+        .bg-primary-block { background-color: #1CADFF; }
+        .text-secondary { color: #246F99; }
+        .bg-highlight-light { background-color: #F5F3E9; }
+        .bg-highlight-dark { background-color: #E4D3A0; }
+        .bg-black-block { background-color: #000; } /* New class for black background */
+
+        .accordion-header {
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #E0E0E0; /* Light gray on hover for headers */
+        }
+        .accordion-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-bottom: 0;
+            opacity: 0;
+        }
+        .accordion-content.active {
+            max-height: 500px; /* Adjust based on expected content height */
+            padding-bottom: 1rem; /* Restore padding */
+            opacity: 1;
+            transition: max-height 0.5s ease-in, padding 0.5s ease-in, opacity 0.3s ease-in;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-icon.rotate {
+            transform: rotate(45deg); /* Rotate for '+' to 'x' or similar effect */
+        }
+    </style>
+<script defer data-domain="crowd-street-shift-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="crowd-street-shift-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="crowd-street-shift-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script defer data-domain="crowd-street-shift-proposal.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+<body class="p-4 sm:p-8 md:p-12 lg:p-16">
+
+    <div class="max-w-6xl mx-auto rounded-lg shadow-xl overflow-hidden bg-white">
+        <!-- Header Section -->
+        <div class="bg-primary-block p-6 sm:p-8 rounded-t-lg">
+            <h1 class="text-white text-3xl sm:text-4xl font-bold mb-2">Crowd Street Proposal by SH/FT</h1>
+            <p class="text-white text-lg sm:text-xl">June 22, 2025</p>
+        </div>
+
+        <!-- Project Title -->
+        <div class="p-6 sm:p-8 bg-highlight-light">
+            <h2 class="text-secondary text-2xl sm:text-3xl font-semibold mb-4">Project Name: Customer Journey Optimization & Automation</h2>
+            <div class="w-full h-1 bg-secondary rounded-full"></div>
+        </div>
+
+        <!-- High-Level Project Description -->
+        <div class="p-6 sm:p-8">
+            <h3 class="text-primary text-xl sm:text-2xl font-bold mb-4 flex items-center">
+                <span class="text-secondary text-3xl sm:text-4xl mr-3 font-extrabold">01</span>
+                High-Level Project Description
+            </h3>
+            <p class="text-primary text-base sm:text-lg leading-relaxed">
+                This project is designed to elevate CrowdStreet's customer experience. We'll begin with an assessment of current email and journey practices, followed by a collaborative workshop and strategic mapping session. The culmination will be the implementation of an automated MVP journey within Salesforce Marketing Cloud (SFMC).
+                <br><br>
+                Our goal is to identify key areas for improvement and provide the necessary oversight to launch a critical customer journey, driving more effective engagement. We aim to leverage SFMC's capabilities to streamline and automate key customer touchpoints.
+            </p>
+        </div>
+
+        <!-- Deliverables Section -->
+        <div class="p-6 sm:p-8 bg-highlight-light">
+            <h3 class="text-primary text-xl sm:text-2xl font-bold mb-6 flex items-center">
+                <span class="text-secondary text-3xl sm:text-4xl mr-3 font-extrabold">02</span>
+                Project Deliverables
+            </h3>
+            <p class="text-primary text-base sm:text-lg leading-relaxed mb-6">
+                Here's a detailed list of the deliverables you'll receive throughout the project:
+            </p>
+
+            <!-- Phase 1 Accordion -->
+            <div class="accordion-item mb-4 bg-white rounded-lg shadow-md border border-gray-200">
+                <h4 class="accordion-header text-primary text-lg sm:text-xl font-bold flex items-center p-4 sm:p-6 cursor-pointer justify-between">
+                    <span class="flex items-center">
+                        <span class="bg-primary-block text-white rounded-full h-8 w-8 flex items-center justify-center mr-3 text-sm font-semibold">1</span>
+                        Phase 1: Email & Customer Experience Assessment
+                    </span>
+                    <span class="accordion-icon text-secondary text-2xl font-bold">+</span>
+                </h4>
+                <ol class="accordion-content list-decimal pl-16 pr-4 text-primary text-base sm:text-lg space-y-2">
+                    <li>Documented summary of findings from email assessment</li>
+                    <li>Documented review of existing journey mapping</li>
+                </ol>
+            </div>
+
+            <!-- Phase 2 Accordion -->
+            <div class="accordion-item mb-4 bg-white rounded-lg shadow-md border border-gray-200">
+                <h4 class="accordion-header text-primary text-lg sm:text-xl font-bold flex items-center p-4 sm:p-6 cursor-pointer justify-between">
+                    <span class="flex items-center">
+                        <span class="bg-primary-block text-white rounded-full h-8 w-8 flex items-center justify-center mr-3 text-sm font-semibold">2</span>
+                        Phase 2: Customer Experience Workshop & Mapping
+                    </span>
+                    <span class="accordion-icon text-secondary text-2xl font-bold">+</span>
+                </h4>
+                <ol class="accordion-content list-decimal pl-16 pr-4 text-primary text-base sm:text-lg space-y-2">
+                    <li>Documented existing customer experience</li>
+                    <li>Documented summary of findings from discovery calls and virtual workshop</li>
+                </ol>
+            </div>
+
+            <!-- Phase 3 Accordion -->
+            <div class="accordion-item bg-white rounded-lg shadow-md border border-gray-200">
+                <h4 class="accordion-header text-primary text-lg sm:text-xl font-bold flex items-center p-4 sm:p-6 cursor-pointer justify-between">
+                    <span class="flex items-center">
+                        <span class="bg-primary-block text-white rounded-full h-8 w-8 flex items-center justify-center mr-3 text-sm font-semibold">3</span>
+                        Phase 3: MVP Journey Automation (Oversight Only)
+                    </span>
+                    <span class="accordion-icon text-secondary text-2xl font-bold">+</span>
+                </h4>
+                <ol class="accordion-content list-decimal pl-16 pr-4 text-primary text-base sm:text-lg space-y-2">
+                    <li>Campaign brief for the chosen MVP journey (1 journey with up to 4 touchpoints).</li>
+                    <li>Messaging strategy, content strategy, and creative recommendations for the MVP journey.</li>
+                    <li>Blueprint document for the tech team to build the MVP journey in SFMC.</li>
+                    <li>Review of/Build and Assistance of data segmentation work.</li>
+                    <li>Build and Assistance of MVP journey testing and refinement.</li>
+                    <li>Build and Assistance of MVP journey deployment within SFMC.</li>
+                    <li>Build and Assistance of post-launch monitoring for two weeks.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Cost and Timeline Section -->
+        <div class="p-6 sm:p-8 bg-black-block flex flex-col sm:flex-row justify-around items-center rounded-b-lg">
+            <div class="text-center mb-6 sm:mb-0">
+                <h4 class="text-primary text-xl sm:text-2xl font-bold mb-2 text-[#F5F3E9]">Cost</h4>
+                <p class="text-2xl sm:text-3xl font-extrabold text-[#F5F3E9]">$74,390 USD</p>
+            </div>
+            <div class="text-center">
+                <h4 class="text-primary text-xl sm:text-2xl font-bold mb-2 text-[#F5F3E9]">Timeline</h4>
+                <p class="text-2xl sm:text-3xl font-extrabold text-[#F5F3E9]">10-12 weeks</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+
+                    // Toggle active class on content
+                    content.classList.toggle('active');
+
+                    // Toggle icon rotation
+                    icon.classList.toggle('rotate');
+
+                    // Change icon text
+                    if (content.classList.contains('active')) {
+                        icon.textContent = '-';
+                    } else {
+                        icon.textContent = '+';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
