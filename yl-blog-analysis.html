@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+        <html>
+          <head>
+            <title></title>
+            
+          <script defer data-domain="shift-younglife-blog-analysis.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script rel="preload" defer src="https://assets.tiiny.xyz/f-ui/bundle.js"></script><link href="https://assets.tiiny.xyz/f-ui/bundle.css" rel="stylesheet" /></head>
+          <body>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Life WordPress Blog Instance Analysis Findings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary .arrow {
+            transform: rotate(90deg);
+        }
+        .section-card {
+            background-color: #f9fafb; /* gray-50 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.75rem; /* rounded-xl */
+            margin-bottom: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+        .section-card-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            cursor: pointer;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #111827; /* gray-900 */
+        }
+        .section-card-content {
+            padding: 0 1.25rem 1.25rem;
+            color: #374151; /* gray-700 */
+            line-height: 1.6;
+        }
+        .point {
+            display: flex;
+            align-items: start;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            border: 1px solid #f3f4f6; /* gray-100 */
+        }
+        .point-icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 1rem;
+            margin-top: 0.25rem;
+        }
+        .recommendation-card {
+            background-color: white;
+            border-left: 4px solid;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+        .recommendation-card.priority-high { border-color: #ef4444; } /* red-500 */
+        .recommendation-card.priority-medium { border-color: #f97316; } /* orange-500 */
+        .recommendation-card.priority-low { border-color: #3b82f6; } /* blue-500 */
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+
+        <!-- Header Section -->
+        <header class="bg-white p-6 rounded-xl shadow-sm mb-8 border border-gray-200">
+            <h1 class="text-3xl font-bold text-gray-900">Young Life WordPress Blog Instance Analysis Findings</h1>
+            <div class="mt-4 text-gray-600 space-y-1">
+                <p><span class="font-semibold">Created by:</span> Natasha Ness & Jenna Moye from Shift Paradigm</p>
+                <p><span class="font-semibold">For:</span> Young Life, Initiative Lead - Michael Sawyer</p>
+                <p><span class="font-semibold">Date:</span> <span id="current-date"></span></p>
+                <p><span class="font-semibold">Version:</span> 1.0</p>
+            </div>
+        </header>
+
+        <!-- Introduction -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg mb-8">
+            <p class="font-semibold">Primary Finding:</p>
+            <p>The WordPress site appears technically self-contained, with no immediate signs of proprietary technology that would prevent Young Life from taking full ownership. However, there are significant issues with best practices and maintainability that should be addressed for a smooth transition.</p>
+        </div>
+
+        <!-- Accordion Sections -->
+        <div id="audit-sections">
+            <!-- 1. Theme & Branding Analysis -->
+            <details class="section-card" open>
+                <summary class="section-card-summary">
+                    <span>1. Theme & Branding Analysis</span>
+                    <svg class="arrow w-6 h-6 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </summary>
+                <div class="section-card-content">
+                    <div class="point">
+                        <svg class="point-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Ownership & Licensing</h4>
+                            <p>The theme folder is `n2-younglife`. It's critical to review the contract to confirm who legally owns this custom theme. If ownership is not with Young Life, this could be a major contractual obstacle.</p>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <svg class="point-icon text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Hard-Coded Elements</h4>
+                            <p>Key parts of the site (navigation, styles) are hard-coded into theme files. This makes the site difficult for non-developers to manage and limits the ability to make quick brand updates using WordPress's standard controls.</p>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <svg class="point-icon text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">CSS Customization</h4>
+                            <p>There is no apparent customization of CSS in the WordPress "Appearance" area, which is a good thing for the migration as it simplifies the process.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- 2. Content & Structure -->
+            <details class="section-card">
+                <summary class="section-card-summary">
+                    <span>2. Content & Structure</span>
+                    <svg class="arrow w-6 h-6 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </summary>
+                <div class="section-card-content">
+                    <div class="point">
+                        <svg class="point-icon text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m012.75h7.5m-7.5-3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Pages vs. Theme Templates</h4>
+                            <p>There is a lack of actual pages in the admin area. It also looks like the bulk of what is "pages" is based outside of the site. Is the intent to have two separate sites or merge the two? There could be some critical issues with the merging approach if not done correctly and we want to call that out as a major risk. Much of the site's content is built directly into theme templates for posts, which makes a lot of sense, but for pages it does not and is typically not a scalable or user-friendly practice.</p>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <svg class="point-icon text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Post Structure</h4>
+                            <p>The setup for blog posts, categories, and tags is standard and uses core WordPress functionality correctly. No issues are foreseen with migrating this content.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- 3. User & Access Management -->
+            <details class="section-card">
+                <summary class="section-card-summary">
+                    <span>3. User & Access Management</span>
+                    <svg class="arrow w-6 h-6 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </summary>
+                <div class="section-card-content">
+                     <div class="point">
+                        <svg class="point-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Critical Warning</h4>
+                            <p>Do not delete an agency user without first re-attributing their content. Doing so could result in the permanent deletion of all pages and posts created by that user.</p>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <svg class="point-icon text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-4.67c.12-.318.239-.636.354-.966M15 19.128c-2.362 0-4.54-.646-6.374-1.766m6.374 1.766v-.106a9.37 9.37 0 01-1.51-4.471m-5.7-1.51a9.37 9.37 0 01-1.51 4.472m5.7 1.51V15" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Transition Process</h4>
+                            <p>A safe transition requires creating a new Young Life admin user, re-attributing all agency-owned content to the new user, and then downgrading or deleting agency accounts.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- 4. Plugins, Hosting & Technical Health -->
+            <details class="section-card">
+                <summary class="section-card-summary">
+                    <span>4. Plugins, Hosting & Technical Health</span>
+                    <svg class="arrow w-6 h-6 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </summary>
+                <div class="section-card-content">
+                    <div class="point">
+                        <svg class="point-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-1.5-1m1.5 1v5.5" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Hosting Ownership</h4>
+                            <p>It is essential to confirm that the WP Engine account is owned by and billed to Young Life. If the agency owns the hosting, you don't truly own your site and must migrate.</p>
+                        </div>
+                    </div>
+                     <div class="point">
+                        <svg class="point-icon text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">SEO Implementation</h4>
+                            <p>A major missed opportunity. While Rank Math SEO is installed, it is not being utilized. Page titles, meta descriptions, and other on-page SEO elements are largely absent.</p>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <svg class="point-icon text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">PHP Security Notice</h4>
+                            <p>The security error flagged during the initial review should be investigated and resolved by a developer, as it may indicate outdated or insecure code.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <!-- 5. Summary & Actionable Recommendations -->
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary & Actionable Recommendations</h2>
+                <div class="space-y-4">
+                    <div class="recommendation-card priority-high">
+                        <h4 class="font-bold text-lg text-gray-800">✅ 1. Confirm Legal Ownership</h4>
+                        <p>Immediately locate the contract and confirm in writing that Young Life owns the `n2-younglife` theme. This is the most critical step.</p>
+                    </div>
+                    <div class="recommendation-card priority-high">
+                        <h4 class="font-bold text-lg text-gray-800">✅ 2. Secure Core Assets</h4>
+                        <p>Confirm that the WP Engine hosting account and the domain name registration are under Young Life's direct control. If not, begin the transfer process immediately.</p>
+                    </div>
+                    <div class="recommendation-card priority-high">
+                        <h4 class="font-bold text-lg text-gray-800">✅ 3. Perform User Transition</h4>
+                        <p>Execute the user transition plan to secure the site and remove agency access before making any other changes.</p>
+                    </div>
+                    <div class="recommendation-card priority-medium">
+                        <h4 class="font-bold text-lg text-gray-800">🛠️ 4. Plan for a Theme Refactor</h4>
+                        <p>Budget for a future project to move hard-coded elements into the user-friendly WordPress editor, making the site far easier to manage long-term.</p>
+                    </div>
+                     <div class="recommendation-card priority-medium">
+                        <h4 class="font-bold text-lg text-gray-800">🛠️ 5. Address Technical Debt</h4>
+                        <p>Have a developer update all plugins, resolve the PHP error, and conduct a full security and performance audit.</p>
+                    </div>
+                    <div class="recommendation-card priority-medium">
+                        <h4 class="font-bold text-lg text-gray-800">💡 6. Contingency Plan</h4>
+                        <p>In the event of contractual issues or dissatisfaction with the current setup, this site could be recreated with a more scalable theme that mirrors the desired look and feel. You have options.</p>
+                    </div>
+                    <div class="recommendation-card priority-low">
+                        <h4 class="font-bold text-lg text-gray-800">🚀 7. Develop an SEO Strategy</h4>
+                        <p>Begin using the installed SEO plugin to optimize all pages and posts to improve organic search visibility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Set the current date
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const today = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                dateElement.textContent = today.toLocaleDateString('en-US', options);
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+          </body>
+        </html>

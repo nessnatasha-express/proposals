@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTCDP Data Model Infographic (Architectural - Shift Paradigm)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Roboto Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F8FAFC; /* Light gray/off-white background for Shift Paradigm */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .infographic-container {
+            background-color: #FFFFFF;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            padding: 3rem; /* More padding for the main container */
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem; /* Increased gap between major sections */
+            position: relative; /* For connecting lines */
+        }
+
+        /* Common Box Styles */
+        .box {
+            background-color: #EEF2FF; /* Indigo 50 */
+            border: 1px solid #E0E7FF; /* Indigo 200 */
+            border-radius: 1rem; /* More rounded corners */
+            padding: 2rem 2.5rem; /* Increased padding */
+            text-align: center;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* For Z-index and internal elements */
+            z-index: 10; /* Ensure boxes are above lines */
+        }
+
+        .section-header {
+            font-size: 1.75rem; /* Slightly larger header */
+            font-weight: 700;
+            color: #1A202C; /* Dark text */
+            margin-bottom: 1rem;
+        }
+
+        .sub-box {
+            background-color: #FFFFFF;
+            border: 1px solid #CBD5E0; /* Gray 300 */
+            border-radius: 0.75rem; /* Slightly less rounded than main boxes */
+            padding: 1.25rem 1.5rem; /* Increased padding */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            font-size: 0.95rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem; /* Increased gap within sub-boxes */
+            position: relative; /* For Z-index */
+            z-index: 10;
+        }
+
+        .icon {
+            font-size: 2.2rem; /* Larger icons */
+            margin-bottom: 0.75rem; /* More space below icons */
+            color: #4F46E5; /* Indigo 600 - Primary brand accent */
+        }
+
+        pre {
+            background-color: #F4F6F8; /* Lighter background for code */
+            padding: 0.75rem; /* More padding for code blocks */
+            border-radius: 0.5rem;
+            font-family: 'Roboto Mono', monospace; /* Monospace for code */
+            font-size: 0.85rem;
+            white-space: pre-wrap; /* Ensure text wraps */
+            word-break: break-all; /* Break long words */
+            overflow-x: auto;
+            max-height: 150px; /* Limit height to keep infographic flow */
+        }
+
+        /* Connecting Lines/Arrows */
+        .line {
+            position: absolute;
+            background-color: #818CF8; /* Indigo 400 - Line color for Shift Paradigm */
+            z-index: 1; /* Below content boxes */
+            border-radius: 1px; /* Sharper lines */
+        }
+
+        /* Generic arrow for lines */
+        .line-arrow::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            z-index: 2;
+        }
+
+        /* Specific arrow directions */
+        .arrow-bottom::after {
+            bottom: -10px; /* Adjust to sit at the end of the line */
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 8px 0 8px;
+            border-color: #818CF8 transparent transparent transparent;
+        }
+        /* Note: For simplicity and clarity in a complex layout, only bottom arrows are primarily used,
+           indicating general flow downwards. More complex architectural diagrams might use all directions. */
+
+        /* Positioning of Lines (Adjusted for increased padding and gaps) */
+        /* These values are carefully adjusted based on element heights and desired spacing */
+
+        /* RTCDP to XDM */
+        .line-rtcdp-xdm {
+            width: 2px;
+            height: 6rem; /* Increased height */
+            top: 14.5rem; /* Position below RTCDP box + initial gap */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* XDM to Classes/Field Groups branching */
+        .line-xdm-branch-vertical {
+            width: 2px;
+            height: 6rem; /* Increased height */
+            top: 30rem; /* Below XDM box + gap */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .line-xdm-branch-horizontal {
+            width: 50%; /* Adjusted width to visually connect */
+            height: 2px;
+            top: 36rem; /* Where the vertical line ends */
+            left: 25%; /* Start from left to cover both */
+            transform: translateX(0%);
+        }
+        .line-xdm-to-classes {
+            width: 2px;
+            height: 3rem;
+            top: 36rem;
+            left: calc(25% + 10%); /* Approx position for left branch */
+            transform: translateX(-50%);
+        }
+        .line-xdm-to-fieldgroups {
+            width: 2px;
+            height: 3rem;
+            top: 36rem;
+            left: calc(75% - 10%); /* Approx position for right branch */
+            transform: translateX(-50%);
+        }
+
+        /* Classes/Field Groups to Schemas merging */
+        .line-classes-to-schema-vertical {
+            width: 2px;
+            height: 6rem; /* Increased height */
+            top: 57rem; /* Below classes box + gap */
+            left: calc(25% + 10%);
+            transform: translateX(-50%);
+        }
+        .line-fieldgroups-to-schema-vertical {
+            width: 2px;
+            height: 6rem; /* Increased height */
+            top: 57rem; /* Below field groups box + gap */
+            left: calc(75% - 10%);
+            transform: translateX(-50%);
+        }
+        .line-schemas-merge-horizontal {
+            width: 50%;
+            height: 2px;
+            top: 63rem; /* Where vertical lines end */
+            left: 25%;
+            transform: translateX(0%);
+        }
+        .line-schemas-merge-vertical-to-schemas-box {
+            width: 2px;
+            height: 3rem; /* Connects horizontal merge to schema box */
+            top: 63rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Schemas to Data Sets */
+        .line-schemas-to-datasets-vertical {
+            width: 2px;
+            height: 6rem; /* Increased height */
+            top: 83.5rem; /* Below schemas box + gap */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Data Sets to Identities branching */
+        .line-datasets-branch-vertical {
+            width: 2px;
+            height: 12rem; /* Significant height for the vertical drop */
+            top: 119rem; /* Below data sets + gap (accounting for pre height) */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .line-datasets-branch-horizontal {
+            width: 50%; /* Covers the width of data sets */
+            height: 2px;
+            top: 131rem; /* Where vertical line ends */
+            left: 25%;
+            transform: translateX(0%);
+        }
+        .line-datasets-to-identities-customer-profile {
+            width: 2px;
+            height: 3rem;
+            top: 131rem;
+            left: calc(25% + 10%);
+            transform: translateX(-50%);
+        }
+        .line-datasets-to-identities-website-events {
+            width: 2px;
+            height: 3rem;
+            top: 131rem;
+            left: calc(75% - 10%);
+            transform: translateX(-50%);
+        }
+        .line-identities-merge-horizontal {
+            width: 50%;
+            height: 2px;
+            top: 134rem;
+            left: 25%;
+            transform: translateX(0%);
+        }
+        .line-identities-merge-vertical-to-identities-box {
+            width: 2px;
+            height: 3rem;
+            top: 134rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+<script defer data-domain="data-language-azek.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+<body>
+    <div class="infographic-container">
+        <!-- Connecting Lines: RTCDP Core to XDM -->
+        <div class="line line-rtcdp-xdm arrow-bottom"></div>
+
+        <!-- Section 1: RTCDP Core -->
+        <div class="bg-indigo-700 text-white p-8 rounded-xl shadow-lg text-center relative z-10 w-full mb-8">
+            <h1 class="text-3xl font-bold mb-3">REAL-TIME CUSTOMER DATA PLATFORM (RTCDP)</h1>
+            <p class="text-lg">Orchestrating data collection, unification, and activation for personalized customer experiences.</p>
+        </div>
+
+        <!-- Section 2: The Foundation - XDM & Building Blocks -->
+        <div class="flex flex-col items-center gap-12 relative">
+            <div class="box bg-indigo-50 border-indigo-200 p-8 w-full max-w-2xl relative z-10">
+                <h2 class="section-header text-indigo-800 mb-4">CORE DATA MODELING FRAMEWORK (e.g., XDM)</h2>
+                <p class="text-gray-700">Provides universal language & structure standards for customer experience data.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center gap-10 w-full mt-12">
+                <!-- Classes Box -->
+                <div class="box flex-1 bg-green-50 border-green-200 p-6 relative z-10">
+                    <span class="icon text-green-700">🏛️</span>
+                    <h3 class="font-semibold text-xl text-green-800 mb-2">CLASSES</h3>
+                    <p class="text-gray-700 mb-4">Foundational definitions for entities. Defines core common attributes.</p>
+                    <ul class="list-none p-0 text-sm text-gray-600 space-y-1">
+                        <li><span class="font-medium">Individual Profile Class:</span> Basic person details (name, email)</li>
+                        <li><span class="font-medium">Experience Event Class:</span> Basic event details (timestamp, event type)</li>
+                    </ul>
+                </div>
+
+                <!-- Field Groups Box -->
+                <div class="box flex-1 bg-yellow-50 border-yellow-200 p-6 relative z-10">
+                    <span class="icon text-yellow-700">🧩</span>
+                    <h3 class="font-semibold text-xl text-yellow-800 mb-2">FIELD GROUPS</h3>
+                    <p class="text-gray-700 mb-4">Reusable, modular sets of attributes. Promotes consistency.</p>
+                    <ul class="list-none p-0 text-sm text-gray-600 space-y-1">
+                        <li><span class="font-medium">Address Details:</span> Street, City, Zip</li>
+                        <li><span class="font-medium">Web Details:</span> Page Name, URL</li>
+                        <li><span class="font-medium">Commerce Details:</span> Product ID, Quantity</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Connecting Lines for XDM section -->
+            <div class="line line-xdm-branch-vertical arrow-bottom"></div>
+            <div class="line line-xdm-branch-horizontal"></div>
+            <div class="line line-xdm-to-classes arrow-bottom"></div>
+            <div class="line line-xdm-to-fieldgroups arrow-bottom"></div>
+        </div>
+
+        <!-- Section 3: Creating the Blueprints - Schemas -->
+        <div class="flex flex-col items-center gap-10 relative">
+            <div class="section-header text-indigo-800 mb-4">SCHEMAS</div>
+            <p class="text-gray-700 text-center mb-4">Specific blueprints for types of data. Built by extending Classes and including Field Groups.</p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                <!-- Customer Profile Schema -->
+                <div class="sub-box flex-1 bg-purple-50 border-purple-200 p-6 relative z-10">
+                    <span class="icon text-purple-700">👤</span>
+                    <h3 class="font-semibold text-lg text-purple-800 mb-1">CUSTOMER PROFILE SCHEMA</h3>
+                    <p class="text-gray-700 text-sm">Defines unified customer profiles. (Extends 'Individual Profile Class' & includes 'Address Details' Field Group).</p>
+                </div>
+
+                <!-- Product Viewed Event Schema -->
+                <div class="sub-box flex-1 bg-orange-50 border-orange-200 p-6 relative z-10">
+                    <span class="icon text-orange-700">👁️‍🗨️</span>
+                    <h3 class="font-semibold text-lg text-orange-800 mb-1">PRODUCT VIEWED EVENT SCHEMA</h3>
+                    <p class="text-gray-700 text-sm">Defines customer behavioral events. (Extends 'Experience Event Class' & includes 'Web Details' & 'Commerce Details' Field Groups).</p>
+                </div>
+            </div>
+            <!-- Connecting Lines for Schemas section -->
+            <div class="line line-classes-to-schema-vertical arrow-bottom"></div>
+            <div class="line line-fieldgroups-to-schema-vertical arrow-bottom"></div>
+            <div class="line line-schemas-merge-horizontal"></div>
+            <div class="line line-schemas-merge-vertical-to-schemas-box arrow-bottom"></div>
+        </div>
+
+        <!-- Section 4: Where Data Lives - Data Sets -->
+        <div class="flex flex-col items-center gap-10 relative">
+            <div class="section-header text-indigo-800 mb-4">DATA SETS</div>
+            <p class="text-gray-700 text-center mb-4">Storage containers for actual data instances. Each tied to a specific Schema.</p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                <!-- Customer Profiles Data Set -->
+                <div class="sub-box flex-1 bg-red-50 border-red-200 p-6 relative z-10">
+                    <span class="icon text-red-700">🗄️</span>
+                    <h3 class="font-semibold text-lg text-red-800 mb-1">CUSTOMER PROFILES DATA SET</h3>
+                    <p class="text-gray-700 text-sm">Stores **RECORD DATA** (e.g., Jane Smith's name, email, address) conforming to 'Customer Profile Schema'.</p>
+                    <pre>
+{
+  "name": "Jane Smith",
+  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f454e414a015c6f4a574e425f434a014c4042">[email&#160;protected]</a>",
+  "address": {
+    "street1": "123 Main St",
+    "city": "Anytown"
+  }
+}
+                    </pre>
+                </div>
+
+                <!-- Website Events Data Set -->
+                <div class="sub-box flex-1 bg-blue-50 border-blue-200 p-6 relative z-10">
+                    <span class="icon text-blue-700">📊</span>
+                    <h3 class="font-semibold text-lg text-blue-800 mb-1">WEBSITE EVENTS DATA SET</h3>
+                    <p class="text-gray-700 text-sm">Stores **TIME-SERIES DATA** (e.g., Product X viewed at 10:30 AM) conforming to 'Product Viewed Event Schema'.</p>
+                    <pre>
+{
+  "timestamp": "2025-06-21T10:30:00Z",
+  "webPage": {
+    "name": "Product X Page",
+    "url": "https://example.com/prod-x"
+  },
+  "productViews": 1
+}
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connecting Lines: Data Sets to Identities -->
+        <div class="line line-datasets-branch-vertical arrow-bottom"></div>
+        <div class="line line-datasets-branch-horizontal"></div>
+        <div class="line line-datasets-to-identities-customer-profile arrow-bottom"></div>
+        <div class="line line-datasets-to-identities-website-events arrow-bottom"></div>
+        <div class="line line-identities-merge-horizontal"></div>
+        <div class="line line-identities-merge-vertical-to-identities-box arrow-bottom"></div>
+
+        <!-- Section 5: The Unifying Element - Identities -->
+        <div class="flex flex-col items-center gap-10 relative">
+            <div class="box bg-teal-50 border-teal-200 p-8 w-full max-w-xl relative z-10">
+                <span class="icon text-teal-700">✨</span>
+                <h2 class="section-header text-teal-800 mb-4">IDENTITIES</h2>
+                <p class="text-gray-700 text-center mb-4">The central link! Connects Record Data to Time-Series Data and unifies profiles across all sources.</p>
+                <ul class="list-disc list-inside p-0 text-base text-gray-600 space-y-1">
+                    <li>Email Address</li>
+                    <li>Experience Cloud ID (ECID)</li>
+                    <li>CRM ID</li>
+                    <li>Phone Number</li>
+                    <li>Organization-Specific IDs</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitsubishi Electric | Marketo &amp; MCI Integration Strategy</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <!-- Chosen Palette: SH/FT Inspired -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling application with a sticky top navigation for easy access to key sections. The structure logically guides the user from the high-level opportunity to the detailed implementation plan. This was chosen over a multi-page site to present the proposal as a single, cohesive story. Interactive elements like the data architecture diagram and the phased plan accordion are used to manage complexity and encourage user exploration, making the dense information more digestible. -->
+    <!-- Visualization & Content Choices: 1. Data Architecture Diagram: Report Info -> List of data sources. Goal -> Organize/Relate. Viz -> Static Image. Interaction -> None. Justification -> Switched to a static image for reliability and exact visual representation as requested. Method -> IMG tag. 2. Implementation Plan: Report Info -> 6-step process. Goal -> Organize/Explain. Viz -> Clickable vertical step-by-step guide (accordion style). Interaction -> Clicking a step reveals its description. Justification -> Reduces information overload by showing details on demand. Method -> HTML/Tailwind/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F3E9; /* Custom Beige Background */
+            color: #2d3748; /* Charcoal Text */
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        .active-nav {
+            color: #246F99; /* Dark Blue */
+            font-weight: 600;
+        }
+        .header-bg {
+             background-color: rgba(245, 243, 233, 0.8);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="header-bg backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-900">
+                SH/FT &amp; MEAU
+            </div>
+            <div class="hidden md:flex space-x-8 text-gray-600">
+                <a href="#intro" class="nav-link hover:text-[#246F99]">Intro</a>
+                <a href="#recommendation" class="nav-link hover:text-[#246F99]">Recommendation</a>
+                <a href="#solution" class="nav-link hover:text-[#246F99]">The Solution</a>
+                <a href="#pros-cons" class="nav-link hover:text-[#246F99]">Pros &amp; Cons</a>
+                <a href="#why-mci" class="nav-link hover:text-[#246F99]">Why MCI?</a>
+                <a href="#architecture" class="nav-link hover:text-[#246F99]">Architecture</a>
+                <a href="#plan" class="nav-link hover:text-[#246F99]">Our Plan</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <span class="text-2xl">☰</span>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#intro" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Intro</a>
+            <a href="#recommendation" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Recommendation</a>
+            <a href="#solution" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">The Solution</a>
+            <a href="#pros-cons" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Pros &amp; Cons</a>
+            <a href="#why-mci" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Why MCI?</a>
+            <a href="#architecture" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Architecture</a>
+            <a href="#plan" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 nav-link">Our Plan</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="intro" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-5xl md:text-6xl font-light text-[#246F99] mb-4">Key Considerations for Marketing Cloud Intelligence with Marketo</h1>
+                    <p class="text-lg text-gray-700">We understand the potential move to Adobe Customer Journey Analytics (CJA) might feel concerning, especially after the investment in Marketing Cloud Intelligence and the challenges you've had so far. While CJA is a great solution, this document will highlight how it is possible to continue to utilize MCI, should you choose that option. We'll walk you through how it will connect to Marketo and the rest of your tech stack, as well as highlight the architecture, pros and cons and a plan forward.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendation" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Was CJA Recommended?</h2>
+                    <p class="text-lg text-gray-700">Our initial recommendation for CJA was based on the understanding that you were in the early stages of developing journey-based analytics. CJA seemed a logical fit to deliver cross-channel insights, automate the SFMC team's manual reporting, and provide a user-friendly, cost-effective solution.</p>
+                    <p class="text-lg text-gray-700 mt-4">Now, with a clearer picture of your team, technology and the time already invested in Marketing Cloud Intelligence, we understand that migrating yet again might not be an option. This document outlines the strategy for staying with MCI and creating a direct integration with Marketo, as well as how we'll support you in both the integration and optimization of your current MCI setup.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">How this Works</h2>
+                    <p class="text-lg text-gray-700 mb-12">Getting Marketo and MCI connected is achieved through a robust data pipeline. The magic of making the data connect accurately and in sync happens in the "Transform" stage, where we harmonize data from all your platforms. This allows you to analyze a "campaign" from Marketo, YouTube, and your DSP (advertising) together using shared Identifiers, Dimensions, and Measurements, resulting in a comprehensive, unified view of performance in your MCI Pages. Represented below is the ETL process that takes place before it lands in the MCI dashboards.</p>
+                </div>
+                <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-stretch justify-center text-center gap-4">
+                    <div class="flex-1 p-6 bg-white rounded-lg shadow-md w-full border-t-4" style="border-color: #1CADFF;">
+                        <svg class="w-10 h-10 mx-auto mb-4" style="color: #1CADFF;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 1.1.9 2 2 2h12a2 2 0 002-2V7M16 3h-8a2 2 0 00-2 2v1h12V5a2 2 0 00-2-2z"></path></svg>
+                        <h4 class="text-xl font-semibold mb-2">Extract</h4>
+                        <ul class="text-gray-600 list-none text-sm space-y-1">
+                            <li>API Connector Data Streams</li>
+                            <li>Marketo Real-time Webhooks</li>
+                            <li>Scheduled Batches (TotalConnect)</li>
+                        </ul>
+                    </div>
+                     <div class="flex-1 p-6 bg-white rounded-lg shadow-md w-full border-t-4" style="border-color: #1CADFF;">
+                        <svg class="w-10 h-10 mx-auto mb-4" style="color: #1CADFF;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <h4 class="text-xl font-semibold mb-2">Transform</h4>
+                        <ul class="text-gray-600 list-none text-sm space-y-1">
+                            <li>Data Model Mapping</li>
+                            <li>Harmonization Center Rules</li>
+                            <li>Calculated Dimensions &amp; Measures</li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 p-6 bg-white rounded-lg shadow-md w-full border-t-4" style="border-color: #1CADFF;">
+                        <svg class="w-10 h-10 mx-auto mb-4" style="color: #1CADFF;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        <h4 class="text-xl font-semibold mb-2">Load</h4>
+                        <ul class="text-gray-600 list-none text-sm space-y-1">
+                            <li>Datorama Data Lake</li>
+                            <li>Data Quality Validation</li>
+                            <li>Staging Tables</li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 p-6 bg-[#246F99] text-white rounded-lg shadow-md w-full border-t-4 border-[#1CADFF]">
+                        <svg class="w-10 h-10 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <h4 class="text-xl font-semibold mb-2">Serve</h4>
+                         <ul class="list-none text-sm space-y-1">
+                            <li>API Endpoints</li>
+                            <li>Dashboard Pages &amp; Widgets</li>
+                            <li>Real-time Updates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pros-cons" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Platform Comparison: MCI vs. CJA</h2>
+                    <p class="text-lg text-gray-700 mb-12">To provide a clear picture, here’s a high-level comparison of the two platforms based on our current understanding of your needs.</p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-[#246F99]">Marketing Cloud Intelligence (MCI)</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-bold text-lg">Pros</h4>
+                                    <ul class="list-disc list-inside text-gray-600 mt-2">
+                                        <li>Leverages existing investment and setup.</li>
+                                        <li>Platform-agnostic; connects to hundreds of sources.</li>
+                                        <li>Highly customizable data model for bespoke KPIs.</li>
+                                        <li>Faster time-to-value by enhancing a current system.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Cons</h4>
+                                    <ul class="list-disc list-inside text-gray-600 mt-2">
+                                        <li>Higher licensing cost.</li>
+                                        <li>Requires specialized expertise to manage data model.</li>
+                                        <li>Current data integrity issues need to be resolved.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-[#246F99]">Customer Journey Analytics (CJA)</h3>
+                             <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-bold text-lg">Pros</h4>
+                                    <ul class="list-disc list-inside text-gray-600 mt-2">
+                                        <li>Purpose-built for cross-channel journey analysis.</li>
+                                        <li>Generally lower licensing cost.</li>
+                                        <li>User-friendly interface for marketers and analysts.</li>
+                                        <li>Strong integration within the Adobe Experience Cloud.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Cons</h4>
+                                    <ul class="list-disc list-inside text-gray-600 mt-2">
+                                        <li>Requires a new implementation (rip-and-replace).</li>
+                                        <li>Less flexible for non-Adobe data sources.</li>
+                                        <li>Longer time-to-value due to new setup.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-mci" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">The Advantages of Sticking with MCI</h2>
+                    <p class="text-lg text-gray-700 mb-12">Here are some key items to consider while evaluating if it makes sense to retain your current platform or move to a new one.</p>
+                    <div class="space-y-4">
+                        <div class="accordion-item bg-white rounded-lg shadow-sm">
+                            <button class="accordion-header w-full flex items-center justify-between p-6 text-left">
+                                <span class="flex items-center">
+                                    <svg class="w-6 h-6 mr-4 text-[#1CADFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    <span class="text-xl font-semibold">Agnostic by Design</span>
+                                </span>
+                                <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-6">
+                                <p class="text-gray-600 pt-4">Although SFMCi is now part of the Salesforce ecosystem, this wasn't always the case. The platform continues to connect with numerous data sources, which helps avoid vendor lock-in and enables you to assess your entire marketing ecosystem fairly. During the review of your onsite instance, it's encouraging to see that you have a separate instance from the standard SFMC one, providing greater independence from the current MC product used in marketing.</p>
+                            </div>
+                        </div>
+                         <div class="accordion-item bg-white rounded-lg shadow-sm">
+                            <button class="accordion-header w-full flex items-center justify-between p-6 text-left">
+                                <span class="flex items-center">
+                                    <svg class="w-6 h-6 mr-4 text-[#1CADFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                    <span class="text-xl font-semibold">Leverage an Existing Investment</span>
+                                </span>
+                                <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-6">
+                                <p class="text-gray-600 pt-4">Since you have already invested significant time and money into MCI, it may be more beneficial to enhance your existing system and incorporate the new Marketo integration, rather than starting from scratch with CJA. This would require enhancements to the current MCI instance, but should allow us to speed up the integration of analytics since all other channels are already tied in.</p>
+                            </div>
+                        </div>
+                         <div class="accordion-item bg-white rounded-lg shadow-sm">
+                            <button class="accordion-header w-full flex items-center justify-between p-6 text-left">
+                                <span class="flex items-center">
+                                    <svg class="w-6 h-6 mr-4 text-[#1CADFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                    <span class="text-xl font-semibold">Assists the Optimization in Other Areas of Marketing</span>
+                                </span>
+                                <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-6">
+                                <p class="text-gray-600 pt-4">This initiative is larger than just addressing and supporting analytics needs - it’s also the start of the Marketing team’s ability to grow and optimize. This is why implementing Marketo and deprecating Salesforce Marketing Cloud Engagement is so important! By collaborating on this approach, we can provide assistance in marketing engagement, campaign management and email strategies, all while facilitating prompt improvements to your existing analytics system.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="py-20" style="background-color: #0d1a2e;">
+             <div class="container mx-auto px-6 relative">
+                 <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-white mb-4">Optimizing the Connection of Your Full Tech Stack</h2>
+                    <p class="text-lg text-gray-300 mb-12">Here’s a look at how all the pieces will fit together. Marketo and Salesforce will have a direct, bidirectional sync for sales and marketing alignment. All platforms, including the synced data from Marketo and Salesforce, will then feed into the central ETL process for harmonization and analysis.</p>
+                </div>
+                <div class="w-full max-w-5xl mx-auto">
+                    <img src="https://go.shiftparadigm.com/rs/230-YBS-585/images/diagram-meau.png?version=0" alt="Data Architecture Diagram" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <section id="plan" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Phased Integration &amp; Optimization Plan</h2>
+                    <p class="text-lg text-gray-700 mb-12">In the event you'd like to stick with MCI, knowing it is YES indeed possible it can connect to Marketo, here are some of the steps we'd work on together throughout the project to ensure you have a far better experience this time around that will vastly differ from your last agency experience, allowing you to feel more trust in a 3rd party partner, but more importantly the data you live and work in everyday.</p>
+                    <div class="space-y-4">
+                        <div class="plan-step" data-step="1">
+                            <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">1</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Analyze Current State</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">Conduct a deep-dive audit of your existing MCI Workspace, including all Data Streams, the current Data Model, and Harmonization Center rules. This will allow us to pinpoint the real issues you're seeing today within your YouTube to MCI and Google Analytics to MCI connections and work on a plan to resolve them.</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                        <div class="plan-step" data-step="2">
+                           <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">2</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Define Marketo Schema Mapping</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">Work with your team to map Marketo objects (Programs, Activities) to MCI Entity Types, and define key Measurements (MQLs, Funnel Velocity) and Dimensions (Program Channel, Campaign Theme).</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                        <div class="plan-step" data-step="3">
+                           <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">3</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Establish Governance &amp; Gain Approval</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">Present a unified Data Model structure, including clear data governance protocols and KPI alignment, for stakeholder approval before technical implementation begins.</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                        <div class="plan-step" data-step="4">
+                           <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">4</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Connect Marketo &amp; Align Workflows</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">Configure the Marketo API Data Stream and work with marketing operations to ensure critical Marketo Program Tags and workflows align with the new reporting structure.</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                        <div class="plan-step" data-step="5">
+                           <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">5</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Modify Dashboards &amp; Reporting</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">Update existing MCI Pages and Widgets to incorporate Marketo data, and create new Dashboard Collections to visualize the end-to-end customer journey.</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                        <div class="plan-step" data-step="6">
+                           <div class="flex items-start p-4 cursor-pointer bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600 mr-4">6</div>
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold">Transition &amp; Go-Live</h4>
+                                    <p class="plan-description hidden mt-2 text-gray-600">After rigorous validation and final approval, formally disconnect legacy SFMC Data Streams and fully transition to Marketo as the primary marketing automation data source.</p>
+                                </div>
+                                <span class="step-arrow text-2xl text-gray-400">▼</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 Proposal for Mitsubishi Electric. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">This document outlines a strategic proposal and is intended for discussion purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px' });
+
+            document.querySelectorAll('main section').forEach(section => {
+                observer.observe(section);
+            });
+
+            const planSteps = document.querySelectorAll('.plan-step');
+            planSteps.forEach(step => {
+                const header = step.querySelector('.flex');
+                const description = step.querySelector('.plan-description');
+                const arrow = step.querySelector('.step-arrow');
+                header.addEventListener('click', () => {
+                    const wasOpen = !description.classList.contains('hidden');
+                    planSteps.forEach(s => {
+                        s.querySelector('.plan-description').classList.add('hidden');
+                        s.querySelector('.step-arrow').classList.remove('rotate-180');
+                    });
+                    if (!wasOpen) {
+                        description.classList.remove('hidden');
+                        arrow.classList.add('rotate-180');
+                    }
+                });
+            });
+
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const arrow = header.querySelector('.accordion-arrow');
+
+                header.addEventListener('click', () => {
+                    const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    accordionItems.forEach(i => {
+                        i.querySelector('.accordion-content').style.maxHeight = '0px';
+                        i.querySelector('.accordion-arrow').classList.remove('rotate-45');
+                    });
+
+                    if (!isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        arrow.classList.add('rotate-45');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+</body></html>

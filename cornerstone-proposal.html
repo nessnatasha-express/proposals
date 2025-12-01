@@ -1,0 +1,593 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cornerstone: A Visual Path to Modern Marketing</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            background-color: #f0f2f5;
+            color: #374151;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #9ca3af;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem; 
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            height: 1.25rem;
+            width: 1.25rem;
+            border-radius: 9999px;
+            border-width: 3px;
+            background-color: white;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 0.5rem;
+            top: 1.5rem;
+            bottom: 0;
+            width: 2px;
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .body-copy {
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.75rem; /* 28px */
+            color: #4b5563;
+        }
+        .list-pro::before {
+            content: '✔';
+            color: #10b981;
+            margin-right: 0.75rem;
+            font-weight: 700;
+        }
+        .list-con::before {
+            content: '✖';
+            color: #ef4444;
+            margin-right: 0.75rem;
+            font-weight: 700;
+        }
+        section {
+            padding-top: 4rem; 
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        .toggle-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .toggle-btn.active {
+            background-color: #003f5c;
+            color: white;
+        }
+        .toggle-btn:not(.active) {
+            background-color: #e2e8f0;
+            color: #4a5568;
+        }
+        .matrix-table th, .matrix-table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .matrix-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #334155;
+            text-align: left;
+        }
+        .matrix-table td:first-child {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <nav class="sticky-nav">
+        <div class="container mx-auto px-4 py-4">
+            <ul class="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+                <li><a href="#challenge" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">1. Key Needs</a></li>
+                <li><a href="#use-cases" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">2. Use Cases</a></li>
+                <li><a href="#vision" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">3. Architectures</a></li>
+                <li><a href="#matrix" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">4. Feature Matrix</a></li>
+                <li><a href="#comparison" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">5. Pros &amp; Cons</a></li>
+                <li><a href="#roadmap" class="font-semibold text-gray-700 hover:text-[#003f5c] transition">6. Project Plan</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="bg-f0f2f5">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center gap-6 md:gap-8 py-16">
+                <img src="https://www.shiftparadigm.com/wp-content/uploads/2024/09/Logo_Blue_Black.png" alt="Shift Paradigm Logo" class="h-4 md:h-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Adobe_Corporate_logo.svg/1024px-Adobe_Corporate_logo.svg.png?20220820114255" alt="Adobe Logo" class="h-5 md:h-6">
+                <img src="https://www.cornerstonebuildingbrands.com/wp-content/uploads/2023/06/CBBLogo.png" alt="Cornerstone Building Brands Logo" class="h-6 md:h-8">
+            </div>
+
+            <header class="text-center pb-12 px-4 md:px-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-[#003f5c] mb-4">Initial Architecture Discussion for Cornerstone's Marketing Transformation</h1>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Reflected here are 4 insights and recommendations across 4 key areas presented in partnership of Shift Paradigm &amp; Adobe to the Cornerstone COE marketing team.</p>
+            </header>
+            
+            <div class="text-center pb-16">
+                <div class="inline-block animate-bounce-slow text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <section id="challenge" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">1. Understanding Your Key Needs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-6 text-center">
+                    <div class="kpi-value text-[#bc5090]">3+</div>
+                    <h3 class="font-semibold text-lg mt-2">Dynamics CRMs</h3>
+                    <p class="body-copy mt-1">There are multiple MS Dynamic instances that are creating data discrepancies and conflicts that result in customer communication issues facilitated in Eloqua.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="kpi-value text-[#ef5675]">💰</div>
+                    <h3 class="font-semibold text-lg mt-2">Missed Opportunities</h3>
+                    <p class="body-copy mt-1">We believe that because of this discrepancy and the lack to scale onto new acquisitions, we're missing money on the table through revenue uplift from cross-sell efforts.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="kpi-value text-[#ff764a]">🔍</div>
+                    <h3 class="font-semibold text-lg mt-2">Fragmented Journey</h3>
+                    <p class="body-copy mt-1">Aside from the complexities in engagement, there is an inability to see a holistic customer journey for reporting and insights effectively.</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="kpi-value text-[#ffa600]">⚠</div>
+                    <h3 class="font-semibold text-lg mt-2">Outdated Capabilities</h3>
+                    <p class="body-copy mt-1">Lack of dynamic forms and deep personalization limits engagement and conversion.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-cases" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">2. Bringing it to Life: Use Cases for Cornerstone</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#003f5c]">Holistic Customer View</h3>
+                    <p class="body-copy">Create a holistic view of the customer experience through cross-channel, real-time customer journey reporting.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#58508d]">B2B &amp; B2C Brand Support</h3>
+                    <p class="body-copy">Enable both B2B and B2C brands and solutions to be managed through the new marketing engine with a Digital COE to support campaign and automation efficiencies.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#bc5090]">Architect &amp; Builder Nurturing</h3>
+                    <p class="body-copy">Engage architects with technical specs and design inspiration. When they specify a Cornerstone product in a project plan, automatically alert the relevant commercial sales rep for high-touch follow-up.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#ef5675]">Dealer &amp; Distributor Co-op Marketing</h3>
+                    <p class="body-copy">Empower your channel partners with pre-built, co-brandable campaigns they can launch locally. Capture lead data centrally to measure channel effectiveness and ROI.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#ff764a]">Residential Cross-Sell Automation</h3>
+                    <p class="body-copy">Identify a homeowner who purchased new windows (via Residential CRM data). Months later, automatically trigger a journey promoting complementary siding or doors, leveraging the unified customer view.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-bold text-xl mb-2 text-[#ffa600]">Big Box Retailer Lead Routing</h3>
+                    <p class="body-copy">Capture a lead from a retailer like Lowe's or Home Depot. Automatically qualify and enrich the lead in AEP, then route it to the nearest certified installer in your network for rapid follow-up.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">3. Recommended Technologies &amp; Architectures</h2>
+            <div class="card p-6 md:p-8">
+                <p class="text-center body-copy mb-10 max-w-4xl mx-auto">This is a very high-level recommendation of where we believe you can gain value and accomplish the objectives you need across four example architectures. Each has distinct advantages and trade-offs to consider.</p>
+                
+                <div class="flex justify-center mb-8">
+                    <div class="flex flex-wrap justify-center gap-2 bg-gray-200 p-1 rounded-full">
+                        <button id="btn-opt1" class="toggle-btn active">Option 1</button>
+                        <button id="btn-opt2" class="toggle-btn">Option 2</button>
+                        <button id="btn-opt3" class="toggle-btn">Option 3</button>
+                        <button id="btn-opt4" class="toggle-btn">Option 4 (Rec.)</button>
+                    </div>
+                </div>
+
+                <div id="architecture-content-wrapper">
+                    <div id="opt1-content">
+                        <div class="p-6 border rounded-lg">
+                            <h3 class="text-xl font-bold text-center mb-2 text-[#003f5c]">Option 1: Marketo w/ Native Dynamics Connector</h3>
+                            <p class="text-center body-copy mb-6 max-w-3xl mx-auto">The challenge here is you will need to retain one Dynamics instance with the native connector. We don't know if you will get the reporting capabilities you are after in this way, but it will fulfill your other marketing needs including forms.</p>
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                                <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow text-center">MS Dynamics CRM<br>(Single Instance)</div>
+                                <div class="flow-arrow text-gray-400">↔</div>
+                                <div class="bg-purple-100 text-purple-800 p-3 rounded-lg shadow text-center">Marketo Engage<br>(Native Connector)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="opt2-content" class="hidden">
+                        <div class="p-6 border rounded-lg">
+                            <h3 class="text-xl font-bold text-center mb-2 text-[#003f5c]">Option 2: Marketo w/ Middleware</h3>
+                            <p class="text-center body-copy mb-6 max-w-3xl mx-auto">This allows you to connect 2 or more Dynamics instances to Marketo directly and allows you to also do extensive data transformation within the middleware system (e.g. Openprise) along with routing, scoring and workspace organization. For reporting, we would recommend you also choose a Marketo BI add-on OR Customer Journey Analytics for end-to-end reporting.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                                <div class="text-center space-y-3">
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 1</div>
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 2</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                    <div class="bg-[#7a5195] text-white p-4 rounded-lg shadow-lg">
+                                        <h4 class="font-bold text-lg">Middleware</h4>
+                                        <p class="text-sm">(e.g. Openprise)</p>
+                                    </div>
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                </div>
+                                <div class="text-center space-y-3">
+                                    <div class="bg-purple-100 text-purple-800 p-3 rounded-lg shadow">Marketo Engage</div>
+                                    <div class="bg-red-100 text-red-800 p-3 rounded-lg shadow">Marketo BI / CJA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="opt3-content" class="hidden">
+                        <div class="p-6 border rounded-lg">
+                            <h3 class="text-xl font-bold text-center mb-2 text-[#003f5c]">Option 3: AEP + AJO</h3>
+                            <p class="text-center body-copy mb-6 max-w-3xl mx-auto">This is an alternative approach that allows you to use a more journey-oriented engagement tool. With AEP, you also have the ability to see and expand across multiple schemas allowing for a wide array of data table expansion, connectivity, and more. It also connects to channels outside of email (like web and mobile) for incremental tagging and granular end-to-end reporting through CJA.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                                <div class="text-center space-y-3">
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 1</div>
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 2</div>
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">Web, Mobile, etc.</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                    <div class="bg-[#003f5c] text-white p-4 rounded-lg shadow-lg">
+                                        <h4 class="font-bold text-lg">Adobe Experience Platform</h4>
+                                        <p class="text-sm">(Unified Profile)</p>
+                                    </div>
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                </div>
+                                <div class="text-center space-y-3">
+                                    <div class="bg-teal-100 text-teal-800 p-3 rounded-lg shadow">Adobe Journey Optimizer</div>
+                                    <div class="bg-teal-100 text-teal-800 p-3 rounded-lg shadow">Customer Journey Analytics</div>
+                                </div>
+                            </div>
+                            <div class="mt-10 pt-6 border-t">
+                                <p class="text-center text-gray-700 font-semibold max-w-4xl mx-auto">While all options have the ability to add on additional BUs as needed, Option 3 is the most scalable end-to-end Adobe ecosystem to support your needs from reporting, data integrations with multiple CRMs, extensive and expansive table/data needs, forms, and end-to-end customer journey analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="opt4-content" class="hidden">
+                        <div class="p-6 border rounded-lg bg-blue-50">
+                            <h3 class="text-xl font-bold text-center mb-2 text-[#003f5c]">Option 4 (Recommended): AEP + Marketo</h3>
+                            <p class="text-center body-copy mb-6 max-w-3xl mx-auto">This approach combines the data unification and scalability of AEP with the powerful B2B marketing automation capabilities of Marketo Engage, providing a robust, best-of-breed solution.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                                <div class="text-center space-y-3">
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 1</div>
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">MS Dynamics CRM 2</div>
+                                    <div class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow">Web, Mobile, etc.</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                    <div class="bg-[#003f5c] text-white p-4 rounded-lg shadow-lg">
+                                        <h4 class="font-bold text-lg">Adobe Experience Platform</h4>
+                                        <p class="text-sm">(Unified Profile)</p>
+                                    </div>
+                                    <div class="flow-arrow md:transform-none transform rotate-90">↔</div>
+                                </div>
+                                <div class="text-center space-y-3">
+                                    <div class="bg-purple-100 text-purple-800 p-3 rounded-lg shadow">Marketo Engage</div>
+                                    <div class="bg-red-100 text-red-800 p-3 rounded-lg shadow">Marketo BI / CJA</div>
+                                </div>
+                            </div>
+                            <div class="mt-10 pt-6 border-t">
+                                <p class="text-center text-gray-700 font-semibold max-w-4xl mx-auto">While all options have the ability to add on additional BUs as needed, this option is the most scalable to support your needs from reporting, data integrations with multiple CRMs, extensive and expansive table/data needs, forms, and end-to-end customer journey analytics with Marketo BI and/or Customer Journey Analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="matrix" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">4. Platform Feature Comparison</h2>
+            <div class="card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-max matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Use Case / Criteria</th>
+                                <th>Eloqua (Current)</th>
+                                <th>Adobe Marketo Engage</th>
+                                <th>Salesforce (Pardot)</th>
+                                <th>HubSpot Marketing Hub</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Holistic Customer View</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Buggy, siloed, fragmented</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Real-time unified profiles &amp; journey analytics (AEP + CJA)</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Basic SFDC dashboards only</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Good UI/reporting, lacks enterprise cross-CRM unification</td>
+                            </tr>
+                            <tr>
+                                <td>B2B &amp; B2C Brand Support</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Supports BUs but brittle integrations</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Proven B2B + B2C, scalable Digital COE</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Strong B2B, weak B2C</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>SMB/mid-market focus, weak enterprise governance</td>
+                            </tr>
+                            <tr>
+                                <td>Architect &amp; Builder Nurturing</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Complex automation, IT heavy</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Robust nurture, Sales Insight, CRM triggers</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Native SFDC integration, limited flexibility</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Easy basic alerts, lacks depth</td>
+                            </tr>
+                            <tr>
+                                <td>Dealer &amp; Distributor Co-op Marketing</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Manual, no clean co-op automation</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Strong with Workspaces &amp; partitions</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Possible with BUs, less flexible</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Good UX/templates, lacks enterprise governance</td>
+                            </tr>
+                            <tr>
+                                <td>Residential Cross-Sell Automation</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>No dynamic triggers across CRMs</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Advanced cross-sell via unified profile; AJO real-time triggers</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Depends on SFDC structure, custom rules needed</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Simple nurtures OK, struggles with multi-CRM segmentation</td>
+                            </tr>
+                            <tr>
+                                <td>Big Box Retailer Lead Routing</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Manual SFTP workaround</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Real-time routing via AEP/middleware</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Strong SFDC routing, weaker across external partners</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Basic workflows, not built for high-scale routing</td>
+                            </tr>
+                             <tr>
+                                <td>CRM Integration (Multi-Dynamics)</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Broken, Oracle not fixing</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Native connectors + scalable via AEP/iPaaS</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Strong only with SFDC, weak for Dynamics multi-instance</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Strong only with HubSpot CRM, poor external CRM integration</td>
+                            </tr>
+                            <tr>
+                                <td>Scalability (M&amp;A, divestitures)</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Fragile, workarounds required</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Purpose-built for M&amp;A via AEP mapping</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Limited to SFDC-centric scaling</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Not suited for enterprise acquisitions</td>
+                            </tr>
+                            <tr>
+                                <td>Unified Marketing Automation</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Unreliable single instance</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Excels at centralized + partitioned governance</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>BUs = fragmented experience</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Portals not designed for enterprise partitioning</td>
+                            </tr>
+                            <tr>
+                                <td>Forms &amp; Data Capture</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Weak, no conditional logic</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Robust conditional forms + profiling</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Basic conditional logic</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Good UX, lacks advanced enterprise capabilities</td>
+                            </tr>
+                            <tr>
+                                <td>Transactional Emails</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Requires 3rd-party add-on</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Native support in Marketo/AJO</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Possible but limited</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Native but less configurable</td>
+                            </tr>
+                             <tr>
+                                <td>Deliverability Management</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Supports 27 domains today</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Scalable IP/domain management, strong deliverability services</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Handles multiple domains but less flexible</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Basic domain management, not enterprise-grade</td>
+                            </tr>
+                            <tr>
+                                <td>Performance-Based Marketing / Attribution</td>
+                                <td><span class="text-red-500 font-bold mr-2">❌</span>Limited, siloed</td>
+                                <td><span class="text-green-500 font-bold mr-2">✅</span>Advanced attribution with CJA</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Basic influence reporting</td>
+                                <td><span class="text-yellow-500 font-bold mr-2">⚠️</span>Good built-in reports, not enterprise-grade</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">5. Pros &amp; Cons of Each Approach</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">1. Marketo Native</h3>
+                    <ul class="space-y-3 body-copy">
+                        <li class="list-pro">Simplest technical setup.</li>
+                        <li class="list-pro">Lower initial implementation complexity.</li>
+                        <li class="list-con">Limited to a single Dynamics instance.</li>
+                        <li class="list-con">Does not solve the core multi-CRM problem.</li>
+                        <li class="list-con">Not easily scalable for future acquisitions.</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">2. Marketo + Middleware</h3>
+                    <ul class="space-y-3 body-copy">
+                        <li class="list-pro">Connects multiple CRM instances.</li>
+                        <li class="list-pro">Allows advanced data transformation.</li>
+                        <li class="list-con">High dependency on a separate tool.</li>
+                        <li class="list-con">Adds architectural complexity and cost.</li>
+                        <li class="list-con">Higher development effort for M&amp;A.</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">3. AEP + AJO</h3>
+                    <ul class="space-y-3 body-copy">
+                        <li class="list-pro">Natively built for multi-CRM data unification.</li>
+                        <li class="list-pro">Most scalable architecture for M&amp;A.</li>
+                        <li class="list-pro">Enables real-time, cross-channel journeys.</li>
+                        <li class="list-con">Represents a shift to a CDP-centric mindset.</li>
+                        <li class="list-con">AJO is a newer tool for journey orchestration.</li>
+                    </ul>
+                </div>
+                <div class="card p-6 ring-4 ring-offset-2 ring-[#003f5c]">
+                    <h3 class="text-xl font-bold mb-4 text-center">4. AEP + Marketo (Recommended)</h3>
+                    <ul class="space-y-3 body-copy">
+                        <li class="list-pro">Best-of-breed: AEP for data, Marketo for B2B.</li>
+                        <li class="list-pro">Natively built for multi-CRM data unification.</li>
+                        <li class="list-pro">Most scalable architecture for M&amp;A.</li>
+                        <li class="list-pro">Leverages your team's potential Marketo skills.</li>
+                        <li class="list-con">Can be a larger initial technology investment.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#003f5c]">6. Typical Project Plan &amp; Partnership</h2>
+            <p class="text-center body-copy mb-10 max-w-4xl mx-auto">Below reflects a high-level implementation plan that highlights to you some of the key activities and stages we would facilitate this work in a highly agile way, with an estimated range of 19-30 weeks based on the current knowns and unknowns.</p>
+            <div class="card p-6 md:p-8">
+                <div class="relative">
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#003f5c]"></div>
+                        <div class="timeline-line bg-[#003f5c]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 1: 2-4 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#003f5c]">Discovery and Solution Design</h4>
+                        <p class="body-copy mt-1">Our joint teams will conduct deep-dive workshops to validate requirements and audit your current data structures. The primary deliverable is a comprehensive Solution Design Document (SDD) that will serve as our blueprint for the entire project.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#58508d]"></div>
+                        <div class="timeline-line bg-[#58508d]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 2: 8-12 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#58508d]">Implementation of New Technologies</h4>
+                        <p class="body-copy mt-1">The Shift Paradigm and Adobe teams will procure licenses and configure the core platforms based on the SDD. This phase focuses on building the foundational technology stack in a dedicated development environment.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#bc5090]"></div>
+                        <div class="timeline-line bg-[#bc5090]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 3: 2-5 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#bc5090]">Data Integration Between Technologies</h4>
+                        <p class="body-copy mt-1">We will build and rigorously test the data flows between your MS Dynamics instances and the new marketing platform. This ensures data integrity and that the system behaves exactly as designed before introducing marketing assets.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#ff6361]"></div>
+                        <div class="timeline-line bg-[#ff6361]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 4: 3-5 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#ff6361]">Migration of Critical Assets &amp; Campaigns</h4>
+                        <p class="body-copy mt-1">Our team will strategically migrate your highest-priority assets, programs, and campaigns from Eloqua into the new platform. This includes emails, landing pages, forms, and active nurture streams to ensure business continuity.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#ffa600]"></div>
+                        <div class="timeline-line bg-[#ffa600]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 5: 2 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#ffa600]">Testing, UAT, and Launch</h4>
+                        <p class="body-copy mt-1">Your key users will perform User Acceptance Testing (UAT) in a sandbox environment to validate all workflows and functionality. This step is crucial for confirming the solution meets the needs of your marketing and sales teams.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot border-[#003f5c]"></div>
+                        <div class="timeline-line bg-[#003f5c]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 6: 2 Weeks</p>
+                        <h4 class="font-bold text-lg text-[#003f5c]">Training, Change Management &amp; COE Rollout</h4>
+                        <p class="body-copy mt-1">We will conduct comprehensive training sessions tailored to different user groups within your Center of Excellence and business units. Our goal is to drive strong user adoption and ensure your teams are confident from day one.</p>
+                    </div>
+                    <div class="timeline-item pb-0">
+                        <div class="timeline-dot border-[#7a5195]"></div>
+                        <p class="text-sm text-gray-500 font-semibold">Phase 7</p>
+                        <h4 class="font-bold text-lg text-[#7a5195]">Monitoring, Optimizations, and Hypercare</h4>
+                        <p class="body-copy mt-1">Post-launch, we will enter a hypercare period to closely monitor system performance and resolve any issues. We then transition into a partnership focused on continuous optimization and maximizing your return on investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = [
+                document.getElementById('btn-opt1'),
+                document.getElementById('btn-opt2'),
+                document.getElementById('btn-opt3'),
+                document.getElementById('btn-opt4')
+            ];
+            const contents = [
+                document.getElementById('opt1-content'),
+                document.getElementById('opt2-content'),
+                document.getElementById('opt3-content'),
+                document.getElementById('opt4-content')
+            ];
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    contents.forEach(content => content.classList.add('hidden'));
+                    buttons.forEach(btn => btn.classList.remove('active'));
+
+                    contents[index].classList.remove('hidden');
+                    button.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+
+
+
+</body></html>

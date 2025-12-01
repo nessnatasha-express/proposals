@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+        <html>
+          <head>
+            <title></title>
+            
+          <script defer data-domain="fanduel-ways-of-working-notes.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script></head>
+          <body>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FanDuel/Shift: Ways of Working Workshop Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar style for the content area */
+        .custom-scroll::-webkit-scrollbar { width: 8px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background-color: #4a5568; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background-color: #2d3748; }
+
+        /* FIXED HEIGHT FOR SCROLLING: Use a fixed height for the container, so only the right side scrolls */
+        .main-container {
+            height: calc(100vh - 6rem); /* Adjust based on header height (approx 6rem/96px) */
+        }
+        /* Base styling for tables in dark mode */
+        .content-table th, .content-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #4a5568; /* Gray-700 for dark mode borders */
+        }
+        .content-table th {
+            background-color: #374151; /* Darker header background */
+            font-weight: 600;
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Header / Title Bar -->
+    <header class="bg-gray-900 p-6 border-b border-gray-800 shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <!-- Icon -->
+            <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+                <h1 class="text-xl font-semibold tracking-tight">FanDuel / Shift Paradigm: Ways of Working Workshop Prep</h1>
+                <p class="text-sm text-gray-400">Synthesized Feedback and Recommendations for Process Improvement</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout Container (Sidebar + Content) -->
+    <div class="flex flex-col md:flex-row max-w-7xl mx-auto main-container">
+
+        <!-- Left Navigation Sidebar - Fixed on desktop, scroll hidden -->
+        <nav id="sidebar" class="md:w-64 w-full flex-shrink-0 bg-gray-800 p-4 md:p-6 rounded-tl-xl md:rounded-bl-xl shadow-2xl md:overflow-y-hidden">
+            <ul class="space-y-2">
+
+                <!-- Active Item: Introduction/Agenda -->
+                <li id="nav-agenda" class="p-3 rounded-xl bg-gray-700 shadow-inner cursor-pointer" onclick="showContent('agenda')">
+                    <div class="flex items-center space-x-3 text-white font-semibold">
+                        <span role="img" aria-label="agenda" class="text-xl">🔥</span>
+                        <span>Workshop Agenda</span>
+                    </div>
+                </li>
+
+                <!-- Theme 1: Streamlining Requests -->
+                <li id="nav-requests" class="text-gray-300 hover:bg-gray-700/50 p-3 rounded-xl cursor-pointer transition duration-150" onclick="showContent('requests')">
+                    <div class="flex items-center space-x-3">
+                        <span role="img" aria-label="requests" class="text-xl">✅</span>
+                        <div class="text-sm">
+                            <div class="font-medium">Theme 1:</div>
+                            <div class="text-xs text-gray-400">Streamlining Requests (Asana)</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Theme 2: Optimizing QA -->
+                <li id="nav-qa" class="text-gray-300 hover:bg-gray-700/50 p-3 rounded-xl cursor-pointer transition duration-150" onclick="showContent('qa')">
+                    <div class="flex items-center space-x-3">
+                        <span role="img" aria-label="qa" class="text-xl">💬</span>
+                        <div class="text-sm">
+                            <div class="font-medium">Theme 2:</div>
+                            <div class="text-xs text-gray-400">Optimizing QA & Approvals</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Theme 3: Dynamic Builds -->
+                <li id="nav-builds" class="text-gray-300 hover:bg-gray-700/50 p-3 rounded-xl cursor-pointer transition duration-150" onclick="showContent('builds')">
+                    <div class="flex items-center space-x-3">
+                        <span role="img" aria-label="builds" class="text-xl">⚙️</span>
+                        <div class="text-sm">
+                            <div class="font-medium">Theme 3:</div>
+                            <div class="text-xs text-gray-400">Dynamic & Standardized Builds</div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Theme 4: List Management (NEW) -->
+                <li id="nav-lists" class="text-gray-300 hover:bg-gray-700/50 p-3 rounded-xl cursor-pointer transition duration-150" onclick="showContent('lists')">
+                    <div class="flex items-center space-x-3">
+                        <span role="img" aria-label="lists" class="text-xl">🗂️</span>
+                        <div class="text-sm">
+                            <div class="font-medium">Theme 4:</div>
+                            <div class="text-xs text-gray-400">List Management & Data Unification</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Supporting Notes (Optional Section) -->
+                <li id="nav-notes" class="text-gray-300 hover:bg-gray-700/50 p-3 rounded-xl cursor-pointer transition duration-150 pt-4 border-t border-gray-700" onclick="showContent('notes')">
+                    <div class="flex items-center space-x-3 font-medium">
+                        <span role="img" aria-label="notes" class="text-xl">📝</span>
+                        <span>Supporting Notes (Free Flow)</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area - Scrollable -->
+        <main class="flex-grow p-4 md:p-10 bg-gray-800 md:bg-gray-700/50 rounded-br-xl rounded-tr-xl shadow-2xl custom-scroll overflow-y-auto">
+            
+            <div class="max-w-4xl" id="content-area">
+                <!-- Content will be injected here by JavaScript -->
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const contentMap = {
+            'agenda': {
+                title: 'Ops User Journey & Future MarTech Stack Workshop',
+                subtitle: 'Review the current Ops user journey, then map how ownership of different executional pieces could look in the new MarTech stack. We’ll also call out any considerations and risks in the phased rollout and start painting a clearer picture of the benefits this change brings so the team sees where things are headed.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        This document outlines the high-level agenda and expected outcomes for the collaborative workshop.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold mt-8 mb-4 text-white">
+                        Workshop Timeline (10:00 AM – 4:00 PM)
+                    </h3>
+                    
+                    <ul class="space-y-6 text-gray-200 list-none pl-0">
+                        <!-- 10:00 – 10:20 | Welcome & Framing -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">10:00 – 10:20 | Welcome & Framing (20 min) - Patty</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Context: current → future stack.</li>
+                                <li>Confirm objectives: ownership, risk/churn, value of change, pain point solving.</li>
+                            </ul>
+                        </li>
+
+                        <!-- 10:20 – 11:00 | Mapping the Current Ops User Journey -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">10:20 – 11:00 | Mapping the Current Ops User Journey (40 min) - Patty</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Map today’s executional capabilities (segmentation, suppression, orchestration, QA, reporting).</li>
+                                <li>Identify current ownership, pain points, and bright spots.</li>
+                            </ul>
+                        </li>
+
+                        <!-- 11:00 – 11:45 | HighTouch Review -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">11:00 – 11:45 | HighTouch Review (45 min) - Jordan / Eric Kim</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Walk through major executional capabilities.</li>
+                            </ul>
+                        </li>
+
+                        <!-- 11:45 – 12:15 | Product Share-Out (CMP Lens) -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">11:45 – 12:15 | Product Share-Out (CMP Lens) (30 min) - Donald</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Product presents: environment configuration considerations & CMP-owned areas.</li>
+                                <li>Group discussion: capture dependencies, feedback, and Ops implications.</li>
+                            </ul>
+                        </li>
+
+                        <!-- 12:15 – 1:00 | Lunch Break -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-red-400">12:15 – 1:00 | Lunch Break (45 min)</div>
+                        </li>
+
+                        <!-- 1:00 – 2:00 | XP Review -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">1:00 – 2:00 | XP Review (1 hr min) - Shift + XP</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Walk through major executional capabilities.</li>
+                            </ul>
+                        </li>
+
+                        <!-- 2:00 – 3:45 Ownership defining + Process optimization -->
+                        <li class="border-b border-gray-600 pb-4">
+                            <div class="font-bold text-lg text-blue-400">2:00 – 3:45 | Ownership defining + Process optimization</div>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Determine ownership by capability and tool.</li>
+                                <li>Outline E2E process scenarios.</li>
+                                <li>Identify Optimization opportunities.</li>
+                                <li>Prioritize top pain points that surfaced earlier.</li>
+                                <li>Capture what must be preserved from the current stack to avoid regression.</li>
+                            </ul>
+                            <div class="mt-2 text-sm text-yellow-400">Output: Ownership model + Optimization opportunities</div>
+                        </li>
+
+                        <!-- 3:45 – 4:00 | Synthesis & Next Steps -->
+                        <li class="pb-4">
+                            <div class="font-bold text-lg text-blue-400">3:45 – 4:00 | Synthesis & Next Steps (25 min)</div>
+                            <p class="text-gray-300 mt-2">Consolidate outputs:</p>
+                            <ul class="list-disc list-inside space-y-1 text-gray-300 ml-4 mt-2">
+                                <li>Ownership model</li>
+                                <li>Product feedback (CMP / env config)</li>
+                                <li>Solution backlog + carryover list</li>
+                                <li>Confirm accountability and immediate next actions.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold mt-8 mb-4 text-white">
+                        Expected Workshop Outputs
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li><strong>Ownership Model:</strong> Draft RACI for executional capabilities in the future stack.</li>
+                        <li><strong>Product Feedback:</strong> Inputs on environment config & CMP-owned areas, with dependencies noted.</li>
+                        <li><strong>Solution Backlog:</strong> Prioritized fixes for current pain points in the future state.</li>
+                        <li><strong>Carryover List:</strong> What’s working today that must be preserved.</li>
+                        <li><strong>Next Steps:</strong> Agreed actions, owners, and checkpoints.</li>
+                    </ul>
+                `
+            },
+            'requests': {
+                title: 'Theme 1: Streamlining Requests (Asana & XP)',
+                subtitle: 'Addressing incomplete requirements and template needs.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        The primary issue is that incomplete requirements create friction, delays, and back-and-forth communication. The solution is to mandate and templatize all necessary details upfront to create a clear "Definition of Ready."
+                    </p>
+                    <div class="overflow-x-auto rounded-lg shadow-xl">
+                        <table class="w-full content-table">
+                            <thead>
+                                <tr>
+                                    <th class="rounded-tl-lg">Area of Friction</th>
+                                    <th>Observed Challenge</th>
+                                    <th class="rounded-tr-lg">Proposed Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">Mandatory Template</td>
+                                    <td>Essential info (e.g., lists, creative, CTA) is often missing, delaying the build start.</td>
+                                    <td class="text-green-400">Action: Create a mandatory, comprehensive Asana request template.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Data & Lists</td>
+                                    <td>Unclear Entry/Exist criteria, standard lists, and custom attributes lead to confusion.</td>
+                                    <td class="text-green-400">Action: Document and mandate default segments, suppression lists, and clear Entry/Exist criteria in the template.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Creative Handoff</td>
+                                    <td>DropBox access must be requested multiple times; files are often shared in comments late.</td>
+                                    <td class="text-green-400">Action: Require ticket owner to attach all final, correctly formatted creative directly to the Asana ticket (or ensure broader, persistent DB permissions).</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Content Style</td>
+                                    <td>Voice, tone, and specific formatting (caps, emojis, punctuation) are inconsistent or left to the Shift team.</td>
+                                    <td class="text-green-400">Action: Finalize and provide an accessible, documented Style Guide (including how copy should be formatted in Asana for easy transfer to Canvas).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            'qa': {
+                title: 'Theme 2: Optimizing QA & Approval Workflow',
+                subtitle: 'Addressing staggered feedback, accountability, and clarity.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        The current QA process introduces delays due to staggered feedback and communication silos. We need to formalize the role and timing of each review round and ensure clear communication channels.
+                    </p>
+                    <div class="overflow-x-auto rounded-lg shadow-xl">
+                        <table class="w-full content-table">
+                            <thead>
+                                <tr>
+                                    <th class="rounded-tl-lg">Area of Friction</th>
+                                    <th>Observed Challenge</th>
+                                    <th class="rounded-tr-lg">Proposed Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">Two-Round QA</td>
+                                    <td>QA 2 is often more scrutinizing than QA 1, creating blockers and delays on tight deadlines.</td>
+                                    <td class="text-green-400">Action: Redefine QA: Round 1 must be a full, comprehensive assessment. Round 2 is only to validate the fixes from Round 1.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Communication & Tagging</td>
+                                    <td>QA feedback contains questions for the owner, but the owner is not tagged, adding wait time. Clarification questions in Asana are often disregarded.</td>
+                                    <td class="text-green-400">Action: Mandate all QA'ers directly tag the ticket owner for questions. Implement a <strong>Service Level Agreement (SLA)</strong> for owner response time in Asana.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Stakeholder Approvals</td>
+                                    <td>Approvers/Strategy owners are not in Asana, forcing critical conversations into Slack.</td>
+                                    <td class="text-green-400">Action: <strong>Mandate all final strategy and approvals be in Asana</strong> before the build team starts work ("Definition of Ready").</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Canvas Duplication</td>
+                                    <td>Requests to duplicate a Canvas often outline changes only *after* the initial duplication, creating rework.</td>
+                                    <td class="text-green-400">Action: Require all changes and assumptions from the original Canvas to be clearly noted upfront in the request template.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            'builds': {
+                title: 'Theme 3: Dynamic & Standardized Build Practices',
+                subtitle: 'Moving beyond static content and standardizing execution.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        Standardizing common elements and shifting towards dynamic content will significantly increase efficiency and reduce manual errors across the build process.
+                    </p>
+                    <div class="overflow-x-auto rounded-lg shadow-xl">
+                        <table class="w-full content-table">
+                            <thead>
+                                <tr>
+                                    <th class="rounded-tl-lg">Area of Friction</th>
+                                    <th>Observed Challenge</th>
+                                    <th class="rounded-tr-lg">Proposed Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">Static Content Reliance</td>
+                                    <td>Campaigns rely on static images/content, making content updates and versioning inefficient.</td>
+                                    <td class="text-green-400">Action: Strategically shift toward <strong>snippets and reusable email template roles</strong> to enable dynamic content in Xtreme Push.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Journey Flow Management</td>
+                                    <td>Multiple individual Canvases are often created when a single, standardized Journey Flow could be used.</td>
+                                    <td class="text-green-400">Action: Standardize around a <strong>single journey flow approach</strong> vs. multiple individual canvases.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Logic Consistency</td>
+                                    <td>Logic is often unclear or based on assumptions (e.g., campaign vs. message step filtering; day number calculation).</td>
+                                    <td class="text-green-400">Action: Clearly define <strong>all logic</strong> (e.g., filtering, calculation assumptions) and note standards (e.g., <code>canvas\_entry\_properties</code> by workspace) in the ticket details.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Parameter Consistency</td>
+                                    <td>Inconsistent application of core build parameters (custom attributes, entry properties, deadlines).</td>
+                                    <td class="text-green-400">Action: Create clear guidelines for calculating and setting Conversion Deadlines, Push Expiration, and Content Card Expiration times, ensuring they align with the offer expiry.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Audience Exclusions</td>
+                                    <td>Inconsistent application of required standard exclusions (VIP, non-gen, BTL comms) based on ticket type.</td>
+                                    <td class="text-green-400">Action: Consistently apply required standard exclusions and document the default rules.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            'lists': {
+                title: 'Theme 4: List Management & Data Unification',
+                subtitle: 'Standardizing audience creation and maintaining a unified data dictionary.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        Currently, audience and exclusion lists are generated through five distinct mechanisms, leading to fragmentation, limited consistency, and a high risk of manual error or overlap. This lack of centralization prevents a unified understanding of our customer segments.
+                    </p>
+
+                    <div class="overflow-x-auto rounded-lg shadow-xl">
+                        <table class="w-full content-table">
+                            <thead>
+                                <tr>
+                                    <th class="rounded-tl-lg">Area of Friction</th>
+                                    <th>Observed Challenge</th>
+                                    <th class="rounded-tr-lg">Proposed Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">List Fragmentation</td>
+                                    <td>Audiences are created through five distinct, decentralized mechanisms (CSV, custom attributes, segments, integrations, Knime).</td>
+                                    <td class="text-green-400">Action: Define a preferred, standard mechanism for list creation and <strong>phase out reliance on fragmented sources</strong> (e.g., manual CSV imports).</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Manual CSV Process</td>
+                                    <td>CSV list imports are manual, prone to formatting errors, and require the complex, multi-step List QA process.</td>
+                                    <td class="text-green-400">Action: Prioritize <strong>simplifying or automating the external list handoff</strong> and QA process to reduce manual intervention.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Data Dictionary Absence</td>
+                                    <td>No centralized data dictionary exists for custom attributes, exclusion lists, and segment definitions.</td>
+                                    <td class="text-green-400">Action: Create and maintain a publicly accessible <strong>Unified Data Dictionary</strong> for all common data points to ensure consistent understanding across teams.</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Exclusion Consistency</td>
+                                    <td>Limited consistency in exclusion lists applied across different campaigns and channels (e.g., push requires disclosure, email requires outlook exclusions).</td>
+                                    <td class="text-green-400">Action: Establish <strong>clear, documented standards</strong> for default exclusion list application by channel.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            'notes': {
+                title: 'Supporting Notes (Free Flow)',
+                subtitle: 'Raw insights from the Shift team regarding current operational processes.',
+                body: `
+                    <p class="mb-6 text-gray-200 leading-relaxed">
+                        This section contains detailed operational steps and observations from the Shift team for context and deeper understanding of the day-to-day friction.
+                    </p>
+                    <ul class="list-disc list-inside space-y-3 text-gray-300 ml-4">
+                        <li><strong>Duplication Workflow:</strong> The process for locating, duplicating, and naming a Canvas needs a formal checklist to ensure naming conventions and initial settings (Conversion events, Promo IDs) are handled consistently.</li>
+                        <li><strong>Targeting Logic:</strong> Explicit rules exist but are sometimes missed: Exclude VIP; ATL tickets must exclude non-gen and BTL comms segments; all segment filter groups must include <code>Internal\_Inclusion\_CRM\_all</code> (except email-only sends).</li>
+                        <li><strong>Branding Review:</strong> Formalize checks for: Title Case for Email Subject Lines, all caps for CTAs, and consistent use and placement of emojis.</li>
+                        <li><strong>CSV List QA:</strong> The external list QA process (download, reformat, upload to Asana subtask, tag team, wait for QA, then upload to Braze) is complex and requires multiple handoffs. This should be simplified or automated if possible.</li>
+                        <li><strong>FanDuel Observations (Shift Key Recs):</strong> Explicitly address known issues like ensuring Exit Criteria are always added, enforcing attribute capitalization (e.g., First name), and aligning conversion expiry times with overall comms expiration.</li>
+                    </ul>
+                `
+            }
+        };
+
+        let activeNavItem = 'agenda'; // Changed default to 'agenda' to show the new content
+
+        function showContent(key) {
+            const contentArea = document.getElementById('content-area');
+            const navItems = document.querySelectorAll('#sidebar li');
+            
+            // Update active state in sidebar
+            navItems.forEach(item => {
+                item.classList.remove('bg-gray-700', 'shadow-inner', 'font-semibold', 'text-white');
+                item.classList.add('text-gray-300', 'hover:bg-gray-700/50');
+                // Ensure only the direct list item styles are reset
+                const textDiv = item.querySelector('.text-sm') || item.querySelector('.font-medium');
+                if (textDiv) {
+                     textDiv.classList.remove('font-semibold');
+                }
+            });
+
+            const activeItem = document.getElementById('nav-' + key);
+            activeItem.classList.remove('text-gray-300', 'hover:bg-gray-700/50');
+            activeItem.classList.add('bg-gray-700', 'shadow-inner', 'font-semibold', 'text-white');
+            
+            activeNavItem = key;
+
+            // Update content area
+            const content = contentMap[key];
+            contentArea.innerHTML = `
+                <!-- Main Title -->
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-2 text-white tracking-tight">
+                    ${content.title}
+                </h2>
+                <!-- Subtitle -->
+                <p class="text-lg text-gray-300 mb-8">
+                    ${content.subtitle}
+                </p>
+
+                <!-- Content Body -->
+                ${content.body}
+            `;
+        }
+
+        // Initialize content on load
+        window.onload = function() {
+            // Default to 'agenda' to show the new, relevant content
+            showContent(activeNavItem); 
+        };
+    </script>
+
+</body>
+</html>
+
+          </body>
+        </html>
